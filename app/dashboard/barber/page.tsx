@@ -17,6 +17,7 @@ import {
   getStoredBlocks, 
   addBarberBlock, 
   removeBarberBlock, 
+  replaceStoredAppointments,
   TimeBlock,
   timeSlots,
   Appointment
@@ -46,7 +47,7 @@ export default function BarberDashboardPage() {
 
   useEffect(() => {
     // Validate session
-    const session = localStorage.getItem("american_barber_session") || sessionStorage.getItem("american_barber_session")
+    const session = localStorage.getItem("barbershop_demo_session") || sessionStorage.getItem("barbershop_demo_session")
     if (!session) {
       router.push("/login")
       return
@@ -127,7 +128,7 @@ export default function BarberDashboardPage() {
       }
       return a
     })
-    localStorage.setItem("american_barber_appointments", JSON.stringify(updated))
+    replaceStoredAppointments(updated)
     loadData()
     showToast(`Agendamento atualizado para '${nextStatus === 'completed' ? 'Concluído' : nextStatus === 'cancelled' ? 'Cancelado' : 'Confirmado'}'.`)
   }
@@ -222,9 +223,9 @@ export default function BarberDashboardPage() {
           <Card className="p-6 bg-card border-border">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider font-mono">Cortes Hoje</p>
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider font-mono">Cortes Hoje</p>
                 <p className="font-heading text-3xl text-foreground font-bold mt-1">{todayApps.length}</p>
-                <p className="text-[10px] text-muted-foreground font-medium mt-1">agendados para hoje</p>
+                <p className="text-xs text-muted-foreground font-medium mt-1">agendados para hoje</p>
               </div>
               <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 border border-primary/20 shrink-0">
                 <Calendar className="h-6 w-6 text-primary" />
@@ -235,9 +236,9 @@ export default function BarberDashboardPage() {
           <Card className="p-6 bg-card border-border">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider font-mono">Comissão Semana</p>
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider font-mono">Comissão Semana</p>
                 <p className="font-heading text-3xl text-foreground font-bold mt-1">R$ {faturamentoSemana.toFixed(2)}</p>
-                <p className="text-[10px] text-emerald-400 flex items-center gap-1 font-medium mt-1">
+                <p className="text-xs text-emerald-400 flex items-center gap-1 font-medium mt-1">
                   <TrendingUp className="h-3.5 w-3.5" /> Comissão de {commissionRate * 100}% ativa
                 </p>
               </div>
@@ -250,9 +251,9 @@ export default function BarberDashboardPage() {
           <Card className="p-6 bg-card border-border">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider font-mono">Total Concluídos</p>
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider font-mono">Total Concluídos</p>
                 <p className="font-heading text-3xl text-foreground font-bold mt-1">{totalAtendimentos}</p>
-                <p className="text-[10px] text-muted-foreground font-medium mt-1">atendimentos realizados</p>
+                <p className="text-xs text-muted-foreground font-medium mt-1">atendimentos realizados</p>
               </div>
               <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-purple-500/10 border border-purple-500/20 shrink-0">
                 <Users className="h-6 w-6 text-purple-400" />
@@ -263,7 +264,7 @@ export default function BarberDashboardPage() {
           <Card className="p-6 bg-card border-border">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider font-mono">Meta Mensal</p>
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider font-mono">Meta Mensal</p>
                 <p className="font-heading text-3xl text-foreground font-bold mt-1">R$ {faturamentoMes.toFixed(2)}</p>
                 <div className="flex items-center gap-0.5 mt-1.5">
                   {[1,2,3,4,5].map((i) => (
@@ -287,7 +288,7 @@ export default function BarberDashboardPage() {
               <Card className="p-5 bg-card border-border border-l-4 border-l-primary flex justify-between items-center relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl" />
                 <div className="relative space-y-2">
-                  <span className="text-[10px] font-bold text-primary font-mono uppercase tracking-wider">Próximo Cliente</span>
+                  <span className="text-xs font-bold text-primary font-mono uppercase tracking-wider">Próximo Cliente</span>
                   <h3 className="font-heading text-lg font-bold text-foreground">{proximoCliente.customerName}</h3>
                   <div className="flex items-center gap-4 text-xs text-muted-foreground">
                     <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" /> {proximoCliente.time}</span>
@@ -317,7 +318,7 @@ export default function BarberDashboardPage() {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <h2 className="font-heading text-sm font-bold uppercase tracking-wider text-primary border-l-2 border-primary pl-2">Agenda de Hoje</h2>
-                <Badge className="bg-primary/20 text-primary border-0 font-mono text-[10px]">
+                <Badge className="bg-primary/20 text-primary border-0 font-mono text-xs">
                   {todayApps.length} agendamentos
                 </Badge>
               </div>
@@ -334,7 +335,7 @@ export default function BarberDashboardPage() {
                         <div className="flex items-center gap-4">
                           <div className="text-center min-w-[70px] font-mono">
                             <p className="font-heading text-sm font-bold text-foreground">{app.time}</p>
-                            <p className="text-[10px] text-muted-foreground">{app.duration}</p>
+                            <p className="text-xs text-muted-foreground">{app.duration}</p>
                           </div>
                           <div className="h-10 w-px bg-border" />
                           <div className="text-left">
@@ -346,7 +347,7 @@ export default function BarberDashboardPage() {
                         <div className="flex items-center gap-4">
                           <div className="text-right">
                             <p className="font-heading text-sm font-bold text-primary">R$ {app.price.toFixed(2)}</p>
-                            <Badge className={`border-0 text-[9px] font-bold mt-1 px-1.5 py-0.2 ${
+                            <Badge className={`border-0 text-xs font-bold mt-1 px-1.5 py-0.2 ${
                               app.status === "completed" 
                                 ? "bg-green-500/10 text-green-500" 
                                 : app.status === "cancelled"
@@ -405,7 +406,7 @@ export default function BarberDashboardPage() {
                         <p className={`text-xs font-semibold ${isToday ? "text-primary font-bold" : "text-muted-foreground"}`}>{d.day}</p>
                         <div className={`p-2 rounded-lg text-center ${isToday ? "bg-primary/10 border border-primary/20" : "bg-muted/30 border border-transparent"} space-y-1`}>
                           <p className="font-heading text-base font-bold text-foreground">{d.apps}</p>
-                          <p className="text-[9px] text-muted-foreground font-mono">R$ {d.val.toFixed(0)}</p>
+                          <p className="text-xs text-muted-foreground font-mono">R$ {d.val.toFixed(0)}</p>
                         </div>
                       </div>
                     )
@@ -431,7 +432,7 @@ export default function BarberDashboardPage() {
                     <Power className={`h-4.5 w-4.5 ${isOffline ? "text-destructive" : "text-green-500"}`} />
                     <div>
                       <p className="text-xs font-bold text-foreground">Ficar Offline</p>
-                      <p className="text-[10px] text-muted-foreground">Bloqueia agendamentos</p>
+                      <p className="text-xs text-muted-foreground">Bloqueia agendamentos</p>
                     </div>
                   </div>
                   <button
@@ -451,11 +452,11 @@ export default function BarberDashboardPage() {
                 <div className="h-px bg-border" />
 
                 <div className="space-y-3">
-                  <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider font-mono">Intervalo Manual</p>
+                  <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider font-mono">Intervalo Manual</p>
                   
                   <div className="grid grid-cols-2 gap-2">
                     <div className="flex flex-col gap-1">
-                      <label className="text-[9px] text-muted-foreground font-bold">Início</label>
+                      <label className="text-xs text-muted-foreground font-bold">Início</label>
                       <Select value={selectedTimeSlot} onValueChange={(value) => setSelectedTimeSlot(value ?? "")}>
                         <SelectTrigger className="w-full text-xs h-9 bg-muted border-border">
                           <SelectValue placeholder="Selecione" />
@@ -469,7 +470,7 @@ export default function BarberDashboardPage() {
                     </div>
                     
                     <div className="flex flex-col gap-1">
-                      <label className="text-[9px] text-muted-foreground font-bold">Duração</label>
+                      <label className="text-xs text-muted-foreground font-bold">Duração</label>
                       <Select value={selectedDuration} onValueChange={(value) => setSelectedDuration(value ?? "30 min")}>
                         <SelectTrigger className="w-full text-xs h-9 bg-muted border-border">
                           <SelectValue placeholder="Selecione" />
@@ -494,14 +495,14 @@ export default function BarberDashboardPage() {
 
                 {blocks.length > 0 && (
                   <div className="space-y-2 pt-1">
-                    <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider font-mono">Bloqueios Ativos Hoje</p>
+                    <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider font-mono">Bloqueios Ativos Hoje</p>
                     <div className="space-y-2 max-h-40 overflow-y-auto pr-1">
                       {blocks.map(b => (
                         <div key={b.id} className="flex items-center justify-between p-2 rounded-lg bg-muted border border-border text-xs">
                           <div className="flex items-center gap-2">
                             <Clock className="h-3.5 w-3.5 text-gold" />
                             <span className="font-semibold text-foreground">{b.time}</span>
-                            <span className="text-muted-foreground text-[10px]">({b.duration})</span>
+                            <span className="text-muted-foreground text-xs">({b.duration})</span>
                           </div>
                           <Button 
                             size="icon" 
@@ -533,7 +534,7 @@ export default function BarberDashboardPage() {
                       </div>
                       <div className="min-w-0 flex-1 text-xs">
                         <p className="font-bold text-foreground truncate">{c.customerName}</p>
-                        <p className="text-[10px] text-muted-foreground truncate">{c.service}</p>
+                        <p className="text-xs text-muted-foreground truncate">{c.service}</p>
                       </div>
                       <ChevronRight className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
                     </div>

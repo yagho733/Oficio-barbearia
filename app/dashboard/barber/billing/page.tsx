@@ -18,7 +18,7 @@ export default function BarberBillingPage() {
   const [commissionRate, setCommissionRate] = useState(0.3) // 30% commission
 
   useEffect(() => {
-    const session = localStorage.getItem("american_barber_session") || sessionStorage.getItem("american_barber_session")
+    const session = localStorage.getItem("barbershop_demo_session") || sessionStorage.getItem("barbershop_demo_session")
     if (!session) {
       router.push("/login")
       return
@@ -100,21 +100,21 @@ export default function BarberBillingPage() {
         {/* Dynamic Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <Card className="p-5 bg-card border-border">
-            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider font-mono">Ganhos Hoje</p>
+            <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider font-mono">Ganhos Hoje</p>
             <p className="font-heading text-2xl font-bold mt-1 text-foreground">R$ {commToday.toFixed(2)}</p>
-            <p className="text-[10px] text-muted-foreground mt-1 font-mono">Bruto: R$ {grossToday.toFixed(2)}</p>
+            <p className="text-xs text-muted-foreground mt-1 font-mono">Bruto: R$ {grossToday.toFixed(2)}</p>
           </Card>
 
           <Card className="p-5 bg-card border-border">
-            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider font-mono">Ganhos da Semana</p>
+            <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider font-mono">Ganhos da Semana</p>
             <p className="font-heading text-2xl font-bold mt-1 text-foreground">R$ {commWeek.toFixed(2)}</p>
-            <p className="text-[10px] text-muted-foreground mt-1 font-mono">Bruto: R$ {grossWeek.toFixed(2)}</p>
+            <p className="text-xs text-muted-foreground mt-1 font-mono">Bruto: R$ {grossWeek.toFixed(2)}</p>
           </Card>
 
           <Card className="p-5 bg-card border-border">
-            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider font-mono">Ganhos do Mês</p>
+            <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider font-mono">Ganhos do Mês</p>
             <p className="font-heading text-2xl font-bold mt-1 text-foreground">R$ {commMonth.toFixed(2)}</p>
-            <p className="text-[10px] text-muted-foreground mt-1 font-mono">Bruto: R$ {grossMonth.toFixed(2)}</p>
+            <p className="text-xs text-muted-foreground mt-1 font-mono">Bruto: R$ {grossMonth.toFixed(2)}</p>
           </Card>
         </div>
 
@@ -122,7 +122,7 @@ export default function BarberBillingPage() {
         <Card className="bg-card border-border overflow-hidden">
           <div className="p-4 border-b border-border bg-muted/10 flex justify-between items-center">
             <span className="font-heading text-xs font-bold uppercase tracking-wider text-primary">Extrato Detalhado de Comissões ({commissionRate * 100}%)</span>
-            <Badge className="bg-emerald-500/10 text-emerald-400 border-0 font-bold text-[9px]">Comissões Ativas</Badge>
+            <Badge className="bg-emerald-500/10 text-emerald-400 border-0 font-bold text-xs">Comissões Ativas</Badge>
           </div>
 
           <div className="divide-y divide-border">
@@ -135,12 +135,12 @@ export default function BarberBillingPage() {
                 <div key={app.id} className="p-4 flex justify-between items-center text-xs hover:bg-muted/5 transition-all">
                   <div className="text-left space-y-1">
                     <p className="font-bold text-foreground">{app.customerName}</p>
-                    <p className="text-muted-foreground text-[11px]">{app.service} • {formatarParaBr(app.date)} às {app.time}</p>
+                    <p className="text-muted-foreground text-xs">{app.service} • {formatarParaBr(app.date)} às {app.time}</p>
                   </div>
                   
                   <div className="text-right space-y-1 font-mono">
                     <p className="font-bold text-emerald-400">+ R$ {(app.price * commissionRate).toFixed(2)}</p>
-                    <p className="text-muted-foreground text-[10px]">Valor total: R$ {app.price.toFixed(2)}</p>
+                    <p className="text-muted-foreground text-xs">Valor total: R$ {app.price.toFixed(2)}</p>
                   </div>
                 </div>
               ))

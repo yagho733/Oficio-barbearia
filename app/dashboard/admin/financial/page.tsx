@@ -35,7 +35,7 @@ export default function AdminFinancialPage() {
   const [appointments, setAppointments] = useState<Appointment[]>([])
 
   useEffect(() => {
-    const session = localStorage.getItem("american_barber_session") || sessionStorage.getItem("american_barber_session")
+    const session = localStorage.getItem("barbershop_demo_session") || sessionStorage.getItem("barbershop_demo_session")
     if (!session) { router.push("/login"); return }
     const p = JSON.parse(session)
     if (p.role !== "admin") { router.push(`/dashboard/${p.role}`); return }
@@ -122,13 +122,13 @@ export default function AdminFinancialPage() {
   const KPI = ({ label, value, sub, icon: Icon, color }: { label: string; value: string; sub?: string; icon: any; color: string }) => (
     <Card className="bg-card border-border p-5 flex flex-col gap-3">
       <div className="flex items-center justify-between">
-        <p className="text-[10px] font-mono font-bold uppercase text-muted-foreground">{label}</p>
+        <p className="text-xs font-mono font-bold uppercase text-muted-foreground">{label}</p>
         <div className={`h-8 w-8 rounded-lg flex items-center justify-center ${color}`}>
           <Icon className="h-4 w-4" />
         </div>
       </div>
       <p className="text-2xl font-bold font-mono text-foreground">{value}</p>
-      {sub && <p className="text-[11px] text-muted-foreground">{sub}</p>}
+      {sub && <p className="text-xs text-muted-foreground">{sub}</p>}
     </Card>
   )
 
@@ -149,7 +149,7 @@ export default function AdminFinancialPage() {
               <button
                 key={p}
                 onClick={() => setPeriod(p)}
-                className={`px-3 py-1.5 rounded-full text-[11px] font-mono font-bold border transition-colors ${period === p ? "bg-primary text-primary-foreground border-primary" : "bg-card border-border text-muted-foreground hover:border-primary/40"}`}
+                className={`px-3 py-1.5 rounded-full text-xs font-mono font-bold border transition-colors ${period === p ? "bg-primary text-primary-foreground border-primary" : "bg-card border-border text-muted-foreground hover:border-primary/40"}`}
               >
                 {PERIOD_LABELS[p]}
               </button>
@@ -160,11 +160,11 @@ export default function AdminFinancialPage() {
         {period === "custom" && (
           <Card className="bg-card border-border p-4 flex flex-wrap items-end gap-4">
             <div className="space-y-1">
-              <label className="text-[10px] font-mono font-bold uppercase text-muted-foreground">De</label>
+              <label className="text-xs font-mono font-bold uppercase text-muted-foreground">De</label>
               <input type="date" value={customFrom} onChange={e => setCustomFrom(e.target.value)} className="bg-muted border border-border rounded-md px-3 h-9 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-primary" />
             </div>
             <div className="space-y-1">
-              <label className="text-[10px] font-mono font-bold uppercase text-muted-foreground">Até</label>
+              <label className="text-xs font-mono font-bold uppercase text-muted-foreground">Até</label>
               <input type="date" value={customTo} onChange={e => setCustomTo(e.target.value)} className="bg-muted border border-border rounded-md px-3 h-9 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-primary" />
             </div>
           </Card>
@@ -181,7 +181,7 @@ export default function AdminFinancialPage() {
         <Card className="bg-card border-border p-6 space-y-4">
           <div className="flex items-center justify-between">
             <p className="text-xs font-mono font-bold uppercase text-muted-foreground">Evolução Financeira</p>
-            <div className="flex items-center gap-4 text-[10px] font-mono text-muted-foreground">
+            <div className="flex items-center gap-4 text-xs font-mono text-muted-foreground">
               <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-emerald-400 inline-block" /> Receita</span>
               <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-primary inline-block" /> Lucro</span>
             </div>
@@ -235,7 +235,7 @@ export default function AdminFinancialPage() {
           </div>
           <table className="w-full text-xs">
             <thead>
-              <tr className="text-[10px] font-mono font-bold uppercase text-muted-foreground border-b border-border bg-muted/10">
+              <tr className="text-xs font-mono font-bold uppercase text-muted-foreground border-b border-border bg-muted/10">
                 <th className="p-3 text-left">Data</th>
                 <th className="p-3 text-left">Cliente</th>
                 <th className="p-3 text-left">Serviço</th>
@@ -267,7 +267,7 @@ export default function AdminFinancialPage() {
             </tbody>
           </table>
           {filtered.length > 20 && (
-            <div className="p-3 text-center text-[11px] text-muted-foreground border-t border-border font-mono">
+            <div className="p-3 text-center text-xs text-muted-foreground border-t border-border font-mono">
               Mostrando 20 de {filtered.length} registros
             </div>
           )}

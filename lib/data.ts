@@ -1,4 +1,4 @@
-// Strongly-typed data layer for the American Barber platform
+// Camada de dados da demonstração de agendamento para barbearias.
 
 export interface User {
   id: string
@@ -71,6 +71,10 @@ export interface TimeBlock {
   duration: string // e.g. "30 min" or "full_day"
   type: "offline" | "break"
 }
+
+export const APPOINTMENTS_STORAGE_KEY = "barbershop_demo_appointments_v2"
+export const BLOCKS_STORAGE_KEY = "barbershop_demo_blocks_v2"
+export const APPOINTMENTS_CHANGED_EVENT = "barbershop-demo:appointments-changed"
 
 // Initial Mock Databases
 export const barbers: Barber[] = [
@@ -329,38 +333,124 @@ export const barberPerformance = [
 // Keep compatibility with files importing standard list directly
 export const appointments = initialAppointments
 
-// LocalStorage helpers to support complete interactivity on client-side
+// Armazenamento local usado apenas nesta demonstração. Em um projeto vendido,
+// estas funções são substituídas por uma API e um banco de dados compartilhado.
 const IS_SERVER = typeof window === "undefined"
 
 export function getStoredAppointments(): Appointment[] {
   if (IS_SERVER) return initialAppointments
-  const stored = localStorage.getItem("american_barber_appointments")
+  const stored = localStorage.getItem(APPOINTMENTS_STORAGE_KEY)
   if (!stored) {
-    localStorage.setItem("american_barber_appointments", JSON.stringify(initialAppointments))
+    localStorage.setItem(APPOINTMENTS_STORAGE_KEY, JSON.stringify(initialAppointments))
     return initialAppointments
   }
-  return JSON.parse(stored)
+  try {
+    const parsed = JSON.parse(stored)
+    return Array.isArray(parsed) ? parsed : initialAppointments
+  } catch {
+    localStorage.setItem(APPOINTMENTS_STORAGE_KEY, JSON.stringify(initialAppointments))
+    return initialAppointments
+  }
+}
+
+export function replaceStoredAppointments(list: Appointment[]): void {
+  if (IS_SERVER) return
+  localStorage.setItem(APPOINTMENTS_STORAGE_KEY, JSON.stringify(list))
+  window.dispatchEvent(new Event(APPOINTMENTS_CHANGED_EVENT))
+}
+
+const timeToMinutes = (time: string) => {
+  const [hours, minutes] = time.split(":").map(Number)
+  return hours * 60 + minutes
+}
+
+export const durationToMinutes = (duration: string) => {
+  const minutes = Number.parseInt(duration, 10)
+  return Number.isFinite(minutes) ? minutes : 30
+}
+
+const periodsOverlap = (startA: number, endA: number, startB: number, endB: number) =>
+  startA < endB && endA > startB
+
+export function isTimeSlotAvailable({
+  barberId,
+  date,
+  time,
+  duration,
+  appointments = getStoredAppointments(),
+  blocks = getStoredBlocks(),
+}: {
+  barberId: string
+  date: string
+  time: string
+  duration: string
+  appointments?: Appointment[]
+  blocks?: TimeBlock[]
+}): boolean {
+  const requestedStart = timeToMinutes(time)
+  const requestedEnd = requestedStart + durationToMinutes(duration)
+
+  const conflictsWithAppointment = appointments.some((appointment) => {
+    if (appointment.barberId !== barberId || appointment.date !== date || appointment.status === "cancelled") {
+      return false
+    }
+    const existingStart = timeToMinutes(appointment.time)
+    const existingEnd = existingStart + durationToMinutes(appointment.duration)
+    return periodsOverlap(requestedStart, requestedEnd, existingStart, existingEnd)
+  })
+
+  if (conflictsWithAppointment) return false
+
+  return !blocks.some((block) => {
+    if (block.barberId !== barberId || block.date !== date) return false
+    if (block.duration === "full_day") return true
+    const blockStart = timeToMinutes(block.time)
+    const blockEnd = blockStart + durationToMinutes(block.duration)
+    return periodsOverlap(requestedStart, requestedEnd, blockStart, blockEnd)
+  })
+}
+
+export class AppointmentConflictError extends Error {
+  constructor() {
+    super("Este horário acabou de ser reservado. Escolha outro horário disponível.")
+    this.name = "AppointmentConflictError"
+  }
 }
 
 export function saveAppointment(app: Omit<Appointment, "id" | "status">): Appointment {
   const list = getStoredAppointments()
+  if (!isTimeSlotAvailable({
+    barberId: app.barberId,
+    date: app.date,
+    time: app.time,
+    duration: app.duration,
+    appointments: list,
+  })) {
+    throw new AppointmentConflictError()
+  }
   const newApp: Appointment = {
     ...app,
     barber: app.barberName,
-    id: Math.random().toString(36).substring(2, 9),
+    id: typeof crypto !== "undefined" && "randomUUID" in crypto
+      ? crypto.randomUUID()
+      : `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
     status: "confirmed"
   }
   const updated = [newApp, ...list]
-  if (!IS_SERVER) {
-    localStorage.setItem("american_barber_appointments", JSON.stringify(updated))
-  }
+  replaceStoredAppointments(updated)
   return newApp
 }
 
 export function getStoredBlocks(): TimeBlock[] {
   if (IS_SERVER) return []
-  const stored = localStorage.getItem("american_barber_blocks")
-  return stored ? JSON.parse(stored) : []
+  const stored = localStorage.getItem(BLOCKS_STORAGE_KEY)
+  if (!stored) return []
+  try {
+    const parsed = JSON.parse(stored)
+    return Array.isArray(parsed) ? parsed : []
+  } catch {
+    return []
+  }
 }
 
 export function addBarberBlock(block: Omit<TimeBlock, "id">): TimeBlock {
@@ -371,7 +461,8 @@ export function addBarberBlock(block: Omit<TimeBlock, "id">): TimeBlock {
   }
   const updated = [...blocks, newBlock]
   if (!IS_SERVER) {
-    localStorage.setItem("american_barber_blocks", JSON.stringify(updated))
+    localStorage.setItem(BLOCKS_STORAGE_KEY, JSON.stringify(updated))
+    window.dispatchEvent(new Event(APPOINTMENTS_CHANGED_EVENT))
   }
   return newBlock
 }
@@ -380,6 +471,7 @@ export function removeBarberBlock(id: string): void {
   const blocks = getStoredBlocks()
   const updated = blocks.filter(b => b.id !== id)
   if (!IS_SERVER) {
-    localStorage.setItem("american_barber_blocks", JSON.stringify(updated))
+    localStorage.setItem(BLOCKS_STORAGE_KEY, JSON.stringify(updated))
+    window.dispatchEvent(new Event(APPOINTMENTS_CHANGED_EVENT))
   }
 }

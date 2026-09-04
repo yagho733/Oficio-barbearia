@@ -30,11 +30,11 @@ export function ProductsSection() {
 
         <AnimatedSection delay={0.12}>
           <p className="text-sm uppercase tracking-[0.28em] text-gold">Mais que um corte</p>
-          <h2 className="mt-4 font-heading text-5xl leading-none tracking-wide text-foreground sm:text-6xl">
+          <h2 className="display-title mt-4 text-[clamp(2.75rem,8vw,4.5rem)]">
             UMA EXPERIÊNCIA QUE COMEÇA ANTES DA CADEIRA
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-            Você escolhe o serviço, o profissional e o melhor horário pelo celular. Quando chega, o atendimento já está preparado para você.
+            O cliente escolhe o serviço, o profissional e um horário realmente livre. A barbearia recebe uma agenda organizada e fácil de acompanhar.
           </p>
 
           <div className="mt-9 space-y-5">

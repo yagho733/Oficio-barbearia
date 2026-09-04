@@ -12,11 +12,11 @@ export function BarbersSection() {
       <div className="container mx-auto px-4 lg:px-8">
         <AnimatedSection className="mb-14 max-w-2xl">
           <p className="text-sm uppercase tracking-[0.28em] text-gold">Profissionais</p>
-          <h2 className="mt-4 font-heading text-5xl leading-none tracking-wide text-foreground sm:text-6xl">
+          <h2 className="display-title mt-4 text-[clamp(2.75rem,8vw,4.5rem)]">
             ESCOLHA QUEM CUIDA DO SEU ESTILO
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-            Cada profissional tem sua especialidade. No agendamento, você escolhe quem combina com o resultado que procura.
+            Perfis individuais valorizam a equipe e conectam cada cliente ao profissional certo.
           </p>
         </AnimatedSection>
 
@@ -25,9 +25,9 @@ export function BarbersSection() {
             <img src={teamImage} alt="Profissional em uma barbearia moderna" className="absolute inset-0 h-full w-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-background/15 to-transparent" />
             <div className="absolute inset-x-0 bottom-0 p-7">
-              <p className="font-heading text-3xl tracking-wide">PROFISSIONAIS QUE ESCUTAM ANTES DE CORTAR</p>
+              <p className="font-heading text-3xl leading-tight tracking-wide">SUA EQUIPE TAMBÉM FAZ PARTE DA MARCA</p>
               <p className="mt-2 text-sm leading-relaxed text-white/70">
-                Referências, rotina e estilo pessoal fazem parte da conversa.
+                Fotos, especialidades e disponibilidade podem ser adaptadas para cada profissional.
               </p>
             </div>
           </AnimatedSection>

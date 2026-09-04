@@ -17,11 +17,11 @@ export function BookingPreviewSection() {
       <div className="container mx-auto px-4 lg:px-8">
         <AnimatedSection className="mx-auto max-w-3xl text-center">
           <p className="text-sm uppercase tracking-[0.28em] text-gold">Sem ligação e sem espera</p>
-          <h2 className="mt-4 font-heading text-5xl leading-none tracking-wide text-foreground sm:text-6xl">
+          <h2 className="display-title mt-4 text-[clamp(2.75rem,8vw,4.5rem)]">
             AGENDE EM MENOS DE UM MINUTO
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            Uma experiência simples no celular para o cliente e uma agenda mais organizada para a barbearia.
+            Serviço, profissional, data e somente os horários livres. Um fluxo direto, inspirado nas melhores plataformas de agendamento.
           </p>
         </AnimatedSection>
 

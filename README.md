@@ -1,4 +1,4 @@
-# American Barber — demonstração comercial
+# Demonstração profissional para barbearias
 
 Projeto demonstrativo de uma plataforma para barbearias, com página de apresentação, agendamento interativo e painéis de gestão para cliente, profissional e administrador.
 
@@ -7,6 +7,8 @@ Projeto demonstrativo de uma plataforma para barbearias, com página de apresent
 - Página comercial responsiva e totalmente em português
 - Serviços, valores e profissionais apresentados com clareza
 - Agendamento demonstrativo sem necessidade de cadastro
+- Bloqueio de horários ocupados por profissional e por duração do serviço
+- Atualização da disponibilidade entre abas do mesmo navegador
 - Painéis separados para cliente, barbeiro e administração
 - Dados salvos localmente apenas para a demonstração
 - Identificação clara de informações fictícias
@@ -37,6 +39,6 @@ npm run build
 
 ## Uso comercial
 
-Esta versão é um protótipo de portfólio. Para uso por uma barbearia real, contatos, identidade visual, equipe, horários e integrações devem ser substituídos pelos dados do estabelecimento. Autenticação e persistência em banco de dados também devem ser configuradas antes de operar com clientes reais.
+Esta versão é um protótipo de portfólio. Para uso por uma barbearia real, contatos, identidade visual, equipe, horários e integrações devem ser substituídos pelos dados do estabelecimento. A demonstração salva reservas no navegador; autenticação e banco de dados compartilhado devem ser configurados antes de operar com clientes reais.
 
 As fotografias utilizadas na demonstração são disponibilizadas por Pexels e Unsplash.

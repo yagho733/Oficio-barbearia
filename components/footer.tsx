@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
+import { Brand } from "@/components/brand"
 
 export function Footer() {
   return (
@@ -7,12 +8,8 @@ export function Footer() {
       <div className="container mx-auto px-4 py-12 lg:px-8">
         <div className="flex flex-col justify-between gap-10 md:flex-row md:items-start">
           <div className="max-w-sm">
-            <Link href="/" className="flex items-center gap-3" aria-label="American Barber - início">
-              <img src="/logo.png" alt="" className="h-12 w-12 rounded-full object-cover ring-1 ring-white/15" />
-              <div className="flex flex-col leading-none">
-                <span className="font-heading text-2xl tracking-[0.14em] text-foreground">AMERICAN</span>
-                <span className="text-xs tracking-[0.32em] text-primary">BARBER</span>
-              </div>
+            <Link href="/" aria-label="Sua Barbearia - início">
+              <Brand />
             </Link>
             <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
               Conceito de site para barbearias que desejam apresentar seus serviços e organizar agendamentos com mais profissionalismo.
@@ -32,7 +29,7 @@ export function Footer() {
         </div>
 
         <div className="mt-10 flex flex-col justify-between gap-3 border-t border-white/8 pt-6 text-sm text-muted-foreground sm:flex-row">
-          <p>{new Date().getFullYear()} American Barber. Projeto demonstrativo.</p>
+          <p>{new Date().getFullYear()} Demonstração de site para barbearias.</p>
           <p>Conteúdo e informações ilustrativas para portfólio.</p>
         </div>
       </div>

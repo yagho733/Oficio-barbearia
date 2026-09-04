@@ -6,29 +6,29 @@ import { Button } from "@/components/ui/button"
 import { AnimatedSection } from "@/components/ui/animated-section"
 
 const info = [
-  { icon: MapPin, label: "Localização", value: "Centro • Pelotas, RS" },
-  { icon: Clock3, label: "Horários", value: "Segunda a sábado • 9h às 20h" },
-  { icon: MessageCircle, label: "Confirmação", value: "Atendimento e lembretes pelo WhatsApp" },
+  { icon: MapPin, label: "Localização", value: "Endereço e mapa da barbearia" },
+  { icon: Clock3, label: "Funcionamento", value: "Dias e horários personalizados" },
+  { icon: MessageCircle, label: "Contato", value: "WhatsApp e redes sociais oficiais" },
 ]
 
 export function ContactSection() {
   return (
     <section id="contact" className="relative overflow-hidden bg-card py-24 sm:py-28">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_40%,rgba(185,28,28,0.14),transparent_32rem)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_40%,rgba(201,154,83,0.12),transparent_32rem)]" />
       <div className="container relative mx-auto px-4 lg:px-8">
         <AnimatedSection className="grid items-center gap-12 lg:grid-cols-[1fr_0.9fr]">
           <div>
-            <p className="text-sm uppercase tracking-[0.28em] text-gold">Seu próximo horário</p>
-            <h2 className="mt-4 max-w-3xl font-heading text-6xl leading-[0.95] tracking-wide text-foreground sm:text-7xl">
-              PRONTO PARA ATUALIZAR O VISUAL?
+            <p className="text-sm uppercase tracking-[0.28em] text-gold">Personalização completa</p>
+            <h2 className="display-title mt-4 max-w-3xl text-[clamp(3rem,9vw,5.25rem)]">
+              ESTE MODELO PODE TER A CARA DA SUA BARBEARIA
             </h2>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              Escolha o serviço, o profissional e o melhor horário. O restante fica por nossa conta.
+              Identidade visual, fotos, valores, profissionais, endereço e WhatsApp são preparados para o seu negócio.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Link href="/booking">
                 <Button size="lg" className="gradient-primary h-14 w-full border-0 px-8 text-base text-primary-foreground sm:w-auto">
-                  Agendar agora <ArrowRight className="ml-2 h-5 w-5" />
+                  Testar agendamento <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
               <Link href="/login">
@@ -56,7 +56,7 @@ export function ContactSection() {
               ))}
             </div>
             <p className="mt-6 border-t border-white/8 pt-5 text-sm leading-relaxed text-muted-foreground">
-              Em uma versão comercial, localização, WhatsApp, horários e identidade visual são personalizados para a barbearia.
+              Os dados acima são exemplos. A versão comercial recebe apenas informações verdadeiras da barbearia.
             </p>
           </div>
         </AnimatedSection>

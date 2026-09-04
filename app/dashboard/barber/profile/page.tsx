@@ -15,12 +15,12 @@ export default function BarberProfilePage() {
   const [name, setName] = useState("Rafael Costa")
   const [specialty, setSpecialty] = useState("Cortes Clássicos & Barbaterapia")
   const [email, setEmail] = useState("marcus.barbeiro@barber.com")
-  const [bio, setBio] = useState("Barbeiro master especialista em cortes clássicos americanos e técnicas tradicionais de toalha quente.")
+  const [bio, setBio] = useState("Barbeiro especialista em cortes clássicos e técnicas tradicionais de toalha quente.")
   const [workingDays, setWorkingDays] = useState("Segunda a Sábado")
   const [isSaved, setIsSaved] = useState(false)
 
   useEffect(() => {
-    const session = localStorage.getItem("american_barber_session") || sessionStorage.getItem("american_barber_session")
+    const session = localStorage.getItem("barbershop_demo_session") || sessionStorage.getItem("barbershop_demo_session")
     if (!session) {
       router.push("/login")
       return
@@ -66,7 +66,7 @@ export default function BarberProfilePage() {
             </div>
             <div>
               <h3 className="text-lg font-semibold text-foreground">{name}</h3>
-              <p className="text-xs text-muted-foreground">Profissional • American Barber</p>
+              <p className="text-xs text-muted-foreground">Profissional • Barbearia demonstrativa</p>
             </div>
           </div>
 

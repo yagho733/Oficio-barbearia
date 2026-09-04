@@ -34,7 +34,7 @@ const INITIAL_SERVICES: Service[] = [
   { id: "6", name: "Coloração", description: "Coloração profissional com produtos premium.", price: 90, duration: 60, category: "Coloração", emoji: "🎨" },
 ]
 
-const STORAGE_KEY = "american_barber_services"
+const STORAGE_KEY = "barbershop_demo_services"
 
 function getStored(): Service[] {
   if (typeof window === "undefined") return INITIAL_SERVICES
@@ -65,7 +65,7 @@ export default function AdminServicesPage() {
   const [toast, setToast] = useState<string | null>(null)
 
   useEffect(() => {
-    const session = localStorage.getItem("american_barber_session") || sessionStorage.getItem("american_barber_session")
+    const session = localStorage.getItem("barbershop_demo_session") || sessionStorage.getItem("barbershop_demo_session")
     if (!session) { router.push("/login"); return }
     const p = JSON.parse(session)
     if (p.role !== "admin") { router.push(`/dashboard/${p.role}`); return }
@@ -128,7 +128,7 @@ export default function AdminServicesPage() {
             <button
               key={c}
               onClick={() => setCategoryFilter(c)}
-              className={`px-3 py-1.5 rounded-full text-[11px] font-mono font-bold border transition-colors ${categoryFilter === c ? "bg-primary text-primary-foreground border-primary" : "bg-card border-border text-muted-foreground hover:border-primary/40"}`}
+              className={`px-3 py-1.5 rounded-full text-xs font-mono font-bold border transition-colors ${categoryFilter === c ? "bg-primary text-primary-foreground border-primary" : "bg-card border-border text-muted-foreground hover:border-primary/40"}`}
             >
               {c}
             </button>
@@ -151,7 +151,7 @@ export default function AdminServicesPage() {
                   </div>
                   <div>
                     <p className="font-bold text-sm text-foreground">{s.name}</p>
-                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-muted/50 text-muted-foreground border border-border">
+                    <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-muted/50 text-muted-foreground border border-border">
                       {s.category}
                     </span>
                   </div>
@@ -205,29 +205,29 @@ export default function AdminServicesPage() {
             <form onSubmit={handleSave} className="space-y-4">
               <div className="grid grid-cols-2 gap-3">
                 <div className="col-span-2 space-y-1">
-                  <Label className="text-[10px] font-bold uppercase text-muted-foreground">Nome do Serviço</Label>
+                  <Label className="text-xs font-bold uppercase text-muted-foreground">Nome do Serviço</Label>
                   <Input value={editing.name} onChange={e => setEditing({ ...editing, name: e.target.value })} className="bg-muted border-border text-xs h-9" required />
                 </div>
                 <div className="col-span-2 space-y-1">
-                  <Label className="text-[10px] font-bold uppercase text-muted-foreground">Descrição</Label>
+                  <Label className="text-xs font-bold uppercase text-muted-foreground">Descrição</Label>
                   <textarea value={editing.description} onChange={e => setEditing({ ...editing, description: e.target.value })} rows={2} className="w-full bg-muted border border-border rounded-md px-3 py-2 text-xs text-foreground resize-none focus:outline-none focus:ring-1 focus:ring-primary" />
                 </div>
                 <div className="space-y-1">
-                  <Label className="text-[10px] font-bold uppercase text-muted-foreground">Preço (R$)</Label>
+                  <Label className="text-xs font-bold uppercase text-muted-foreground">Preço (R$)</Label>
                   <Input type="number" min={0} step={0.01} value={editing.price} onChange={e => setEditing({ ...editing, price: Number(e.target.value) })} className="bg-muted border-border text-xs h-9" required />
                 </div>
                 <div className="space-y-1">
-                  <Label className="text-[10px] font-bold uppercase text-muted-foreground">Duração (min)</Label>
+                  <Label className="text-xs font-bold uppercase text-muted-foreground">Duração (min)</Label>
                   <Input type="number" min={5} step={5} value={editing.duration} onChange={e => setEditing({ ...editing, duration: Number(e.target.value) })} className="bg-muted border-border text-xs h-9" required />
                 </div>
                 <div className="space-y-1">
-                  <Label className="text-[10px] font-bold uppercase text-muted-foreground">Categoria</Label>
+                  <Label className="text-xs font-bold uppercase text-muted-foreground">Categoria</Label>
                   <select value={editing.category} onChange={e => setEditing({ ...editing, category: e.target.value })} className="w-full bg-muted border border-border rounded-md px-3 text-xs h-9 text-foreground focus:outline-none focus:ring-1 focus:ring-primary">
                     {CATEGORIES.map(c => <option key={c}>{c}</option>)}
                   </select>
                 </div>
                 <div className="space-y-1">
-                  <Label className="text-[10px] font-bold uppercase text-muted-foreground">Emoji / Ícone</Label>
+                  <Label className="text-xs font-bold uppercase text-muted-foreground">Emoji / Ícone</Label>
                   <Input value={editing.emoji} onChange={e => setEditing({ ...editing, emoji: e.target.value })} className="bg-muted border-border text-xs h-9" maxLength={4} />
                 </div>
               </div>

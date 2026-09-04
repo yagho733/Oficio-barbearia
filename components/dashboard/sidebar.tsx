@@ -15,6 +15,7 @@ import {
   Package,
   DollarSign
 } from "lucide-react"
+import { Brand } from "@/components/brand"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -70,8 +71,8 @@ export function DashboardSidebar({ type, className }: SidebarProps) {
     : "Admin"
 
   const handleLogout = () => {
-    localStorage.removeItem("american_barber_session")
-    sessionStorage.removeItem("american_barber_session")
+    localStorage.removeItem("barbershop_demo_session")
+    sessionStorage.removeItem("barbershop_demo_session")
     router.push("/login")
   }
 
@@ -80,23 +81,15 @@ export function DashboardSidebar({ type, className }: SidebarProps) {
       <div className="flex h-full flex-col">
         {/* Logo */}
         <div className="flex h-16 items-center gap-3 px-6 border-b border-border">
-          <Link href="/" className="flex items-center gap-2.5">
-            <img 
-              src="/logo.png" 
-              alt="Logotipo American Barber"
-              className="h-9 w-9 rounded-full object-contain filter drop-shadow-md" 
-            />
-            <div className="flex flex-col leading-none">
-              <span className="font-heading text-sm tracking-wider text-foreground">AMERICAN</span>
-              <span className="text-[9px] tracking-[0.15em] text-muted-foreground font-mono">BARBER</span>
-            </div>
+          <Link href="/">
+            <Brand compact />
           </Link>
         </div>
 
         {/* Dashboard Type Badge */}
         <div className="px-6 py-4">
           <div className="bg-muted/40 border border-border rounded-lg px-3 py-2 text-left">
-            <p className="text-[10px] text-muted-foreground font-mono uppercase tracking-wider">Painel</p>
+            <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">Painel</p>
             <p className="font-heading text-base tracking-wide text-foreground font-bold">{title.toUpperCase()}</p>
           </div>
         </div>

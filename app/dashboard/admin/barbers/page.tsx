@@ -67,7 +67,7 @@ const INITIAL_BARBERS: Barber[] = [
   },
 ]
 
-const STORAGE_KEY = "american_barber_barbers"
+const STORAGE_KEY = "barbershop_demo_barbers"
 
 function getStoredBarbers(): Barber[] {
   if (typeof window === "undefined") return INITIAL_BARBERS
@@ -106,8 +106,8 @@ export default function AdminBarbersPage() {
 
   useEffect(() => {
     const session =
-      localStorage.getItem("american_barber_session") ||
-      sessionStorage.getItem("american_barber_session")
+      localStorage.getItem("barbershop_demo_session") ||
+      sessionStorage.getItem("barbershop_demo_session")
     if (!session) { router.push("/login"); return }
     const parsed = JSON.parse(session)
     if (parsed.role !== "admin") { router.push(`/dashboard/${parsed.role}`); return }
@@ -227,31 +227,31 @@ export default function AdminBarbersPage() {
 
               <div className="grid grid-cols-3 gap-2 text-center">
                 <div className="bg-muted/30 rounded-lg p-2">
-                  <p className="text-[10px] text-muted-foreground font-mono uppercase">Comissão</p>
+                  <p className="text-xs text-muted-foreground font-mono uppercase">Comissão</p>
                   <p className="text-sm font-bold text-primary font-mono">{b.commission}%</p>
                 </div>
                 <div className="bg-muted/30 rounded-lg p-2">
-                  <p className="text-[10px] text-muted-foreground font-mono uppercase">Cortes</p>
+                  <p className="text-xs text-muted-foreground font-mono uppercase">Cortes</p>
                   <p className="text-sm font-bold text-foreground font-mono">{b.totalCuts}</p>
                 </div>
                 <div className="bg-muted/30 rounded-lg p-2">
-                  <p className="text-[10px] text-muted-foreground font-mono uppercase">Avaliação</p>
+                  <p className="text-xs text-muted-foreground font-mono uppercase">Avaliação</p>
                   <p className="text-sm font-bold text-amber-400 font-mono">★ {b.rating}</p>
                 </div>
               </div>
 
               <div>
-                <p className="text-[10px] text-muted-foreground font-mono uppercase mb-1.5">Dias de Trabalho</p>
+                <p className="text-xs text-muted-foreground font-mono uppercase mb-1.5">Dias de Trabalho</p>
                 <div className="flex gap-1 flex-wrap">
                   {DAYS.map(d => (
-                    <span key={d} className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold ${b.workingDays.includes(d) ? "bg-primary/15 text-primary border border-primary/25" : "bg-muted/20 text-muted-foreground/40"}`}>
+                    <span key={d} className={`px-2 py-0.5 rounded text-xs font-mono font-bold ${b.workingDays.includes(d) ? "bg-primary/15 text-primary border border-primary/25" : "bg-muted/20 text-muted-foreground/40"}`}>
                       {d}
                     </span>
                   ))}
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 text-[11px] text-muted-foreground font-mono">
+              <div className="flex items-center gap-2 text-xs text-muted-foreground font-mono">
                 <Clock className="h-3.5 w-3.5" />
                 {b.startTime} – {b.endTime}
               </div>
@@ -282,33 +282,33 @@ export default function AdminBarbersPage() {
             <form onSubmit={handleSave} className="space-y-4">
               <div className="grid grid-cols-2 gap-3">
                 <div className="col-span-2 space-y-1">
-                  <Label className="text-[10px] font-bold uppercase text-muted-foreground">Nome Completo</Label>
+                  <Label className="text-xs font-bold uppercase text-muted-foreground">Nome Completo</Label>
                   <Input value={editingBarber.name} onChange={e => setEditingBarber({ ...editingBarber, name: e.target.value })} className="bg-muted border-border text-xs h-9" required />
                 </div>
                 <div className="col-span-2 space-y-1">
-                  <Label className="text-[10px] font-bold uppercase text-muted-foreground">Especialidade</Label>
+                  <Label className="text-xs font-bold uppercase text-muted-foreground">Especialidade</Label>
                   <Input value={editingBarber.specialty} onChange={e => setEditingBarber({ ...editingBarber, specialty: e.target.value })} className="bg-muted border-border text-xs h-9" required />
                 </div>
                 <div className="space-y-1">
-                  <Label className="text-[10px] font-bold uppercase text-muted-foreground">Início</Label>
+                  <Label className="text-xs font-bold uppercase text-muted-foreground">Início</Label>
                   <Input type="time" value={editingBarber.startTime} onChange={e => setEditingBarber({ ...editingBarber, startTime: e.target.value })} className="bg-muted border-border text-xs h-9" />
                 </div>
                 <div className="space-y-1">
-                  <Label className="text-[10px] font-bold uppercase text-muted-foreground">Término</Label>
+                  <Label className="text-xs font-bold uppercase text-muted-foreground">Término</Label>
                   <Input type="time" value={editingBarber.endTime} onChange={e => setEditingBarber({ ...editingBarber, endTime: e.target.value })} className="bg-muted border-border text-xs h-9" />
                 </div>
                 <div className="space-y-1">
-                  <Label className="text-[10px] font-bold uppercase text-muted-foreground">Comissão (%)</Label>
+                  <Label className="text-xs font-bold uppercase text-muted-foreground">Comissão (%)</Label>
                   <Input type="number" min={0} max={100} value={editingBarber.commission} onChange={e => setEditingBarber({ ...editingBarber, commission: Number(e.target.value) })} className="bg-muted border-border text-xs h-9" />
                 </div>
                 <div className="space-y-1">
-                  <Label className="text-[10px] font-bold uppercase text-muted-foreground">Total de Cortes</Label>
+                  <Label className="text-xs font-bold uppercase text-muted-foreground">Total de Cortes</Label>
                   <Input type="number" min={0} value={editingBarber.totalCuts} onChange={e => setEditingBarber({ ...editingBarber, totalCuts: Number(e.target.value) })} className="bg-muted border-border text-xs h-9" />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label className="text-[10px] font-bold uppercase text-muted-foreground">Dias de Trabalho</Label>
+                <Label className="text-xs font-bold uppercase text-muted-foreground">Dias de Trabalho</Label>
                 <div className="flex gap-2 flex-wrap">
                   {DAYS.map(d => (
                     <button
@@ -324,7 +324,7 @@ export default function AdminBarbersPage() {
               </div>
 
               <div className="space-y-1">
-                <Label className="text-[10px] font-bold uppercase text-muted-foreground">Bio / Apresentação</Label>
+                <Label className="text-xs font-bold uppercase text-muted-foreground">Bio / Apresentação</Label>
                 <textarea
                   value={editingBarber.bio}
                   onChange={e => setEditingBarber({ ...editingBarber, bio: e.target.value })}

@@ -26,7 +26,7 @@ export default function BarberClientsPage() {
   const [searchTerm, setSearchTerm] = useState("")
 
   useEffect(() => {
-    const session = localStorage.getItem("american_barber_session") || sessionStorage.getItem("american_barber_session")
+    const session = localStorage.getItem("barbershop_demo_session") || sessionStorage.getItem("barbershop_demo_session")
     if (!session) {
       router.push("/login")
       return
@@ -132,7 +132,7 @@ export default function BarberClientsPage() {
                     </div>
                     <div className="text-left space-y-1">
                       <p className="font-bold text-sm text-foreground">{client.name}</p>
-                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-muted-foreground text-[11px]">
+                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-muted-foreground text-xs">
                         <span className="flex items-center gap-1"><Phone className="h-3 w-3" /> {client.phone}</span>
                         <span className="flex items-center gap-1"><Mail className="h-3 w-3" /> {client.email}</span>
                       </div>
@@ -141,15 +141,15 @@ export default function BarberClientsPage() {
 
                   <div className="grid grid-cols-3 gap-6 text-left sm:text-right shrink-0 ml-12 sm:ml-0 font-mono">
                     <div>
-                      <p className="text-muted-foreground text-[9px] uppercase tracking-wider">Última Visita</p>
+                      <p className="text-muted-foreground text-xs uppercase tracking-wider">Última Visita</p>
                       <p className="font-semibold text-foreground mt-0.5">{formatarParaBr(client.lastVisit)}</p>
                     </div>
                     <div>
-                      <p className="text-muted-foreground text-[9px] uppercase tracking-wider">Total Cortes</p>
+                      <p className="text-muted-foreground text-xs uppercase tracking-wider">Total Cortes</p>
                       <p className="font-bold text-primary mt-0.5">{client.cutsCount}</p>
                     </div>
                     <div>
-                      <p className="text-muted-foreground text-[9px] uppercase tracking-wider">Gasto Total</p>
+                      <p className="text-muted-foreground text-xs uppercase tracking-wider">Gasto Total</p>
                       <p className="font-bold text-emerald-400 mt-0.5">R$ {client.totalSpent.toFixed(2)}</p>
                     </div>
                   </div>

@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge"
 import { DashboardHeader } from "@/components/dashboard/header"
 import { 
   getStoredAppointments, 
+  replaceStoredAppointments,
   Appointment, 
   barbers 
 } from "@/lib/data"
@@ -26,7 +27,7 @@ export default function CustomerDashboardPage() {
   const [toastMessage, setToastMessage] = useState<string | null>(null)
 
   useEffect(() => {
-    const session = localStorage.getItem("american_barber_session") || sessionStorage.getItem("american_barber_session")
+    const session = localStorage.getItem("barbershop_demo_session") || sessionStorage.getItem("barbershop_demo_session")
     if (!session) {
       router.push("/login")
       return
@@ -42,7 +43,7 @@ export default function CustomerDashboardPage() {
       setCurrentUser(parsed)
       setAppointmentsList(getStoredAppointments())
     } catch (e) {
-      localStorage.removeItem("american_barber_session")
+      localStorage.removeItem("barbershop_demo_session")
       router.push("/login")
     }
   }, [router])
@@ -59,7 +60,7 @@ export default function CustomerDashboardPage() {
       }
       return app
     })
-    localStorage.setItem("american_barber_appointments", JSON.stringify(updated))
+    replaceStoredAppointments(updated)
     loadAppointments()
     showToast("Agendamento cancelado com sucesso.")
   }
@@ -126,7 +127,7 @@ export default function CustomerDashboardPage() {
                 <div className="flex justify-between items-center">
                   <h2 className="font-heading text-xs font-bold uppercase tracking-wider text-primary">Próximo Horário</h2>
                   {nextAppointment && (
-                    <Badge className="bg-emerald-500/10 text-emerald-400 border-0 font-bold text-[10px]">
+                    <Badge className="bg-emerald-500/10 text-emerald-400 border-0 font-bold text-xs">
                       Confirmado
                     </Badge>
                   )}
@@ -197,12 +198,12 @@ export default function CustomerDashboardPage() {
                       <div className="space-y-1">
                         <p className="font-bold text-sm text-foreground">{app.service}</p>
                         <p className="text-xs text-muted-foreground">Barbeiro: {app.barberName}</p>
-                        <p className="text-[10px] text-muted-foreground flex items-center gap-1.5 pt-1 font-mono">
+                        <p className="text-xs text-muted-foreground flex items-center gap-1.5 pt-1 font-mono">
                           <Calendar className="h-3 w-3" /> {formatarParaBr(app.date)} às {app.time}
                         </p>
                       </div>
                       <div className="text-right space-y-1.5">
-                        <Badge className="bg-green-500/10 text-green-400 border-0 font-bold text-[9px]">Concluído</Badge>
+                        <Badge className="bg-green-500/10 text-green-400 border-0 font-bold text-xs">Concluído</Badge>
                         <p className="font-heading font-bold text-primary text-sm">R$ {app.price.toFixed(2)}</p>
                       </div>
                     </Card>
@@ -240,7 +241,7 @@ export default function CustomerDashboardPage() {
                 </div>
                 <div className="min-w-0">
                   <p className="text-xs font-bold text-foreground truncate">{currentUser?.name}</p>
-                  <p className="text-[10px] text-muted-foreground truncate">{currentUser?.email}</p>
+                  <p className="text-xs text-muted-foreground truncate">{currentUser?.email}</p>
                 </div>
               </div>
               <div className="h-px bg-border" />

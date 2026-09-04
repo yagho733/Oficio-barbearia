@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { DashboardHeader } from "@/components/dashboard/header"
-import { getStoredAppointments, Appointment } from "@/lib/data"
+import { getStoredAppointments, replaceStoredAppointments, Appointment } from "@/lib/data"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
 
@@ -39,7 +39,7 @@ export default function CustomerAppointmentsPage() {
       }
       return app
     })
-    localStorage.setItem("american_barber_appointments", JSON.stringify(updated))
+    replaceStoredAppointments(updated)
     loadAppointments()
     setToastMessage("Agendamento cancelado com sucesso.")
     setTimeout(() => setToastMessage(null), 3000)
@@ -154,7 +154,7 @@ export default function CustomerAppointmentsPage() {
                     </div>
 
                     <div className="flex flex-col items-end shrink-0 gap-1.5">
-                      <Badge variant="secondary" className={`border-0 text-[10px] font-bold px-2 py-0.5 ${
+                      <Badge variant="secondary" className={`border-0 text-xs font-bold px-2 py-0.5 ${
                         app.status === "confirmed" 
                           ? "bg-green-500/10 text-green-500" 
                           : "bg-gold/10 text-gold"
@@ -219,7 +219,7 @@ export default function CustomerAppointmentsPage() {
                   </div>
 
                   <div className="flex items-center justify-between sm:justify-end gap-4 shrink-0 ml-12 sm:ml-0">
-                    <Badge variant="secondary" className={`border-0 text-[9px] font-bold px-2 ${
+                    <Badge variant="secondary" className={`border-0 text-xs font-bold px-2 ${
                       app.status === "cancelled" 
                         ? "bg-destructive/10 text-destructive" 
                         : "bg-muted text-muted-foreground"

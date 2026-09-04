@@ -19,7 +19,7 @@ export default function AdminAnalyticsPage() {
   const [appointments, setAppointments] = useState<Appointment[]>([])
 
   useEffect(() => {
-    const session = localStorage.getItem("american_barber_session") || sessionStorage.getItem("american_barber_session")
+    const session = localStorage.getItem("barbershop_demo_session") || sessionStorage.getItem("barbershop_demo_session")
     if (!session) { router.push("/login"); return }
     const p = JSON.parse(session)
     if (p.role !== "admin") { router.push(`/dashboard/${p.role}`); return }
@@ -93,8 +93,8 @@ export default function AdminAnalyticsPage() {
         <Icon className="h-5 w-5" />
       </div>
       <p className="text-xl font-bold font-mono text-foreground">{value}</p>
-      <p className="text-[11px] font-bold text-muted-foreground uppercase font-mono">{label}</p>
-      {sub && <p className="text-[10px] text-muted-foreground">{sub}</p>}
+      <p className="text-xs font-bold text-muted-foreground uppercase font-mono">{label}</p>
+      {sub && <p className="text-xs text-muted-foreground">{sub}</p>}
     </Card>
   )
 
@@ -169,7 +169,7 @@ export default function AdminAnalyticsPage() {
                       {i === 0 && <span className="text-amber-400 text-sm">🥇</span>}
                       {i === 1 && <span className="text-slate-400 text-sm">🥈</span>}
                       {i === 2 && <span className="text-amber-700 text-sm">🥉</span>}
-                      {i > 2 && <span className="w-5 text-center font-mono text-muted-foreground text-[10px]">#{i + 1}</span>}
+                      {i > 2 && <span className="w-5 text-center font-mono text-muted-foreground text-xs">#{i + 1}</span>}
                       <span className="text-foreground font-medium">{name}</span>
                     </span>
                     <span className="font-mono text-emerald-400 font-bold">R$ {rev.toFixed(2)}</span>
@@ -198,14 +198,14 @@ export default function AdminAnalyticsPage() {
               const isBusiest = i === dayCounts.indexOf(Math.max(...dayCounts))
               return (
                 <div key={i} className="flex flex-col items-center gap-2 flex-1">
-                  <span className="text-[10px] font-mono text-muted-foreground">{count > 0 ? count : ""}</span>
+                  <span className="text-xs font-mono text-muted-foreground">{count > 0 ? count : ""}</span>
                   <div className="w-full rounded-t-sm transition-all duration-700 min-h-[4px]"
                     style={{
                       height: `${Math.max(pct, 4)}%`,
                       background: isBusiest ? "hsl(var(--primary))" : "hsl(var(--muted))"
                     }}
                   />
-                  <span className={`text-[10px] font-mono font-bold ${isBusiest ? "text-primary" : "text-muted-foreground"}`}>
+                  <span className={`text-xs font-mono font-bold ${isBusiest ? "text-primary" : "text-muted-foreground"}`}>
                     {DAYS_PT[i]}
                   </span>
                 </div>
@@ -223,18 +223,18 @@ export default function AdminAnalyticsPage() {
           <div className="flex items-center gap-6">
             <div className="text-center">
               <p className="text-4xl font-bold font-mono text-amber-400">4.8</p>
-              <p className="text-[10px] text-muted-foreground font-mono mt-1">Média Geral</p>
+              <p className="text-xs text-muted-foreground font-mono mt-1">Média Geral</p>
             </div>
             <div className="flex-1 space-y-2">
               {[5, 4, 3, 2, 1].map(star => {
                 const pct = star === 5 ? 68 : star === 4 ? 22 : star === 3 ? 7 : star === 2 ? 2 : 1
                 return (
                   <div key={star} className="flex items-center gap-3">
-                    <span className="text-[10px] font-mono text-muted-foreground w-6">{star}★</span>
+                    <span className="text-xs font-mono text-muted-foreground w-6">{star}★</span>
                     <div className="flex-1 h-2 rounded-full bg-muted overflow-hidden">
                       <div className="h-full rounded-full bg-amber-400" style={{ width: `${pct}%` }} />
                     </div>
-                    <span className="text-[10px] font-mono text-muted-foreground w-8">{pct}%</span>
+                    <span className="text-xs font-mono text-muted-foreground w-8">{pct}%</span>
                   </div>
                 )
               })}

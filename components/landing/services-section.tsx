@@ -25,16 +25,16 @@ export function ServicesSection() {
         <AnimatedSection className="mb-14 flex flex-col justify-between gap-7 md:flex-row md:items-end">
           <div className="max-w-2xl">
             <Badge variant="outline" className="mb-5 border-gold/30 text-gold">Serviços e valores</Badge>
-            <h2 className="font-heading text-5xl tracking-wide text-foreground sm:text-6xl">
-              ESCOLHA O SEU RITUAL
+            <h2 className="display-title text-[clamp(2.75rem,8vw,4.5rem)]">
+              SERVIÇOS BEM APRESENTADOS VENDEM MELHOR
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Serviços objetivos, valores claros e tempo reservado exclusivamente para o seu atendimento.
+              O cliente entende o que está contratando, quanto custa e quanto tempo leva antes de reservar.
             </p>
           </div>
           <Link href="/booking">
             <Button variant="outline" className="h-12 border-white/15 bg-white/5 px-5 hover:bg-white/10">
-              Consultar horários <ArrowUpRight className="ml-2 h-4 w-4" />
+              Ver horários disponíveis <ArrowUpRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
         </AnimatedSection>

@@ -40,7 +40,7 @@ export default function LoginPage() {
 
   const enterDemo = (profile: (typeof profiles)[number]) => {
     setLoadingRole(profile.role)
-    localStorage.setItem("american_barber_session", JSON.stringify({
+    localStorage.setItem("barbershop_demo_session", JSON.stringify({
       email: profile.role + "@demonstracao.local",
       name: profile.name,
       role: profile.role,
@@ -60,7 +60,7 @@ export default function LoginPage() {
             <ShieldCheck className="h-8 w-8" />
           </div>
           <p className="mt-6 text-sm uppercase tracking-[0.25em] text-gold">Ambiente de demonstração</p>
-          <h1 className="mt-3 font-heading text-5xl tracking-wide sm:text-6xl">EXPLORE A GESTÃO COMPLETA</h1>
+          <h1 className="display-title mt-3 text-[clamp(2.8rem,10vw,4.5rem)]">EXPLORE A GESTÃO COMPLETA</h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
             Escolha um perfil para conhecer as telas disponíveis. Nenhuma conta ou senha real é necessária.
           </p>

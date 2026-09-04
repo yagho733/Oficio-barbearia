@@ -17,24 +17,10 @@ const bebasNeue = Bebas_Neue({
 })
 
 export const metadata: Metadata = {
-  title: 'American Barber | Barbearia premium em Pelotas',
-  description: 'Cortes, barba e cuidado masculino com atendimento personalizado e agendamento online em poucos passos.',
+  title: 'Demonstração de site para barbearias | Agendamento online',
+  description: 'Modelo profissional e personalizável de site para barbearias com serviços, equipe e agendamento online.',
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: [{ url: '/icon.svg', type: 'image/svg+xml' }],
   },
 }
 

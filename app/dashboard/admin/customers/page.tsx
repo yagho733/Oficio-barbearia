@@ -12,7 +12,7 @@ import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { DashboardHeader } from "@/components/dashboard/header"
-import { getStoredAppointments, Appointment } from "@/lib/data"
+import { getStoredAppointments, replaceStoredAppointments, Appointment } from "@/lib/data"
 import { format, parseISO } from "date-fns"
 
 interface CustomerAggregate {
@@ -39,7 +39,7 @@ export default function AdminCustomersPage() {
   const [toastMessage, setToastMessage] = useState<string | null>(null)
 
   useEffect(() => {
-    const session = localStorage.getItem("american_barber_session") || sessionStorage.getItem("american_barber_session")
+    const session = localStorage.getItem("barbershop_demo_session") || sessionStorage.getItem("barbershop_demo_session")
     if (!session) {
       router.push("/login")
       return
@@ -98,7 +98,7 @@ export default function AdminCustomersPage() {
     
     const apps = getStoredAppointments()
     const filtered = apps.filter(a => a.customerName !== name)
-    localStorage.setItem("american_barber_appointments", JSON.stringify(filtered))
+    replaceStoredAppointments(filtered)
     loadData()
     showToast(`Cliente '${name}' excluído com sucesso.`)
   }
@@ -131,7 +131,7 @@ export default function AdminCustomersPage() {
       return app
     })
 
-    localStorage.setItem("american_barber_appointments", JSON.stringify(updated))
+    replaceStoredAppointments(updated)
     setIsEditing(false)
     setEditingIndex(null)
     loadData()
@@ -190,7 +190,7 @@ export default function AdminCustomersPage() {
         <Card className="bg-card border-border overflow-x-auto">
           <table className="w-full min-w-[700px] text-left border-collapse">
             <thead>
-              <tr className="border-b border-border bg-muted/20 text-[10px] font-bold text-muted-foreground uppercase tracking-wider font-mono">
+              <tr className="border-b border-border bg-muted/20 text-xs font-bold text-muted-foreground uppercase tracking-wider font-mono">
                 <th className="p-4">Nome</th>
                 <th className="p-4">Telefone</th>
                 <th className="p-4">E-mail</th>
@@ -212,15 +212,15 @@ export default function AdminCustomersPage() {
                   <tr key={idx} className="hover:bg-muted/10 transition-colors">
                     <td className="p-4 font-bold text-foreground">
                       <div className="flex items-center gap-2">
-                        <div className="h-7 w-7 rounded-full bg-primary/15 text-primary flex items-center justify-center font-bold text-[10px] font-mono">
+                        <div className="h-7 w-7 rounded-full bg-primary/15 text-primary flex items-center justify-center font-bold text-xs font-mono">
                           {c.name.substring(0,2).toUpperCase()}
                         </div>
                         {c.name}
                       </div>
                     </td>
-                    <td className="p-4 font-mono text-[11px]">{c.phone}</td>
+                    <td className="p-4 font-mono text-xs">{c.phone}</td>
                     <td className="p-4 text-muted-foreground">{c.email}</td>
-                    <td className="p-4 font-mono text-[11px]">{formatarParaBr(c.lastVisit)}</td>
+                    <td className="p-4 font-mono text-xs">{formatarParaBr(c.lastVisit)}</td>
                     <td className="p-4 font-bold font-mono text-center sm:text-left pl-8">{c.cutsCount}</td>
                     <td className="p-4 font-bold font-mono text-emerald-400">R$ {c.totalSpent.toFixed(2)}</td>
                     <td className="p-4">

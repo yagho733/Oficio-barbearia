@@ -39,14 +39,14 @@ interface BarbershopSettings {
 }
 
 const DEFAULT_SETTINGS: BarbershopSettings = {
-  name: "American Barber Shop",
-  tagline: "Estilo e precisão desde 2015",
-  phone: "(53) 3225-1234",
-  whatsapp: "5353992251234",
-  instagram: "americanbarbershop",
-  website: "https://americanbarber.com.br",
-  address: "Av. Rio Branco, 450 - Centro",
-  city: "Rio Grande",
+  name: "Sua Barbearia",
+  tagline: "Atendimento, estilo e praticidade",
+  phone: "(53) 99999-0000",
+  whatsapp: "5553999990000",
+  instagram: "suabarbearia",
+  website: "https://suabarbearia.com.br",
+  address: "Endereço da barbearia",
+  city: "Pelotas",
   state: "RS",
   zipcode: "96200-000",
   openDays: ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"],
@@ -61,7 +61,7 @@ const DEFAULT_SETTINGS: BarbershopSettings = {
   timezone: "America/Sao_Paulo",
 }
 
-const SETTINGS_KEY = "american_barber_settings"
+const SETTINGS_KEY = "barbershop_demo_settings"
 
 function getSettings(): BarbershopSettings {
   if (typeof window === "undefined") return DEFAULT_SETTINGS
@@ -78,7 +78,7 @@ export default function AdminSettingsPage() {
   const [activeSection, setActiveSection] = useState("Geral")
 
   useEffect(() => {
-    const session = localStorage.getItem("american_barber_session") || sessionStorage.getItem("american_barber_session")
+    const session = localStorage.getItem("barbershop_demo_session") || sessionStorage.getItem("barbershop_demo_session")
     if (!session) { router.push("/login"); return }
     const p = JSON.parse(session)
     if (p.role !== "admin") { router.push(`/dashboard/${p.role}`); return }
@@ -105,7 +105,7 @@ export default function AdminSettingsPage() {
 
   const Field = ({ label, children }: { label: string; children: React.ReactNode }) => (
     <div className="space-y-1.5">
-      <Label className="text-[10px] font-bold uppercase text-muted-foreground font-mono">{label}</Label>
+      <Label className="text-xs font-bold uppercase text-muted-foreground font-mono">{label}</Label>
       {children}
     </div>
   )
@@ -234,7 +234,7 @@ export default function AdminSettingsPage() {
               </div>
 
               <div>
-                <Label className="text-[10px] font-bold uppercase text-muted-foreground font-mono mb-3 block">Dias de Funcionamento</Label>
+                <Label className="text-xs font-bold uppercase text-muted-foreground font-mono mb-3 block">Dias de Funcionamento</Label>
                 <div className="flex gap-2 flex-wrap">
                   {DAYS.map(d => (
                     <button
@@ -281,7 +281,7 @@ export default function AdminSettingsPage() {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label className="text-[10px] font-bold uppercase text-muted-foreground font-mono">Cor Primária</Label>
+                  <Label className="text-xs font-bold uppercase text-muted-foreground font-mono">Cor Primária</Label>
                   <div className="flex items-center gap-3">
                     <input type="color" value={settings.primaryColor} onChange={e => set("primaryColor", e.target.value)} className="h-10 w-14 rounded-lg border border-border bg-muted cursor-pointer" />
                     <Input value={settings.primaryColor} onChange={e => set("primaryColor", e.target.value)} className="bg-muted border-border text-xs h-9 font-mono" />
@@ -289,7 +289,7 @@ export default function AdminSettingsPage() {
                   <div className="h-8 rounded-lg transition-colors" style={{ backgroundColor: settings.primaryColor }} />
                 </div>
                 <div className="space-y-2">
-                  <Label className="text-[10px] font-bold uppercase text-muted-foreground font-mono">Cor de Destaque</Label>
+                  <Label className="text-xs font-bold uppercase text-muted-foreground font-mono">Cor de Destaque</Label>
                   <div className="flex items-center gap-3">
                     <input type="color" value={settings.accentColor} onChange={e => set("accentColor", e.target.value)} className="h-10 w-14 rounded-lg border border-border bg-muted cursor-pointer" />
                     <Input value={settings.accentColor} onChange={e => set("accentColor", e.target.value)} className="bg-muted border-border text-xs h-9 font-mono" />
@@ -297,7 +297,7 @@ export default function AdminSettingsPage() {
                   <div className="h-8 rounded-lg transition-colors" style={{ backgroundColor: settings.accentColor }} />
                 </div>
               </div>
-              <div className="bg-muted/30 border border-border rounded-xl p-4 text-[11px] text-muted-foreground">
+              <div className="bg-muted/30 border border-border rounded-xl p-4 text-xs text-muted-foreground">
                 <strong className="text-foreground">Nota:</strong> A personalização completa de cores está disponível com a integração ao backend (variáveis CSS dinâmicas via banco de dados). As cores configuradas acima serão sincronizadas na versão com Supabase.
               </div>
             </Card>

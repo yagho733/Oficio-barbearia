@@ -18,7 +18,7 @@ export default function BarberHistoryPage() {
   const [searchTerm, setSearchTerm] = useState("")
 
   useEffect(() => {
-    const session = localStorage.getItem("american_barber_session") || sessionStorage.getItem("american_barber_session")
+    const session = localStorage.getItem("barbershop_demo_session") || sessionStorage.getItem("barbershop_demo_session")
     if (!session) {
       router.push("/login")
       return
@@ -104,7 +104,7 @@ export default function BarberHistoryPage() {
                       <p className="text-xs text-muted-foreground mt-0.5">
                         Serviço: <span className="font-semibold text-foreground">{app.service}</span>
                       </p>
-                      <div className="flex flex-wrap items-center gap-3 mt-1.5 text-[10px] text-muted-foreground font-mono">
+                      <div className="flex flex-wrap items-center gap-3 mt-1.5 text-xs text-muted-foreground font-mono">
                         <span className="flex items-center gap-1"><Calendar className="h-3 w-3" /> {formatarParaBr(app.date)}</span>
                         <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> {app.time} ({app.duration})</span>
                       </div>
@@ -112,7 +112,7 @@ export default function BarberHistoryPage() {
                   </div>
 
                   <div className="flex items-center justify-between sm:justify-end gap-5 shrink-0 ml-14 sm:ml-0 font-mono">
-                    <Badge variant="secondary" className={`border-0 text-[9px] font-bold px-2 py-0.5 ${
+                    <Badge variant="secondary" className={`border-0 text-xs font-bold px-2 py-0.5 ${
                       app.status === "completed" 
                         ? "bg-green-500/10 text-green-500" 
                         : app.status === "cancelled"

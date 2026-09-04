@@ -26,7 +26,7 @@ export default function BarberSchedulePage() {
   const [toastMessage, setToastMessage] = useState<string | null>(null)
 
   useEffect(() => {
-    const session = localStorage.getItem("american_barber_session") || sessionStorage.getItem("american_barber_session")
+    const session = localStorage.getItem("barbershop_demo_session") || sessionStorage.getItem("barbershop_demo_session")
     if (!session) {
       router.push("/login")
       return
@@ -173,7 +173,7 @@ export default function BarberSchedulePage() {
                       </div>
                       <div className="text-left">
                         <p className="font-bold text-foreground">{b.date === format(new Date(), "yyyy-MM-dd") ? "Hoje" : b.date}</p>
-                        <p className="text-muted-foreground text-[11px]">Horário: <span className="font-semibold text-foreground">{b.time}</span> ({b.duration === 'full_day' ? 'Dia Inteiro' : b.duration})</p>
+                        <p className="text-muted-foreground text-xs">Horário: <span className="font-semibold text-foreground">{b.time}</span> ({b.duration === 'full_day' ? 'Dia Inteiro' : b.duration})</p>
                       </div>
                     </div>
 

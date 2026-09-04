@@ -27,12 +27,12 @@ export function TestimonialsSection() {
       <div className="container mx-auto px-4 lg:px-8">
         <AnimatedSection className="grid gap-10 rounded-[1.75rem] border border-white/8 bg-gradient-to-br from-card to-background p-7 sm:p-10 lg:grid-cols-[0.8fr_1.2fr] lg:p-14">
           <div>
-            <p className="text-sm uppercase tracking-[0.28em] text-gold">Nosso compromisso</p>
-            <h2 className="mt-4 font-heading text-5xl leading-none tracking-wide text-foreground">
-              VOCÊ PERCEBE A DIFERENÇA NOS DETALHES
+            <p className="text-sm uppercase tracking-[0.28em] text-gold">Estrutura profissional</p>
+            <h2 className="display-title mt-4 text-[clamp(2.75rem,8vw,4.25rem)]">
+              CADA DETALHE AJUDA A GERAR CONFIANÇA
             </h2>
             <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-              Um bom atendimento não termina quando o corte acaba. Ele aparece na confiança para voltar à rotina.
+              O site organiza informações importantes e reduz as dúvidas que impedem o cliente de marcar.
             </p>
           </div>
 

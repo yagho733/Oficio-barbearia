@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { DashboardHeader } from "@/components/dashboard/header"
-import { getStoredAppointments, barbers, Appointment } from "@/lib/data"
+import { getStoredAppointments, replaceStoredAppointments, barbers, Appointment } from "@/lib/data"
 import { format, parseISO, startOfWeek, endOfWeek, startOfMonth, endOfMonth, isWithinInterval } from "date-fns"
 
 export default function AdminAppointmentsPage() {
@@ -28,7 +28,7 @@ export default function AdminAppointmentsPage() {
   const [toastMessage, setToastMessage] = useState<string | null>(null)
 
   useEffect(() => {
-    const session = localStorage.getItem("american_barber_session") || sessionStorage.getItem("american_barber_session")
+    const session = localStorage.getItem("barbershop_demo_session") || sessionStorage.getItem("barbershop_demo_session")
     if (!session) {
       router.push("/login")
       return
@@ -53,7 +53,7 @@ export default function AdminAppointmentsPage() {
       }
       return app
     })
-    localStorage.setItem("american_barber_appointments", JSON.stringify(updated))
+    replaceStoredAppointments(updated)
     loadData()
     showToast(`Status do agendamento alterado para '${newStatus === 'completed' ? 'Concluído' : newStatus === 'cancelled' ? 'Cancelado' : 'Confirmado'}'.`)
   }
@@ -62,7 +62,7 @@ export default function AdminAppointmentsPage() {
     if (!confirm("Tem certeza que deseja excluir permanentemente este agendamento?")) return
     const all = getStoredAppointments()
     const filtered = all.filter(app => app.id !== id)
-    localStorage.setItem("american_barber_appointments", JSON.stringify(filtered))
+    replaceStoredAppointments(filtered)
     loadData()
     showToast("Agendamento excluído com sucesso.")
   }
@@ -141,7 +141,7 @@ export default function AdminAppointmentsPage() {
         {/* Filters Panel */}
         <Card className="p-5 bg-card border-border grid grid-cols-1 sm:grid-cols-4 gap-4">
           <div className="flex flex-col gap-1.5">
-            <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider font-mono">Pesquisa</label>
+            <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider font-mono">Pesquisa</label>
             <div className="relative">
               <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input 
@@ -154,7 +154,7 @@ export default function AdminAppointmentsPage() {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider font-mono">Período</label>
+            <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider font-mono">Período</label>
             <Select value={timePeriodFilter} onValueChange={(value) => setTimePeriodFilter(value ?? "all")}>
               <SelectTrigger className="w-full text-xs h-9 bg-background border-border">
                 <SelectValue placeholder="Todos os períodos" />
@@ -169,7 +169,7 @@ export default function AdminAppointmentsPage() {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider font-mono">Barbeiro</label>
+            <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider font-mono">Barbeiro</label>
             <Select value={barberFilter} onValueChange={(value) => setBarberFilter(value ?? "all")}>
               <SelectTrigger className="w-full text-xs h-9 bg-background border-border">
                 <SelectValue placeholder="Todos os barbeiros" />
@@ -184,7 +184,7 @@ export default function AdminAppointmentsPage() {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider font-mono">Status</label>
+            <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider font-mono">Status</label>
             <Select value={statusFilter} onValueChange={(value) => setStatusFilter(value ?? "all")}>
               <SelectTrigger className="w-full text-xs h-9 bg-background border-border">
                 <SelectValue placeholder="Todos os status" />
@@ -203,7 +203,7 @@ export default function AdminAppointmentsPage() {
         <Card className="bg-card border-border overflow-x-auto">
           <table className="w-full min-w-[700px] text-left border-collapse">
             <thead>
-              <tr className="border-b border-border bg-muted/20 text-[10px] font-bold text-muted-foreground uppercase tracking-wider font-mono">
+              <tr className="border-b border-border bg-muted/20 text-xs font-bold text-muted-foreground uppercase tracking-wider font-mono">
                 <th className="p-4">Cliente</th>
                 <th className="p-4">Barbeiro</th>
                 <th className="p-4">Serviço</th>
@@ -227,11 +227,11 @@ export default function AdminAppointmentsPage() {
                     <td className="p-4 text-gold font-semibold">{app.barberName}</td>
                     <td className="p-4">{app.service}</td>
                     <td className="p-4 font-mono font-bold text-primary">R$ {app.price.toFixed(2)}</td>
-                    <td className="p-4 font-mono text-[11px]">
+                    <td className="p-4 font-mono text-xs">
                       {formatarParaBr(app.date)} às {app.time}
                     </td>
                     <td className="p-4">
-                      <Badge className={`border-0 text-[9px] font-bold px-2 py-0.5 ${
+                      <Badge className={`border-0 text-xs font-bold px-2 py-0.5 ${
                         app.status === "completed" 
                           ? "bg-green-500/10 text-green-500" 
                           : app.status === "cancelled"

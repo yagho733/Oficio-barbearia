@@ -20,7 +20,7 @@ export default function AdminDashboardPage() {
   const [appointmentsList, setAppointmentsList] = useState<Appointment[]>([])
 
   useEffect(() => {
-    const session = localStorage.getItem("american_barber_session") || sessionStorage.getItem("american_barber_session")
+    const session = localStorage.getItem("barbershop_demo_session") || sessionStorage.getItem("barbershop_demo_session")
     if (!session) {
       router.push("/login")
       return
@@ -109,7 +109,7 @@ export default function AdminDashboardPage() {
           <Card className="p-5 bg-card border-border">
             <div className="flex justify-between items-start">
               <div>
-                <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-wider font-mono">Faturamento Hoje</p>
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider font-mono">Faturamento Hoje</p>
                 <p className="font-heading text-lg font-bold text-foreground mt-1.5">R$ {faturamentoHoje.toFixed(2)}</p>
               </div>
               <DollarSign className="h-4.5 w-4.5 text-emerald-400 shrink-0" />
@@ -119,7 +119,7 @@ export default function AdminDashboardPage() {
           <Card className="p-5 bg-card border-border">
             <div className="flex justify-between items-start">
               <div>
-                <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-wider font-mono">Faturamento Semana</p>
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider font-mono">Faturamento Semana</p>
                 <p className="font-heading text-lg font-bold text-foreground mt-1.5">R$ {faturamentoSemana.toFixed(2)}</p>
               </div>
               <TrendingUp className="h-4.5 w-4.5 text-primary shrink-0" />
@@ -129,7 +129,7 @@ export default function AdminDashboardPage() {
           <Card className="p-5 bg-card border-border">
             <div className="flex justify-between items-start">
               <div>
-                <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-wider font-mono">Faturamento Mês</p>
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider font-mono">Faturamento Mês</p>
                 <p className="font-heading text-lg font-bold text-foreground mt-1.5">R$ {faturamentoMes.toFixed(2)}</p>
               </div>
               <DollarSign className="h-4.5 w-4.5 text-purple-400 shrink-0" />
@@ -139,7 +139,7 @@ export default function AdminDashboardPage() {
           <Card className="p-5 bg-card border-border">
             <div className="flex justify-between items-start">
               <div>
-                <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-wider font-mono">Clientes Ativos</p>
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider font-mono">Clientes Ativos</p>
                 <p className="font-heading text-lg font-bold text-foreground mt-1.5">{uniqueCustomers}</p>
               </div>
               <Users className="h-4.5 w-4.5 text-gold shrink-0" />
@@ -149,7 +149,7 @@ export default function AdminDashboardPage() {
           <Card className="p-5 bg-card border-border">
             <div className="flex justify-between items-start">
               <div>
-                <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-wider font-mono">Agendamentos</p>
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider font-mono">Agendamentos</p>
                 <p className="font-heading text-lg font-bold text-foreground mt-1.5">{totalAppointments}</p>
               </div>
               <Calendar className="h-4.5 w-4.5 text-sky-400 shrink-0" />
@@ -159,7 +159,7 @@ export default function AdminDashboardPage() {
           <Card className="p-5 bg-card border-border">
             <div className="flex justify-between items-start">
               <div>
-                <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-wider font-mono">Barbeiros</p>
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider font-mono">Barbeiros</p>
                 <p className="font-heading text-lg font-bold text-foreground mt-1.5">{totalBarbers}</p>
               </div>
               <Scissors className="h-4.5 w-4.5 text-pink-400 shrink-0" />
@@ -174,7 +174,7 @@ export default function AdminDashboardPage() {
           <Card className="p-6 bg-card border-border lg:col-span-2 space-y-4">
             <div className="flex justify-between items-center">
               <h3 className="font-heading text-xs font-bold uppercase tracking-wider text-foreground">Faturamento da Barbearia</h3>
-              <Badge className="bg-primary/10 text-primary border-0 text-[10px]">Gráfico Mensal</Badge>
+              <Badge className="bg-primary/10 text-primary border-0 text-xs">Gráfico Mensal</Badge>
             </div>
             
             {/* SVG line chart */}
@@ -219,7 +219,7 @@ export default function AdminDashboardPage() {
             <div>
               <div className="p-4 border-b border-border bg-muted/10 flex justify-between items-center">
                 <span className="font-heading text-xs font-bold uppercase tracking-wider text-gold">Agenda do Dia</span>
-                <Badge className="bg-gold/10 text-gold border-0 text-[9px]">{todayApps.length} cortes</Badge>
+                <Badge className="bg-gold/10 text-gold border-0 text-xs">{todayApps.length} cortes</Badge>
               </div>
 
               <div className="divide-y divide-border max-h-[220px] overflow-y-auto pr-1">
@@ -230,18 +230,18 @@ export default function AdminDashboardPage() {
                     <div key={app.id} className="p-3 flex justify-between items-center text-xs hover:bg-muted/5 transition-all">
                       <div className="text-left">
                         <p className="font-bold text-foreground truncate max-w-[120px]">{app.customerName}</p>
-                        <p className="text-[10px] text-muted-foreground truncate max-w-[120px]">{app.service} com {app.barberName}</p>
+                        <p className="text-xs text-muted-foreground truncate max-w-[120px]">{app.service} com {app.barberName}</p>
                       </div>
                       <div className="text-right shrink-0">
                         <p className="font-bold text-primary font-mono">{app.time}</p>
-                        <p className="text-[9px] text-muted-foreground font-mono">{app.duration}</p>
+                        <p className="text-xs text-muted-foreground font-mono">{app.duration}</p>
                       </div>
                     </div>
                   ))
                 )}
               </div>
             </div>
-            <Link href="/dashboard/admin/appointments" className="block p-3 text-center border-t border-border/40 text-[10px] font-bold text-primary hover:underline">
+            <Link href="/dashboard/admin/appointments" className="block p-3 text-center border-t border-border/40 text-xs font-bold text-primary hover:underline">
               Visualizar Agenda Completa
             </Link>
           </Card>
@@ -262,11 +262,11 @@ export default function AdminDashboardPage() {
                 <div key={app.id} className="p-4 flex justify-between items-center text-xs hover:bg-muted/5">
                   <div className="text-left">
                     <p className="font-bold text-foreground">{app.customerName}</p>
-                    <p className="text-muted-foreground text-[11px]">{app.service} com {app.barberName}</p>
+                    <p className="text-muted-foreground text-xs">{app.service} com {app.barberName}</p>
                   </div>
                   <div className="text-right shrink-0 font-mono">
                     <p className="font-bold text-emerald-400">R$ {app.price.toFixed(2)}</p>
-                    <p className="text-muted-foreground text-[10px]">{formatarParaBr(app.date)} às {app.time}</p>
+                    <p className="text-muted-foreground text-xs">{formatarParaBr(app.date)} às {app.time}</p>
                   </div>
                 </div>
               ))}
@@ -291,12 +291,12 @@ export default function AdminDashboardPage() {
                       </div>
                       <div className="text-left">
                         <p className="font-bold text-foreground">{name}</p>
-                        <p className="text-muted-foreground text-[10px]">Cortes realizados: <span className="font-bold text-foreground font-mono">{clientApps.length}</span></p>
+                        <p className="text-muted-foreground text-xs">Cortes realizados: <span className="font-bold text-foreground font-mono">{clientApps.length}</span></p>
                       </div>
                     </div>
                     <div className="text-right shrink-0">
-                      <Badge className="bg-green-500/10 text-green-500 border-0 text-[9px] font-bold">Ativo</Badge>
-                      <p className="text-[10px] text-muted-foreground font-mono mt-1">Último: {lastApp ? formatarParaBr(lastApp.date) : ""}</p>
+                      <Badge className="bg-green-500/10 text-green-500 border-0 text-xs font-bold">Ativo</Badge>
+                      <p className="text-xs text-muted-foreground font-mono mt-1">Último: {lastApp ? formatarParaBr(lastApp.date) : ""}</p>
                     </div>
                   </div>
                 )

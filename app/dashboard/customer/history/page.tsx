@@ -70,7 +70,7 @@ export default function CustomerHistoryPage() {
                 </div>
 
                 <div className="flex items-center justify-between sm:justify-end gap-5 shrink-0 ml-14 sm:ml-0">
-                  <Badge variant="secondary" className={`border-0 text-[10px] font-bold px-2 py-0.5 ${
+                  <Badge variant="secondary" className={`border-0 text-xs font-bold px-2 py-0.5 ${
                     app.status === "cancelled" 
                       ? "bg-destructive/10 text-destructive" 
                       : "bg-green-500/10 text-green-500"
