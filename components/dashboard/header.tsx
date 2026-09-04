@@ -34,6 +34,9 @@ export function DashboardHeader({ title, subtitle, type }: DashboardHeaderProps)
         <h1 className="font-heading text-lg lg:text-xl tracking-wide text-foreground">{title.toUpperCase()}</h1>
         {subtitle && <p className="text-xs lg:text-sm text-muted-foreground">{subtitle}</p>}
       </div>
+      <span className="hidden rounded-full border border-gold/20 bg-gold/10 px-3 py-1.5 text-xs text-gold sm:inline-flex">
+        Dados demonstrativos
+      </span>
     </header>
   )
 }

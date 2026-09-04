@@ -12,7 +12,7 @@ import { DashboardHeader } from "@/components/dashboard/header"
 
 export default function BarberProfilePage() {
   const router = useRouter()
-  const [name, setName] = useState("Marcus Johnson")
+  const [name, setName] = useState("Rafael Costa")
   const [specialty, setSpecialty] = useState("Cortes Clássicos & Barbaterapia")
   const [email, setEmail] = useState("marcus.barbeiro@barber.com")
   const [bio, setBio] = useState("Barbeiro master especialista em cortes clássicos americanos e técnicas tradicionais de toalha quente.")
@@ -32,7 +32,7 @@ export default function BarberProfilePage() {
     }
 
     if (parsed.role === "barber") {
-      setName(parsed.name || "Marcus Johnson")
+      setName(parsed.name || "Rafael Costa")
       setEmail(parsed.email || "marcus.barbeiro@barber.com")
     }
   }, [router])
@@ -66,7 +66,7 @@ export default function BarberProfilePage() {
             </div>
             <div>
               <h3 className="text-lg font-semibold text-foreground">{name}</h3>
-              <p className="text-xs text-muted-foreground">Profissional de Elite • American Barber</p>
+              <p className="text-xs text-muted-foreground">Profissional • American Barber</p>
             </div>
           </div>
 

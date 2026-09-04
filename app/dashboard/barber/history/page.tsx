@@ -29,7 +29,7 @@ export default function BarberHistoryPage() {
       return
     }
 
-    const barberName = parsed.role === "barber" ? parsed.name || "Marcus Johnson" : "Marcus Johnson"
+    const barberName = parsed.role === "barber" ? parsed.name || "Rafael Costa" : "Rafael Costa"
     const all = getStoredAppointments()
     const history = all.filter(a => a.barberName === barberName)
     

@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, type Variants } from "framer-motion"
 import { X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -52,7 +52,10 @@ export function Sheet({ children, open: controlledOpen, onOpenChange }: SheetPro
 }
 
 interface SheetTriggerProps {
-  children: React.ReactElement
+  children: React.ReactElement<{
+    onClick?: React.MouseEventHandler
+    className?: string
+  }>
   asChild?: boolean
   className?: string
 }
@@ -70,8 +73,9 @@ export function SheetTrigger({ children, className }: SheetTriggerProps) {
   })
 }
 
-interface SheetContentProps extends React.HTMLAttributes<HTMLDivElement> {
+type SheetContentProps = Omit<React.ComponentProps<typeof motion.div>, "children"> & {
   side?: "left" | "right" | "top" | "bottom"
+  children?: React.ReactNode
 }
 
 export function SheetContent({
@@ -83,7 +87,7 @@ export function SheetContent({
   const context = React.useContext(SheetContext)
   if (!context) throw new Error("SheetContent must be used within Sheet")
 
-  const slideVariants = {
+  const slideVariants: Variants = {
     hidden: {
       x: side === "right" ? "100%" : side === "left" ? "-100%" : 0,
       y: side === "bottom" ? "100%" : side === "top" ? "-100%" : 0,

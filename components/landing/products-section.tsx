@@ -1,66 +1,56 @@
 "use client"
 
-import { ShoppingBag } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/animated-section"
-import { products } from "@/lib/data"
+import { Award, Clock3, ShieldCheck } from "lucide-react"
+import { AnimatedSection } from "@/components/ui/animated-section"
+
+const craftImage = "https://images.unsplash.com/photo-1657105052497-f996284ffff8?auto=format&fit=crop&fm=jpg&q=82&w=1600"
+
+const details = [
+  { icon: Award, title: "Técnica apurada", text: "Cortes atuais sem abrir mão do acabamento clássico." },
+  { icon: Clock3, title: "Seu horário respeitado", text: "Agenda organizada para reduzir espera e atender com calma." },
+  { icon: ShieldCheck, title: "Cuidado em cada etapa", text: "Higiene, produtos selecionados e orientação para manter o resultado." },
+]
 
 export function ProductsSection() {
   return (
-    <section id="products" className="py-24 bg-card">
-      <div className="container mx-auto px-4 lg:px-8">
-        <AnimatedSection className="text-center mb-16">
-          <Badge variant="outline" className="mb-4 text-gold border-gold/30">
-            Produtos Premium
-          </Badge>
-          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl tracking-wide text-foreground mb-4">
-            CUIDE DO SEU ESTILO
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Produtos selecionados de alta qualidade para manter seu visual impecável entre as visitas.
-          </p>
+    <section id="experience" className="overflow-hidden border-y border-white/5 bg-card py-24 sm:py-28">
+      <div className="container mx-auto grid items-center gap-14 px-4 lg:grid-cols-2 lg:px-8">
+        <AnimatedSection className="relative">
+          <div className="absolute -inset-5 rounded-[2rem] bg-gold/10 blur-3xl" />
+          <div className="relative overflow-hidden rounded-[1.75rem] border border-white/10">
+            <img src={craftImage} alt="Barbeiro realizando um corte com precisão" className="h-[520px] w-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+            <div className="absolute bottom-0 left-0 p-6">
+              <span className="rounded-full border border-white/15 bg-background/70 px-4 py-2 text-sm text-white/80 backdrop-blur">
+                Precisão do primeiro ao último detalhe
+              </span>
+            </div>
+          </div>
         </AnimatedSection>
 
-        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.map((product) => (
-            <StaggerItem key={product.id}>
-              <Card className="group overflow-hidden bg-muted/50 border-border hover:border-primary/50 transition-all duration-300">
-                {/* Product Image Placeholder */}
-                <div className="aspect-square bg-gradient-to-br from-secondary to-muted relative overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-24 h-24 rounded-full bg-background/10 flex items-center justify-center">
-                      <ShoppingBag className="h-10 w-10 text-muted-foreground/50" />
-                    </div>
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
-                </div>
+        <AnimatedSection delay={0.12}>
+          <p className="text-sm uppercase tracking-[0.28em] text-gold">Mais que um corte</p>
+          <h2 className="mt-4 font-heading text-5xl leading-none tracking-wide text-foreground sm:text-6xl">
+            UMA EXPERIÊNCIA QUE COMEÇA ANTES DA CADEIRA
+          </h2>
+          <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+            Você escolhe o serviço, o profissional e o melhor horário pelo celular. Quando chega, o atendimento já está preparado para você.
+          </p>
 
-                <div className="p-5">
-                  <Badge variant="secondary" className="mb-3 bg-muted text-muted-foreground text-xs">
-                    {product.category === "styling" ? "Styling" : product.category === "beard" ? "Barba" : "Pós-barba"}
-                  </Badge>
-                  
-                  <h3 className="font-heading text-xl tracking-wide text-foreground mb-2">
-                    {product.name.toUpperCase()}
-                  </h3>
-                  
-                  <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-                    {product.description}
-                  </p>
-
-                  <div className="flex items-center justify-between">
-                    <span className="font-heading text-2xl text-primary">${product.price}</span>
-                    <Button size="sm" variant="outline" className="hover:bg-primary hover:text-primary-foreground hover:border-primary">
-                      Comprar
-                    </Button>
-                  </div>
+          <div className="mt-9 space-y-5">
+            {details.map(({ icon: Icon, title, text }) => (
+              <div key={title} className="flex gap-4 rounded-xl border border-white/8 bg-background/50 p-4">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-primary/12 text-primary">
+                  <Icon className="h-5 w-5" />
+                </span>
+                <div>
+                  <h3 className="font-medium text-foreground">{title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{text}</p>
                 </div>
-              </Card>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
+              </div>
+            ))}
+          </div>
+        </AnimatedSection>
       </div>
     </section>
   )

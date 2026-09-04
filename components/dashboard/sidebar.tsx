@@ -83,7 +83,7 @@ export function DashboardSidebar({ type, className }: SidebarProps) {
           <Link href="/" className="flex items-center gap-2.5">
             <img 
               src="/logo.png" 
-              alt="American Barber Logo" 
+              alt="Logotipo American Barber"
               className="h-9 w-9 rounded-full object-contain filter drop-shadow-md" 
             />
             <div className="flex flex-col leading-none">
@@ -146,7 +146,7 @@ export function DashboardSidebar({ type, className }: SidebarProps) {
             size="sm"
           >
             <LogOut className="mr-1.5 h-4 w-4" />
-            Sair da Conta
+            Trocar perfil
           </Button>
         </div>
       </div>

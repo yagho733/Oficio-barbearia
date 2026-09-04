@@ -1,41 +1,42 @@
-# Barbearia Premium
+# American Barber — demonstração comercial
 
-Protótipo de plataforma web para barbearias, criado para demonstrar uma experiência profissional de apresentação, agendamento e gestão.
+Projeto demonstrativo de uma plataforma para barbearias, com página de apresentação, agendamento interativo e painéis de gestão para cliente, profissional e administrador.
 
-## Funcionalidades
+## Principais experiências
 
-- Página comercial com serviços, profissionais, produtos e depoimentos
-- Fluxo demonstrativo de agendamento
-- Telas de login e perfis de usuário
-- Painéis para cliente, barbeiro e administrador
-- Layout responsivo para celular e computador
+- Página comercial responsiva e totalmente em português
+- Serviços, valores e profissionais apresentados com clareza
+- Agendamento demonstrativo sem necessidade de cadastro
+- Painéis separados para cliente, barbeiro e administração
+- Dados salvos localmente apenas para a demonstração
+- Identificação clara de informações fictícias
 
 ## Tecnologias
 
-- Next.js
-- React
+- Next.js 16
+- React 19
 - TypeScript
 - Tailwind CSS
 - Framer Motion
 
 ## Executar localmente
 
-Requisitos: Node.js e npm instalados.
-
 ```bash
 npm install
 npm run dev
 ```
 
-Abra [http://localhost:3000](http://localhost:3000) no navegador.
+Abra [http://localhost:3000](http://localhost:3000).
 
-Para verificar a versão de produção:
+## Validação
 
 ```bash
+npm run check
 npm run build
-npm start
 ```
 
-## Observação
+## Uso comercial
 
-Este projeto é uma demonstração de portfólio. Informações, contatos e dados exibidos devem ser substituídos e validados antes de qualquer uso comercial.
+Esta versão é um protótipo de portfólio. Para uso por uma barbearia real, contatos, identidade visual, equipe, horários e integrações devem ser substituídos pelos dados do estabelecimento. Autenticação e persistência em banco de dados também devem ser configuradas antes de operar com clientes reais.
+
+As fotografias utilizadas na demonstração são disponibilizadas por Pexels e Unsplash.

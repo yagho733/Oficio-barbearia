@@ -50,7 +50,10 @@ export default function AdminAnalyticsPage() {
   // Top barber by revenue
   const barberRevenue = useMemo(() => {
     const map: Record<string, number> = {}
-    completed.forEach(a => { map[a.barber] = (map[a.barber] || 0) + a.price })
+    completed.forEach(a => {
+      const barber = a.barber ?? a.barberName
+      map[barber] = (map[barber] || 0) + a.price
+    })
     return map
   }, [completed])
 

@@ -37,7 +37,7 @@ export default function BarberClientsPage() {
       return
     }
 
-    const barberName = parsed.role === "barber" ? parsed.name || "Marcus Johnson" : "Marcus Johnson"
+    const barberName = parsed.role === "barber" ? parsed.name || "Rafael Costa" : "Rafael Costa"
     const apps = getStoredAppointments().filter(a => a.barberName === barberName)
 
     // Aggregate client statistics

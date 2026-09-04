@@ -47,7 +47,7 @@ export default function CustomerProfilePage() {
             </div>
             <div>
               <h3 className="text-lg font-semibold text-foreground">{name}</h3>
-              <p className="text-xs text-muted-foreground">Cliente American Barber</p>
+              <p className="text-xs text-muted-foreground">Cliente demonstração</p>
             </div>
           </div>
 

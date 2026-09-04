@@ -7,6 +7,7 @@ import { ProductsSection } from "@/components/landing/products-section"
 import { BarbersSection } from "@/components/landing/barbers-section"
 import { TestimonialsSection } from "@/components/landing/testimonials-section"
 import { ContactSection } from "@/components/landing/contact-section"
+import { BookingPreviewSection } from "@/components/landing/booking-preview-section"
 import { Footer } from "@/components/footer"
 
 export default function LandingPage() {
@@ -22,16 +23,10 @@ export default function LandingPage() {
         {/* Services Section */}
         <ServicesSection />
 
-        {/* Products Section */}
         <ProductsSection />
-
-        {/* Barbers / Equipe Section */}
         <BarbersSection />
-
-        {/* Testimonials / Avaliações Section */}
+        <BookingPreviewSection />
         <TestimonialsSection />
-
-        {/* Contact and Location Section */}
         <ContactSection />
       </main>
 

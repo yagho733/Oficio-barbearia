@@ -155,7 +155,7 @@ export default function AdminAppointmentsPage() {
 
           <div className="flex flex-col gap-1.5">
             <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider font-mono">Período</label>
-            <Select value={timePeriodFilter} onValueChange={setTimePeriodFilter}>
+            <Select value={timePeriodFilter} onValueChange={(value) => setTimePeriodFilter(value ?? "all")}>
               <SelectTrigger className="w-full text-xs h-9 bg-background border-border">
                 <SelectValue placeholder="Todos os períodos" />
               </SelectTrigger>
@@ -170,7 +170,7 @@ export default function AdminAppointmentsPage() {
 
           <div className="flex flex-col gap-1.5">
             <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider font-mono">Barbeiro</label>
-            <Select value={barberFilter} onValueChange={setBarberFilter}>
+            <Select value={barberFilter} onValueChange={(value) => setBarberFilter(value ?? "all")}>
               <SelectTrigger className="w-full text-xs h-9 bg-background border-border">
                 <SelectValue placeholder="Todos os barbeiros" />
               </SelectTrigger>
@@ -185,7 +185,7 @@ export default function AdminAppointmentsPage() {
 
           <div className="flex flex-col gap-1.5">
             <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider font-mono">Status</label>
-            <Select value={statusFilter} onValueChange={setStatusFilter}>
+            <Select value={statusFilter} onValueChange={(value) => setStatusFilter(value ?? "all")}>
               <SelectTrigger className="w-full text-xs h-9 bg-background border-border">
                 <SelectValue placeholder="Todos os status" />
               </SelectTrigger>

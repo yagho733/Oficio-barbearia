@@ -1,114 +1,57 @@
 "use client"
 
 import Link from "next/link"
-import { Calendar, ArrowRight, Check } from "lucide-react"
+import { ArrowRight, CalendarDays, CheckCircle2, Scissors, UserRound } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { AnimatedSection } from "@/components/ui/animated-section"
 
-const features = [
-  "Escolha seu barbeiro preferido",
-  "Selecione data e horário disponíveis",
-  "Confirmação instantânea",
-  "Lembretes automáticos",
+const steps = [
+  { icon: Scissors, number: "01", title: "Escolha o serviço", text: "Veja o valor e o tempo estimado antes de continuar." },
+  { icon: UserRound, number: "02", title: "Selecione o profissional", text: "Encontre a especialidade ideal para o seu estilo." },
+  { icon: CalendarDays, number: "03", title: "Reserve o horário", text: "Confira a agenda disponível e conclua em poucos passos." },
 ]
 
 export function BookingPreviewSection() {
   return (
-    <section className="py-24 bg-background relative overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+    <section id="booking-demo" className="border-y border-white/5 bg-card py-24 sm:py-28">
+      <div className="container mx-auto px-4 lg:px-8">
+        <AnimatedSection className="mx-auto max-w-3xl text-center">
+          <p className="text-sm uppercase tracking-[0.28em] text-gold">Sem ligação e sem espera</p>
+          <h2 className="mt-4 font-heading text-5xl leading-none tracking-wide text-foreground sm:text-6xl">
+            AGENDE EM MENOS DE UM MINUTO
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+            Uma experiência simples no celular para o cliente e uma agenda mais organizada para a barbearia.
+          </p>
+        </AnimatedSection>
 
-      <div className="container mx-auto px-4 lg:px-8 relative">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Content */}
-          <AnimatedSection>
-            <Badge variant="outline" className="mb-4 text-gold border-gold/30">
-              Agendamento Online
-            </Badge>
-            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl tracking-wide text-foreground mb-6">
-              AGENDE EM<br />SEGUNDOS
-            </h2>
-            <p className="text-muted-foreground mb-8 leading-relaxed max-w-lg">
-              Nossa plataforma de agendamento inteligente torna fácil marcar seu horário. 
-              Escolha o barbeiro, serviço, data e horário que melhor se encaixam na sua agenda.
-            </p>
-
-            <ul className="space-y-4 mb-8">
-              {features.map((feature, index) => (
-                <li key={index} className="flex items-center gap-3">
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10">
-                    <Check className="h-3.5 w-3.5 text-primary" />
-                  </div>
-                  <span className="text-foreground">{feature}</span>
-                </li>
-              ))}
-            </ul>
-
-            <Link href="/booking">
-              <Button size="lg" className="gradient-primary text-primary-foreground border-0">
-                <Calendar className="mr-2 h-5 w-5" />
-                Agendar Agora
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
-          </AnimatedSection>
-
-          {/* Preview Card */}
-          <AnimatedSection delay={0.2}>
-            <Card className="glass-card p-6 lg:p-8">
-              <div className="space-y-6">
-                {/* Step indicators */}
-                <div className="flex items-center gap-3">
-                  {[1, 2, 3, 4, 5].map((step) => (
-                    <div
-                      key={step}
-                      className={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-medium ${
-                        step === 1 
-                          ? "bg-primary text-primary-foreground" 
-                          : "bg-muted text-muted-foreground"
-                      }`}
-                    >
-                      {step}
-                    </div>
-                  ))}
+        <div className="relative mx-auto mt-14 grid max-w-5xl gap-4 md:grid-cols-3">
+          <div className="absolute left-[16%] right-[16%] top-8 hidden h-px bg-gradient-to-r from-transparent via-primary/45 to-transparent md:block" />
+          {steps.map(({ icon: Icon, number, title, text }, index) => (
+            <AnimatedSection key={title} delay={index * 0.1} className="relative">
+              <div className="h-full rounded-2xl border border-white/8 bg-background/65 p-6 text-center">
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border border-primary/25 bg-primary/12 text-primary">
+                  <Icon className="h-7 w-7" />
                 </div>
-
-                <div className="h-px bg-border" />
-
-                {/* Mock booking preview */}
-                <div>
-                  <p className="text-sm text-muted-foreground mb-2">Passo 1</p>
-                  <h3 className="font-heading text-2xl text-foreground mb-4">ESCOLHA SEU BARBEIRO</h3>
-                  
-                  <div className="grid grid-cols-2 gap-3">
-                    {["Marcus J.", "David W.", "James T.", "Michael B."].map((name, i) => (
-                      <Card 
-                        key={name}
-                        className={`p-4 cursor-pointer transition-all ${
-                          i === 0 
-                            ? "bg-primary/10 border-primary" 
-                            : "bg-muted/50 border-transparent hover:border-border"
-                        }`}
-                      >
-                        <div className="w-10 h-10 rounded-full bg-muted mb-2" />
-                        <p className="text-sm font-medium text-foreground">{name}</p>
-                        <p className="text-xs text-muted-foreground">Disponível</p>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-
-                <Button className="w-full gradient-primary text-primary-foreground border-0">
-                  Continuar
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
+                <span className="mt-6 block text-xs font-medium tracking-[0.24em] text-gold">PASSO {number}</span>
+                <h3 className="mt-2 font-heading text-2xl tracking-wide text-foreground">{title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{text}</p>
               </div>
-            </Card>
-          </AnimatedSection>
+            </AnimatedSection>
+          ))}
         </div>
+
+        <AnimatedSection delay={0.2} className="mt-10 flex flex-col items-center gap-4">
+          <Link href="/booking">
+            <Button size="lg" className="gradient-primary h-14 border-0 px-8 text-base text-primary-foreground">
+              Testar o agendamento <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
+          <p className="flex items-center gap-2 text-sm text-muted-foreground">
+            <CheckCircle2 className="h-4 w-4 text-primary" />
+            Fluxo demonstrativo; nenhuma cobrança será realizada.
+          </p>
+        </AnimatedSection>
       </div>
     </section>
   )

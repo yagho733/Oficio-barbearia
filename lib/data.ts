@@ -54,12 +54,13 @@ export interface Appointment {
   customerPhone?: string
   barberId: string
   barberName: string
+  barber?: string
   service: string
   date: string // YYYY-MM-DD
   time: string // e.g., "10:00 AM"
   duration: string // e.g., "45 min"
   price: number
-  status: "confirmed" | "pending" | "cancelled"
+  status: "confirmed" | "pending" | "cancelled" | "completed"
 }
 
 export interface TimeBlock {
@@ -75,46 +76,46 @@ export interface TimeBlock {
 export const barbers: Barber[] = [
   {
     id: "1",
-    name: "Marcus Johnson",
-    specialty: "Classic Cuts & Hot Towel Shaves",
-    experience: "12 years",
+    name: "Rafael Costa",
+    specialty: "Cortes clássicos e tesoura",
+    experience: "9 anos",
     rating: 4.9,
-    reviews: 284,
+    reviews: 126,
     image: "/barbers/marcus.jpg",
-    bio: "Master barber specializing in classic American cuts and traditional hot towel shaves.",
+    bio: "Especialista em cortes clássicos, acabamento na tesoura e consultoria de estilo.",
     availability: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
   },
   {
     id: "2",
-    name: "David Williams",
-    specialty: "Modern Fades & Designs",
-    experience: "8 years",
+    name: "Lucas Martins",
+    specialty: "Degradê e cortes modernos",
+    experience: "6 anos",
     rating: 4.8,
-    reviews: 196,
+    reviews: 94,
     image: "/barbers/david.jpg",
-    bio: "Expert in modern fades, creative designs, and contemporary styling.",
+    bio: "Foco em degradês limpos, cortes atuais e finalizações que valorizam o formato do rosto.",
     availability: ["Wed", "Thu", "Fri", "Sat"],
   },
   {
     id: "3",
-    name: "James Thompson",
-    specialty: "Beard Grooming & Styling",
-    experience: "15 years",
+    name: "Diego Almeida",
+    specialty: "Barba e visagismo masculino",
+    experience: "11 anos",
     rating: 4.9,
-    reviews: 342,
+    reviews: 158,
     image: "/barbers/james.jpg",
-    bio: "Beard specialist with expertise in shaping, styling, and maintenance.",
+    bio: "Especialista em desenho de barba, toalha quente e cuidados para manutenção em casa.",
     availability: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
   },
   {
     id: "4",
-    name: "Michael Brown",
-    specialty: "Precision Cuts & Texturing",
-    experience: "10 years",
+    name: "Bruno Nunes",
+    specialty: "Textura e acabamento",
+    experience: "7 anos",
     rating: 4.7,
-    reviews: 167,
+    reviews: 87,
     image: "/barbers/michael.jpg",
-    bio: "Known for precision cuts and advanced texturing techniques.",
+    bio: "Trabalha textura, movimento e acabamento para cortes práticos no dia a dia.",
     availability: ["Mon", "Tue", "Thu", "Sat"],
   },
 ]
@@ -122,50 +123,50 @@ export const barbers: Barber[] = [
 export const services: Service[] = [
   {
     id: "1",
-    name: "Classic Haircut",
-    description: "Traditional scissor cut with hot towel finish and styling",
+    name: "Corte clássico",
+    description: "Corte personalizado com lavagem, acabamento e finalização",
     duration: "45 min",
-    price: 45,
+    price: 55,
     category: "haircut",
   },
   {
     id: "2",
-    name: "Executive Cut",
-    description: "Premium cut with scalp massage, hot towel, and premium styling",
+    name: "Corte executivo",
+    description: "Corte completo com lavagem, massagem capilar e finalização",
     duration: "60 min",
     price: 65,
     category: "haircut",
   },
   {
     id: "3",
-    name: "Precision Fade",
-    description: "Modern fade with detailed line work and styling",
+    name: "Degradê de precisão",
+    description: "Degradê com transição limpa, contorno e finalização",
     duration: "45 min",
-    price: 50,
+    price: 60,
     category: "haircut",
   },
   {
     id: "4",
-    name: "Hot Towel Shave",
-    description: "Traditional straight razor shave with hot towels and aftercare",
+    name: "Barba com toalha quente",
+    description: "Modelagem, navalha, toalha quente e hidratação",
     duration: "40 min",
-    price: 40,
+    price: 45,
     category: "shave",
   },
   {
     id: "5",
-    name: "Beard Trim & Shape",
-    description: "Professional beard trimming, shaping, and conditioning",
+    name: "Barba express",
+    description: "Aparo, alinhamento e acabamento do contorno",
     duration: "30 min",
-    price: 30,
+    price: 35,
     category: "beard",
   },
   {
     id: "6",
-    name: "Royal Treatment",
-    description: "Complete package: haircut, hot shave, beard trim, and facial",
-    duration: "120 min",
-    price: 150,
+    name: "Experiência completa",
+    description: "Corte, barba com toalha quente e cuidado facial",
+    duration: "90 min",
+    price: 120,
     category: "package",
   },
 ]
@@ -173,33 +174,33 @@ export const services: Service[] = [
 export const products: Product[] = [
   {
     id: "1",
-    name: "Premium Pomade",
-    description: "Strong hold, high shine pomade for classic styles",
-    price: 28,
+    name: "Pomada modeladora",
+    description: "Fixação firme e acabamento natural",
+    price: 49,
     image: "/products/pomade.jpg",
     category: "styling",
   },
   {
     id: "2",
-    name: "Beard Oil",
-    description: "Nourishing blend of argan and jojoba oils",
-    price: 32,
+    name: "Óleo para barba",
+    description: "Hidratação e maciez sem aspecto oleoso",
+    price: 42,
     image: "/products/beard-oil.jpg",
     category: "beard",
   },
   {
     id: "3",
-    name: "Matte Clay",
-    description: "Medium hold, matte finish for textured looks",
-    price: 26,
+    name: "Cera efeito matte",
+    description: "Fixação média para penteados com textura",
+    price: 45,
     image: "/products/clay.jpg",
     category: "styling",
   },
   {
     id: "4",
-    name: "Aftershave Balm",
-    description: "Soothing balm with aloe vera and vitamin E",
-    price: 24,
+    name: "Balm pós-barba",
+    description: "Ação calmante e refrescante para a pele",
+    price: 39,
     image: "/products/aftershave.jpg",
     category: "shave",
   },
@@ -208,25 +209,25 @@ export const products: Product[] = [
 export const testimonials: Testimonial[] = [
   {
     id: "1",
-    name: "Robert Chen",
-    role: "Executive",
-    content: "The best barbershop experience I've ever had. Marcus understands exactly what I need every time.",
+    name: "André Ferreira",
+    role: "Cliente",
+    content: "Atendimento no horário, conversa clara e um acabamento muito bem feito.",
     rating: 5,
     image: "/testimonials/robert.jpg",
   },
   {
     id: "2",
-    name: "Thomas Wright",
-    role: "Attorney",
-    content: "Professional, punctual, and premium quality. This is what a real barbershop should be.",
+    name: "Marcos Oliveira",
+    role: "Cliente",
+    content: "O agendamento foi simples e o profissional entendeu exatamente o corte que eu queria.",
     rating: 5,
     image: "/testimonials/thomas.jpg",
   },
   {
     id: "3",
-    name: "Daniel Martinez",
-    role: "Entrepreneur",
-    content: "The Royal Treatment is worth every penny. I leave feeling like a new man every time.",
+    name: "Felipe Santos",
+    role: "Cliente",
+    content: "Ambiente organizado, serviço cuidadoso e uma experiência que dá vontade de voltar.",
     rating: 5,
     image: "/testimonials/daniel.jpg",
   },
@@ -234,23 +235,24 @@ export const testimonials: Testimonial[] = [
 
 // All possible time slots (in 30-min steps)
 export const timeSlots = [
-  "09:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM",
-  "12:00 PM", "12:30 PM", "01:00 PM", "01:30 PM", "02:00 PM", "02:30 PM",
-  "03:00 PM", "03:30 PM", "04:00 PM", "04:30 PM", "05:00 PM", "05:30 PM",
-  "06:00 PM", "06:30 PM", "07:00 PM", "07:30 PM"
+  "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
+  "12:00", "12:30", "13:00", "13:30", "14:00", "14:30",
+  "15:00", "15:30", "16:00", "16:30", "17:00", "17:30",
+  "18:00", "18:30", "19:00", "19:30"
 ]
 
 export const initialAppointments: Appointment[] = [
   {
     id: "1",
     customerId: "c1",
-    customerName: "John Smith",
+    customerName: "João Silva",
     customerPhone: "+5553999999999",
     barberId: "1",
-    barberName: "Marcus Johnson",
-    service: "Classic Haircut",
+    barberName: "Rafael Costa",
+    barber: "Rafael Costa",
+    service: "Corte clássico",
     date: "2026-06-05",
-    time: "10:00 AM",
+    time: "10:00",
     duration: "45 min",
     price: 45,
     status: "confirmed",
@@ -258,13 +260,14 @@ export const initialAppointments: Appointment[] = [
   {
     id: "2",
     customerId: "c2",
-    customerName: "Mike Davis",
+    customerName: "Matheus Lima",
     customerPhone: "+5553988888888",
     barberId: "1",
-    barberName: "Marcus Johnson",
-    service: "Hot Towel Shave",
+    barberName: "Rafael Costa",
+    barber: "Rafael Costa",
+    service: "Barba com toalha quente",
     date: "2026-06-05",
-    time: "11:30 AM",
+    time: "11:30",
     duration: "40 min",
     price: 40,
     status: "confirmed",
@@ -272,13 +275,14 @@ export const initialAppointments: Appointment[] = [
   {
     id: "3",
     customerId: "c3",
-    customerName: "Chris Wilson",
+    customerName: "Carlos Souza",
     customerPhone: "+5553977777777",
     barberId: "2",
-    barberName: "David Williams",
-    service: "Precision Fade",
+    barberName: "Lucas Martins",
+    barber: "Lucas Martins",
+    service: "Degradê de precisão",
     date: "2026-06-05",
-    time: "02:00 PM",
+    time: "14:00",
     duration: "45 min",
     price: 50,
     status: "pending",
@@ -299,27 +303,27 @@ export const dashboardStats = {
 
 export const revenueData = [
   { month: "Jan", revenue: 15200 },
-  { month: "Feb", revenue: 16800 },
+  { month: "Fev", revenue: 16800 },
   { month: "Mar", revenue: 17500 },
-  { month: "Apr", revenue: 18200 },
-  { month: "May", revenue: 19100 },
+  { month: "Abr", revenue: 18200 },
+  { month: "Mai", revenue: 19100 },
   { month: "Jun", revenue: 18500 },
 ]
 
 export const servicePerformance = [
-  { name: "Classic Haircut", bookings: 245, revenue: 11025 },
-  { name: "Executive Cut", bookings: 128, revenue: 8320 },
-  { name: "Precision Fade", bookings: 189, revenue: 9450 },
-  { name: "Hot Towel Shave", bookings: 156, revenue: 6240 },
-  { name: "Beard Trim", bookings: 201, revenue: 6030 },
-  { name: "Royal Treatment", bookings: 67, revenue: 10050 },
+  { name: "Corte clássico", bookings: 245, revenue: 13475 },
+  { name: "Corte executivo", bookings: 128, revenue: 8320 },
+  { name: "Degradê", bookings: 189, revenue: 11340 },
+  { name: "Barba com toalha quente", bookings: 156, revenue: 7020 },
+  { name: "Barba express", bookings: 201, revenue: 7035 },
+  { name: "Experiência completa", bookings: 67, revenue: 8040 },
 ]
 
 export const barberPerformance = [
-  { name: "Marcus Johnson", appointments: 284, revenue: 12780, rating: 4.9 },
-  { name: "David Williams", appointments: 196, revenue: 9800, rating: 4.8 },
-  { name: "James Thompson", appointments: 342, revenue: 13680, rating: 4.9 },
-  { name: "Michael Brown", appointments: 167, revenue: 7515, rating: 4.7 },
+  { name: "Rafael Costa", appointments: 284, revenue: 15620, rating: 4.9 },
+  { name: "Lucas Martins", appointments: 196, revenue: 11760, rating: 4.8 },
+  { name: "Diego Almeida", appointments: 342, revenue: 15390, rating: 4.9 },
+  { name: "Bruno Nunes", appointments: 167, revenue: 9185, rating: 4.7 },
 ]
 
 // Keep compatibility with files importing standard list directly
@@ -342,6 +346,7 @@ export function saveAppointment(app: Omit<Appointment, "id" | "status">): Appoin
   const list = getStoredAppointments()
   const newApp: Appointment = {
     ...app,
+    barber: app.barberName,
     id: Math.random().toString(36).substring(2, 9),
     status: "confirmed"
   }
@@ -378,4 +383,3 @@ export function removeBarberBlock(id: string): void {
     localStorage.setItem("american_barber_blocks", JSON.stringify(updated))
   }
 }
-

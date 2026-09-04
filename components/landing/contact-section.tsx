@@ -1,151 +1,65 @@
 "use client"
 
-import { MapPin, Phone, Mail, Clock } from "lucide-react"
-import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import Link from "next/link"
+import { ArrowRight, Clock3, MapPin, MessageCircle, MonitorCog } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { AnimatedSection } from "@/components/ui/animated-section"
 
-const hours = [
-  { day: "Segunda - Sexta", time: "9:00 - 20:00" },
-  { day: "Sábado", time: "9:00 - 18:00" },
-  { day: "Domingo", time: "Fechado" },
+const info = [
+  { icon: MapPin, label: "Localização", value: "Centro • Pelotas, RS" },
+  { icon: Clock3, label: "Horários", value: "Segunda a sábado • 9h às 20h" },
+  { icon: MessageCircle, label: "Confirmação", value: "Atendimento e lembretes pelo WhatsApp" },
 ]
 
 export function ContactSection() {
   return (
-    <section id="contact" className="py-24 bg-card">
-      <div className="container mx-auto px-4 lg:px-8">
-        <AnimatedSection className="text-center mb-16">
-          <Badge variant="outline" className="mb-4 text-gold border-gold/30">
-            Contato
-          </Badge>
-          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl tracking-wide text-foreground mb-4">
-            VISITE-NOS
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Estamos localizados no coração da cidade, prontos para recebê-lo.
-          </p>
-        </AnimatedSection>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Contact Info */}
-          <AnimatedSection>
-            <Card className="bg-muted/50 border-border p-8 h-full">
-              <h3 className="font-heading text-2xl tracking-wide text-foreground mb-6">
-                INFORMAÇÕES
-              </h3>
-
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                    <MapPin className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-foreground">Endereço</p>
-                    <p className="text-sm text-muted-foreground">
-                      123 Main Street, Downtown<br />
-                      New York, NY 10001
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                    <Phone className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-foreground">Telefone</p>
-                    <p className="text-sm text-muted-foreground">(555) 123-4567</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                    <Mail className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-foreground">Email</p>
-                    <p className="text-sm text-muted-foreground">info@americanbarber.com</p>
-                  </div>
-                </div>
-
-                <div className="h-px bg-border my-6" />
-
-                <div>
-                  <div className="flex items-center gap-2 mb-4">
-                    <Clock className="h-5 w-5 text-primary" />
-                    <h4 className="font-heading text-lg tracking-wide text-foreground">HORÁRIO DE FUNCIONAMENTO</h4>
-                  </div>
-                  <div className="space-y-2">
-                    {hours.map((item) => (
-                      <div key={item.day} className="flex justify-between text-sm">
-                        <span className="text-muted-foreground">{item.day}</span>
-                        <span className="text-foreground">{item.time}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </AnimatedSection>
-
-          {/* Contact Form */}
-          <AnimatedSection delay={0.2}>
-            <Card className="bg-muted/50 border-border p-8 h-full">
-              <h3 className="font-heading text-2xl tracking-wide text-foreground mb-6">
-                ENVIE UMA MENSAGEM
-              </h3>
-
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Nome</Label>
-                    <Input 
-                      id="name" 
-                      placeholder="Seu nome" 
-                      className="bg-background border-border"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input 
-                      id="email" 
-                      type="email" 
-                      placeholder="seu@email.com" 
-                      className="bg-background border-border"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="phone">Telefone</Label>
-                  <Input 
-                    id="phone" 
-                    placeholder="(00) 00000-0000" 
-                    className="bg-background border-border"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="message">Mensagem</Label>
-                  <textarea 
-                    id="message" 
-                    rows={4}
-                    placeholder="Como podemos ajudá-lo?"
-                    className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 resize-none"
-                  />
-                </div>
-
-                <Button type="submit" className="w-full gradient-primary text-primary-foreground border-0">
-                  Enviar Mensagem
+    <section id="contact" className="relative overflow-hidden bg-card py-24 sm:py-28">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_40%,rgba(185,28,28,0.14),transparent_32rem)]" />
+      <div className="container relative mx-auto px-4 lg:px-8">
+        <AnimatedSection className="grid items-center gap-12 lg:grid-cols-[1fr_0.9fr]">
+          <div>
+            <p className="text-sm uppercase tracking-[0.28em] text-gold">Seu próximo horário</p>
+            <h2 className="mt-4 max-w-3xl font-heading text-6xl leading-[0.95] tracking-wide text-foreground sm:text-7xl">
+              PRONTO PARA ATUALIZAR O VISUAL?
+            </h2>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
+              Escolha o serviço, o profissional e o melhor horário. O restante fica por nossa conta.
+            </p>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <Link href="/booking">
+                <Button size="lg" className="gradient-primary h-14 w-full border-0 px-8 text-base text-primary-foreground sm:w-auto">
+                  Agendar agora <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
-              </form>
-            </Card>
-          </AnimatedSection>
-        </div>
+              </Link>
+              <Link href="/login">
+                <Button size="lg" variant="outline" className="h-14 w-full border-white/15 bg-white/5 px-7 text-base hover:bg-white/10 sm:w-auto">
+                  <MonitorCog className="mr-2 h-5 w-5" />
+                  Ver painel demonstrativo
+                </Button>
+              </Link>
+            </div>
+          </div>
+
+          <div className="rounded-[1.75rem] border border-white/10 bg-background/75 p-6 shadow-2xl backdrop-blur sm:p-8">
+            <p className="text-xs uppercase tracking-[0.24em] text-primary">Informações ilustrativas</p>
+            <div className="mt-6 space-y-4">
+              {info.map(({ icon: Icon, label, value }) => (
+                <div key={label} className="flex gap-4 rounded-xl border border-white/8 bg-white/[0.025] p-4">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-primary/12 text-primary">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <p className="text-sm text-muted-foreground">{label}</p>
+                    <p className="mt-1 font-medium text-foreground">{value}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p className="mt-6 border-t border-white/8 pt-5 text-sm leading-relaxed text-muted-foreground">
+              Em uma versão comercial, localização, WhatsApp, horários e identidade visual são personalizados para a barbearia.
+            </p>
+          </div>
+        </AnimatedSection>
       </div>
     </section>
   )

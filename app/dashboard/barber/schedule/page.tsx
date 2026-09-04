@@ -121,7 +121,7 @@ export default function BarberSchedulePage() {
 
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-muted-foreground uppercase">Horário</label>
-                <Select value={selectedTime} onValueChange={setSelectedTime}>
+                <Select value={selectedTime} onValueChange={(value) => setSelectedTime(value ?? "")}>
                   <SelectTrigger className="w-full text-xs h-10 bg-background border-border">
                     <SelectValue placeholder="Selecione" />
                   </SelectTrigger>
@@ -135,7 +135,7 @@ export default function BarberSchedulePage() {
 
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-muted-foreground uppercase">Duração</label>
-                <Select value={selectedDuration} onValueChange={setSelectedDuration}>
+                <Select value={selectedDuration} onValueChange={(value) => setSelectedDuration(value ?? "30 min")}>
                   <SelectTrigger className="w-full text-xs h-10 bg-background border-border">
                     <SelectValue placeholder="Selecione" />
                   </SelectTrigger>

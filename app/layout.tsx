@@ -17,9 +17,8 @@ const bebasNeue = Bebas_Neue({
 })
 
 export const metadata: Metadata = {
-  title: 'American Barber | Premium Grooming Experience',
-  description: 'American Tradition. Modern Style. Premium grooming experience and intelligent scheduling for the modern gentleman.',
-  generator: 'v0.app',
+  title: 'American Barber | Barbearia premium em Pelotas',
+  description: 'Cortes, barba e cuidado masculino com atendimento personalizado e agendamento online em poucos passos.',
   icons: {
     icon: [
       {
@@ -45,7 +44,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${bebasNeue.variable} dark bg-background`}>
+    <html lang="pt-BR" className={`${inter.variable} ${bebasNeue.variable} dark bg-background`}>
       <body className="font-sans antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

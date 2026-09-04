@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { 
   Calendar, Clock, DollarSign, Users, TrendingUp, Star, CheckCircle, XCircle,
-  Power, Coffee, Plus, Trash2, AlertTriangle, ChevronRight, User as UserIcon
+  Power, Coffee, Plus, Trash2, AlertTriangle, ChevronRight, User as UserIcon, Scissors
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -27,7 +27,7 @@ export default function BarberDashboardPage() {
   const router = useRouter()
   
   // Barber state details
-  const [barberName, setBarberName] = useState("Marcus Johnson")
+  const [barberName, setBarberName] = useState("Rafael Costa")
   const [commissionRate, setCommissionRate] = useState(0.3) // 30% commission
   const [appointmentsList, setAppointmentsList] = useState<Appointment[]>([])
   
@@ -59,9 +59,9 @@ export default function BarberDashboardPage() {
         return
       }
       
-      // If the logged in user has a name, let's map it or fall back to Marcus
+      // Use the selected demonstration profile name.
       if (parsed.role === "barber") {
-        setBarberName(parsed.name || "Marcus Johnson")
+        setBarberName(parsed.name || "Rafael Costa")
       }
     } catch (e) {
       router.push("/login")
@@ -456,7 +456,7 @@ export default function BarberDashboardPage() {
                   <div className="grid grid-cols-2 gap-2">
                     <div className="flex flex-col gap-1">
                       <label className="text-[9px] text-muted-foreground font-bold">Início</label>
-                      <Select value={selectedTimeSlot} onValueChange={setSelectedTimeSlot}>
+                      <Select value={selectedTimeSlot} onValueChange={(value) => setSelectedTimeSlot(value ?? "")}>
                         <SelectTrigger className="w-full text-xs h-9 bg-muted border-border">
                           <SelectValue placeholder="Selecione" />
                         </SelectTrigger>
@@ -470,7 +470,7 @@ export default function BarberDashboardPage() {
                     
                     <div className="flex flex-col gap-1">
                       <label className="text-[9px] text-muted-foreground font-bold">Duração</label>
-                      <Select value={selectedDuration} onValueChange={setSelectedDuration}>
+                      <Select value={selectedDuration} onValueChange={(value) => setSelectedDuration(value ?? "30 min")}>
                         <SelectTrigger className="w-full text-xs h-9 bg-muted border-border">
                           <SelectValue placeholder="Selecione" />
                         </SelectTrigger>
