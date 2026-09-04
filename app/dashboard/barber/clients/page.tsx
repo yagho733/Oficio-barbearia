@@ -37,7 +37,7 @@ export default function BarberClientsPage() {
       return
     }
 
-    const barberName = parsed.role === "barber" ? parsed.name || "Rafael Costa" : "Rafael Costa"
+    const barberName = parsed.role === "barber" ? parsed.name || "Profissional demonstrativo" : "Profissional demonstrativo"
     const apps = getStoredAppointments().filter(a => a.barberName === barberName)
 
     // Aggregate client statistics
@@ -45,8 +45,8 @@ export default function BarberClientsPage() {
 
     apps.forEach((app) => {
       const name = app.customerName
-      const email = app.customerId || "cliente@email.com"
-      const phone = app.customerPhone || "(53) 99999-9999"
+      const email = app.customerId || "Não informado"
+      const phone = app.customerPhone || "Não informado"
 
       if (!clientMap[name]) {
         clientMap[name] = {

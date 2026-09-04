@@ -12,9 +12,9 @@ import { DashboardHeader } from "@/components/dashboard/header"
 
 export default function BarberProfilePage() {
   const router = useRouter()
-  const [name, setName] = useState("Rafael Costa")
+  const [name, setName] = useState("Profissional demonstrativo")
   const [specialty, setSpecialty] = useState("Cortes Clássicos & Barbaterapia")
-  const [email, setEmail] = useState("marcus.barbeiro@barber.com")
+  const [email, setEmail] = useState("profissional@demonstracao.local")
   const [bio, setBio] = useState("Barbeiro especialista em cortes clássicos e técnicas tradicionais de toalha quente.")
   const [workingDays, setWorkingDays] = useState("Segunda a Sábado")
   const [isSaved, setIsSaved] = useState(false)
@@ -32,8 +32,8 @@ export default function BarberProfilePage() {
     }
 
     if (parsed.role === "barber") {
-      setName(parsed.name || "Rafael Costa")
-      setEmail(parsed.email || "marcus.barbeiro@barber.com")
+      setName(parsed.name || "Profissional demonstrativo")
+      setEmail(parsed.email || "profissional@demonstracao.local")
     }
   }, [router])
 

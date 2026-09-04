@@ -14,7 +14,7 @@ import { ptBR } from "date-fns/locale"
 export default function BarberBillingPage() {
   const router = useRouter()
   const [appointments, setAppointments] = useState<Appointment[]>([])
-  const [barberName, setBarberName] = useState("Rafael Costa")
+  const [barberName, setBarberName] = useState("Profissional demonstrativo")
   const [commissionRate, setCommissionRate] = useState(0.3) // 30% commission
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function BarberBillingPage() {
       return
     }
 
-    const name = parsed.role === "barber" ? parsed.name || "Rafael Costa" : "Rafael Costa"
+    const name = parsed.role === "barber" ? parsed.name || "Profissional demonstrativo" : "Profissional demonstrativo"
     setBarberName(name)
 
     const all = getStoredAppointments()

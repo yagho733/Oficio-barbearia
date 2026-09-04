@@ -31,7 +31,7 @@ interface Barber {
 const INITIAL_BARBERS: Barber[] = [
   {
     id: "1",
-    name: "Carlos Silva",
+    name: "Profissional 1",
     specialty: "Corte Clássico & Barba",
     workingDays: ["Seg", "Ter", "Qua", "Qui", "Sex"],
     startTime: "09:00",
@@ -43,7 +43,7 @@ const INITIAL_BARBERS: Barber[] = [
   },
   {
     id: "2",
-    name: "Rafael Santos",
+    name: "Profissional 2",
     specialty: "Degradê & Desenho",
     workingDays: ["Ter", "Qua", "Qui", "Sex", "Sáb"],
     startTime: "10:00",
@@ -55,7 +55,7 @@ const INITIAL_BARBERS: Barber[] = [
   },
   {
     id: "3",
-    name: "Lucas Oliveira",
+    name: "Profissional 3",
     specialty: "Coloração & Química",
     workingDays: ["Seg", "Qua", "Sex", "Sáb"],
     startTime: "09:00",

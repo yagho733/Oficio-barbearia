@@ -41,8 +41,8 @@ interface BarbershopSettings {
 const DEFAULT_SETTINGS: BarbershopSettings = {
   name: "Sua Barbearia",
   tagline: "Atendimento, estilo e praticidade",
-  phone: "(53) 99999-0000",
-  whatsapp: "5553999990000",
+  phone: "",
+  whatsapp: "",
   instagram: "suabarbearia",
   website: "https://suabarbearia.com.br",
   address: "Endereço da barbearia",
@@ -191,7 +191,7 @@ export default function AdminSettingsPage() {
                 <Field label="WhatsApp (com DDI e DDD)">
                   <div className="relative">
                     <MessageCircle className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
-                    <Input value={settings.whatsapp} onChange={e => set("whatsapp", e.target.value)} className="bg-muted border-border text-xs h-9 pl-9" placeholder="5511999999999" />
+                    <Input value={settings.whatsapp} onChange={e => set("whatsapp", e.target.value)} className="bg-muted border-border text-xs h-9 pl-9" placeholder="Digite o número com DDD" />
                   </div>
                 </Field>
                 <Field label="Instagram (sem @)">

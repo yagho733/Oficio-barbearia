@@ -18,7 +18,7 @@ const profiles = [
   },
   {
     role: "barber",
-    name: "Rafael Costa",
+    name: "Profissional demonstrativo",
     title: "Área do profissional",
     text: "Veja a agenda, clientes, histórico e resumo de atendimentos.",
     icon: Scissors,

@@ -10,10 +10,10 @@ import { Label } from "@/components/ui/label"
 import { DashboardHeader } from "@/components/dashboard/header"
 
 export default function CustomerProfilePage() {
-  const [name, setName] = useState("John Smith")
-  const [phone, setPhone] = useState("+55 (53) 99999-9999")
-  const [email, setEmail] = useState("john.smith@gmail.com")
-  const [address, setAddress] = useState("Av. Duque de Caxias, 775 - Fragata")
+  const [name, setName] = useState("Cliente demonstrativo")
+  const [phone, setPhone] = useState("")
+  const [email, setEmail] = useState("cliente@demonstracao.local")
+  const [address, setAddress] = useState("")
   const [isSaved, setIsSaved] = useState(false)
 
   const handleSave = (e: React.FormEvent) => {
@@ -43,7 +43,7 @@ export default function CustomerProfilePage() {
         <Card className="p-6 bg-card border-border text-left">
           <div className="flex items-center gap-4 border-b border-border/50 pb-5 mb-5">
             <div className="w-16 h-16 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center font-heading text-2xl text-primary font-bold">
-              JS
+              CD
             </div>
             <div>
               <h3 className="text-lg font-semibold text-foreground">{name}</h3>

@@ -1,4 +1,5 @@
 // Camada de dados da demonstração de agendamento para barbearias.
+import { siteConfig } from "@/lib/site-config"
 
 export interface User {
   id: string
@@ -77,103 +78,9 @@ export const BLOCKS_STORAGE_KEY = "barbershop_demo_blocks_v2"
 export const APPOINTMENTS_CHANGED_EVENT = "barbershop-demo:appointments-changed"
 
 // Initial Mock Databases
-export const barbers: Barber[] = [
-  {
-    id: "1",
-    name: "Rafael Costa",
-    specialty: "Cortes clássicos e tesoura",
-    experience: "9 anos",
-    rating: 4.9,
-    reviews: 126,
-    image: "/barbers/marcus.jpg",
-    bio: "Especialista em cortes clássicos, acabamento na tesoura e consultoria de estilo.",
-    availability: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-  },
-  {
-    id: "2",
-    name: "Lucas Martins",
-    specialty: "Degradê e cortes modernos",
-    experience: "6 anos",
-    rating: 4.8,
-    reviews: 94,
-    image: "/barbers/david.jpg",
-    bio: "Foco em degradês limpos, cortes atuais e finalizações que valorizam o formato do rosto.",
-    availability: ["Wed", "Thu", "Fri", "Sat"],
-  },
-  {
-    id: "3",
-    name: "Diego Almeida",
-    specialty: "Barba e visagismo masculino",
-    experience: "11 anos",
-    rating: 4.9,
-    reviews: 158,
-    image: "/barbers/james.jpg",
-    bio: "Especialista em desenho de barba, toalha quente e cuidados para manutenção em casa.",
-    availability: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-  },
-  {
-    id: "4",
-    name: "Bruno Nunes",
-    specialty: "Textura e acabamento",
-    experience: "7 anos",
-    rating: 4.7,
-    reviews: 87,
-    image: "/barbers/michael.jpg",
-    bio: "Trabalha textura, movimento e acabamento para cortes práticos no dia a dia.",
-    availability: ["Mon", "Tue", "Thu", "Sat"],
-  },
-]
+export const barbers: Barber[] = siteConfig.professionals.map((professional) => ({ ...professional, availability: [...professional.availability] }))
 
-export const services: Service[] = [
-  {
-    id: "1",
-    name: "Corte clássico",
-    description: "Corte personalizado com lavagem, acabamento e finalização",
-    duration: "45 min",
-    price: 55,
-    category: "haircut",
-  },
-  {
-    id: "2",
-    name: "Corte executivo",
-    description: "Corte completo com lavagem, massagem capilar e finalização",
-    duration: "60 min",
-    price: 65,
-    category: "haircut",
-  },
-  {
-    id: "3",
-    name: "Degradê de precisão",
-    description: "Degradê com transição limpa, contorno e finalização",
-    duration: "45 min",
-    price: 60,
-    category: "haircut",
-  },
-  {
-    id: "4",
-    name: "Barba com toalha quente",
-    description: "Modelagem, navalha, toalha quente e hidratação",
-    duration: "40 min",
-    price: 45,
-    category: "shave",
-  },
-  {
-    id: "5",
-    name: "Barba express",
-    description: "Aparo, alinhamento e acabamento do contorno",
-    duration: "30 min",
-    price: 35,
-    category: "beard",
-  },
-  {
-    id: "6",
-    name: "Experiência completa",
-    description: "Corte, barba com toalha quente e cuidado facial",
-    duration: "90 min",
-    price: 120,
-    category: "package",
-  },
-]
+export const services: Service[] = siteConfig.services.map((service) => ({ ...service }))
 
 export const products: Product[] = [
   {
@@ -210,32 +117,7 @@ export const products: Product[] = [
   },
 ]
 
-export const testimonials: Testimonial[] = [
-  {
-    id: "1",
-    name: "André Ferreira",
-    role: "Cliente",
-    content: "Atendimento no horário, conversa clara e um acabamento muito bem feito.",
-    rating: 5,
-    image: "/testimonials/robert.jpg",
-  },
-  {
-    id: "2",
-    name: "Marcos Oliveira",
-    role: "Cliente",
-    content: "O agendamento foi simples e o profissional entendeu exatamente o corte que eu queria.",
-    rating: 5,
-    image: "/testimonials/thomas.jpg",
-  },
-  {
-    id: "3",
-    name: "Felipe Santos",
-    role: "Cliente",
-    content: "Ambiente organizado, serviço cuidadoso e uma experiência que dá vontade de voltar.",
-    rating: 5,
-    image: "/testimonials/daniel.jpg",
-  },
-]
+export const testimonials: Testimonial[] = []
 
 // All possible time slots (in 30-min steps)
 export const timeSlots = [
@@ -245,53 +127,7 @@ export const timeSlots = [
   "18:00", "18:30", "19:00", "19:30"
 ]
 
-export const initialAppointments: Appointment[] = [
-  {
-    id: "1",
-    customerId: "c1",
-    customerName: "João Silva",
-    customerPhone: "+5553999999999",
-    barberId: "1",
-    barberName: "Rafael Costa",
-    barber: "Rafael Costa",
-    service: "Corte clássico",
-    date: "2026-06-05",
-    time: "10:00",
-    duration: "45 min",
-    price: 45,
-    status: "confirmed",
-  },
-  {
-    id: "2",
-    customerId: "c2",
-    customerName: "Matheus Lima",
-    customerPhone: "+5553988888888",
-    barberId: "1",
-    barberName: "Rafael Costa",
-    barber: "Rafael Costa",
-    service: "Barba com toalha quente",
-    date: "2026-06-05",
-    time: "11:30",
-    duration: "40 min",
-    price: 40,
-    status: "confirmed",
-  },
-  {
-    id: "3",
-    customerId: "c3",
-    customerName: "Carlos Souza",
-    customerPhone: "+5553977777777",
-    barberId: "2",
-    barberName: "Lucas Martins",
-    barber: "Lucas Martins",
-    service: "Degradê de precisão",
-    date: "2026-06-05",
-    time: "14:00",
-    duration: "45 min",
-    price: 50,
-    status: "pending",
-  },
-]
+export const initialAppointments: Appointment[] = []
 
 // Default statistics
 export const dashboardStats = {
@@ -324,10 +160,9 @@ export const servicePerformance = [
 ]
 
 export const barberPerformance = [
-  { name: "Rafael Costa", appointments: 284, revenue: 15620, rating: 4.9 },
-  { name: "Lucas Martins", appointments: 196, revenue: 11760, rating: 4.8 },
-  { name: "Diego Almeida", appointments: 342, revenue: 15390, rating: 4.9 },
-  { name: "Bruno Nunes", appointments: 167, revenue: 9185, rating: 4.7 },
+  { name: "Profissional 1", appointments: 284, revenue: 15620, rating: 4.9 },
+  { name: "Profissional 2", appointments: 196, revenue: 11760, rating: 4.8 },
+  { name: "Profissional 3", appointments: 342, revenue: 15390, rating: 4.9 },
 ]
 
 // Keep compatibility with files importing standard list directly

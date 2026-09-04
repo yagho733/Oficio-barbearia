@@ -28,7 +28,7 @@ export default function BarberDashboardPage() {
   const router = useRouter()
   
   // Barber state details
-  const [barberName, setBarberName] = useState("Rafael Costa")
+  const [barberName, setBarberName] = useState("Profissional demonstrativo")
   const [commissionRate, setCommissionRate] = useState(0.3) // 30% commission
   const [appointmentsList, setAppointmentsList] = useState<Appointment[]>([])
   
@@ -62,7 +62,7 @@ export default function BarberDashboardPage() {
       
       // Use the selected demonstration profile name.
       if (parsed.role === "barber") {
-        setBarberName(parsed.name || "Rafael Costa")
+        setBarberName(parsed.name || "Profissional demonstrativo")
       }
     } catch (e) {
       router.push("/login")

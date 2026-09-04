@@ -163,7 +163,7 @@ export default function BookingPage() {
             <Brand compact />
           </Link>
           <Link href="/">
-            <Button variant="outline" className="h-10 border-white/15 bg-white/5 px-3 sm:px-4">
+            <Button variant="outline" className="h-10 border-border bg-background px-3 sm:px-4">
               <ArrowLeft className="mr-2 h-4 w-4" /> Início
             </Button>
           </Link>
@@ -188,17 +188,17 @@ export default function BookingPage() {
           </div>
         )}
 
-        <Card className="mt-7 overflow-hidden border-white/10 bg-card/80 p-5 shadow-2xl sm:mt-8 sm:p-8">
+        <Card className="mt-7 overflow-hidden border-border bg-card p-5 shadow-none sm:mt-8 sm:p-8">
           {step === 1 && (
             <section>
               <p className="eyebrow">Etapa 1 de 3</p>
-              <h1 className="display-title mt-3 text-[clamp(2.5rem,10vw,4rem)]">Escolha o serviço</h1>
+              <h1 className="display-title mt-3 text-[clamp(2.35rem,8vw,3.75rem)]">Escolha o serviço</h1>
               <p className="mt-3 max-w-2xl text-base leading-7 text-muted-foreground">Confira valor e duração antes de continuar.</p>
               <div className="mt-7 grid gap-3 sm:grid-cols-2">
                 {services.map((service) => (
-                  <button key={service.id} type="button" onClick={() => selectService(service)} className="group rounded-xl border border-white/10 bg-background/60 p-5 text-left transition-all hover:-translate-y-0.5 hover:border-primary/50 focus-visible:border-primary">
+                  <button key={service.id} type="button" onClick={() => selectService(service)} className="group border border-border bg-background p-5 text-left transition-colors hover:border-primary focus-visible:border-primary">
                     <div className="flex items-start justify-between gap-4">
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/12 text-primary"><Scissors className="h-5 w-5" /></span>
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-primary/25 bg-primary/8 text-primary"><Scissors className="h-5 w-5" /></span>
                       <span className="font-heading text-2xl leading-none text-primary">{formatPrice(service.price)}</span>
                     </div>
                     <h2 className="mt-5 font-heading text-2xl leading-tight tracking-wide">{service.name}</h2>
@@ -214,13 +214,13 @@ export default function BookingPage() {
             <section>
               <button type="button" onClick={goBack} className="mb-5 flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="h-4 w-4" /> Voltar</button>
               <p className="eyebrow">Etapa 2 de 3</p>
-              <h1 className="display-title mt-3 text-[clamp(2.5rem,10vw,4rem)]">Escolha o profissional</h1>
+              <h1 className="display-title mt-3 text-[clamp(2.35rem,8vw,3.75rem)]">Escolha o profissional</h1>
               <p className="mt-3 max-w-2xl text-base leading-7 text-muted-foreground">Cada agenda é independente. Um horário ocupado com um profissional pode estar livre com outro.</p>
               <div className="mt-7 grid gap-3 sm:grid-cols-2">
                 {barbers.slice(0, 3).map((barber) => (
-                  <button key={barber.id} type="button" onClick={() => selectBarber(barber)} className="rounded-xl border border-white/10 bg-background/60 p-5 text-left transition-all hover:-translate-y-0.5 hover:border-primary/50 focus-visible:border-primary">
+                  <button key={barber.id} type="button" onClick={() => selectBarber(barber)} className="border border-border bg-background p-5 text-left transition-colors hover:border-primary focus-visible:border-primary">
                     <div className="flex items-center gap-4">
-                      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/12 text-primary"><UserRound className="h-6 w-6" /></span>
+                      <span className="flex h-12 w-12 shrink-0 items-center justify-center border border-primary/25 bg-primary/8 text-primary"><UserRound className="h-6 w-6" /></span>
                       <div className="min-w-0">
                         <h2 className="font-heading text-2xl leading-tight tracking-wide">{barber.name}</h2>
                         <p className="mt-1 text-sm leading-5 text-primary">{barber.specialty}</p>
@@ -237,9 +237,9 @@ export default function BookingPage() {
             <section>
               <button type="button" onClick={goBack} className="mb-5 flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="h-4 w-4" /> Voltar</button>
               <p className="eyebrow">Etapa 3 de 3</p>
-              <h1 className="display-title mt-3 text-[clamp(2.5rem,10vw,4rem)]">Escolha data e horário</h1>
+              <h1 className="display-title mt-3 text-[clamp(2.35rem,8vw,3.75rem)]">Escolha data e horário</h1>
 
-              <div className="mt-6 grid gap-3 rounded-xl border border-white/10 bg-background/60 p-4 text-sm sm:grid-cols-3">
+              <div className="mt-6 grid gap-3 border border-border bg-background p-4 text-sm sm:grid-cols-3">
                 <div><span className="block text-muted-foreground">Serviço</span><strong className="mt-1 block font-medium">{selectedService.name}</strong></div>
                 <div><span className="block text-muted-foreground">Profissional</span><strong className="mt-1 block font-medium">{selectedBarber.name}</strong></div>
                 <div><span className="block text-muted-foreground">Valor</span><strong className="mt-1 block font-medium text-primary">{formatPrice(selectedService.price)}</strong></div>
@@ -251,7 +251,7 @@ export default function BookingPage() {
                   {availableDates.map((date) => {
                     const active = selectedDate && format(selectedDate, "yyyy-MM-dd") === format(date, "yyyy-MM-dd")
                     return (
-                      <button key={date.toISOString()} type="button" onClick={() => { setSelectedDate(date); setSelectedTime(""); setError("") }} className={`min-h-16 rounded-lg border px-3 py-2 text-sm capitalize transition-colors ${active ? "border-primary bg-primary text-primary-foreground" : "border-white/10 bg-background hover:border-primary/45"}`}>
+                      <button key={date.toISOString()} type="button" onClick={() => { setSelectedDate(date); setSelectedTime(""); setError("") }} className={`min-h-16 border px-3 py-2 text-sm capitalize transition-colors ${active ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background hover:border-primary"}`}>
                         <span className="block font-medium">{format(date, "EEEE", { locale: ptBR })}</span>
                         <span className={`mt-1 block text-xs ${active ? "text-primary-foreground/75" : "text-muted-foreground"}`}>{format(date, "dd 'de' MMM", { locale: ptBR })}</span>
                       </button>
@@ -265,7 +265,7 @@ export default function BookingPage() {
                   <Label className="text-sm font-medium">Horários de {selectedBarber.name}</Label>
                   <div className="mt-3 grid grid-cols-3 gap-2 sm:grid-cols-5">
                     {slotAvailability.map(({ time, available }) => (
-                      <button key={time} type="button" disabled={!available} onClick={() => { setSelectedTime(time); setError("") }} className={`min-h-14 rounded-lg border px-2 py-2 text-sm transition-colors ${selectedTime === time ? "border-primary bg-primary text-primary-foreground" : available ? "border-white/10 bg-background hover:border-primary/45" : "cursor-not-allowed border-white/5 bg-white/[0.02] text-muted-foreground/50"}`}>
+                      <button key={time} type="button" disabled={!available} onClick={() => { setSelectedTime(time); setError("") }} className={`min-h-14 border px-2 py-2 text-sm transition-colors ${selectedTime === time ? "border-primary bg-primary text-primary-foreground" : available ? "border-border bg-background hover:border-primary" : "cursor-not-allowed border-border bg-muted/45 text-muted-foreground/50"}`}>
                         <span className="block font-medium">{time}</span>
                         {!available && <span className="mt-0.5 block text-xs">Ocupado</span>}
                       </button>
@@ -278,14 +278,14 @@ export default function BookingPage() {
               {selectedTime && (
                 <div className="mt-8 grid gap-4 sm:grid-cols-2">
                   <div><Label htmlFor="booking-name">Seu nome</Label><Input id="booking-name" value={name} onChange={(event) => setName(event.target.value)} placeholder="Nome completo" autoComplete="name" className="mt-2 h-11 bg-background" /></div>
-                  <div><Label htmlFor="booking-phone">WhatsApp</Label><Input id="booking-phone" value={phone} onChange={(event) => setPhone(event.target.value)} placeholder="(53) 99999-9999" inputMode="tel" autoComplete="tel" className="mt-2 h-11 bg-background" /></div>
+                  <div><Label htmlFor="booking-phone">WhatsApp</Label><Input id="booking-phone" value={phone} onChange={(event) => setPhone(event.target.value)} placeholder="Digite seu número" inputMode="tel" autoComplete="tel" className="mt-2 h-11 bg-background" /></div>
                 </div>
               )}
 
               {error && <p aria-live="polite" className="mt-4 rounded-lg border border-destructive/25 bg-destructive/10 p-3 text-sm leading-6 text-destructive">{error}</p>}
 
-              <Button type="button" onClick={finalizeBooking} disabled={!selectedDate || !selectedTime} className="gradient-primary mt-8 h-12 w-full border-0 text-base font-semibold text-primary-foreground">Confirmar reserva demonstrativa</Button>
-              <p className="mt-3 text-center text-sm leading-6 text-muted-foreground">Teste local: nenhuma cobrança ou mensagem será enviada.</p>
+              <Button type="button" onClick={finalizeBooking} disabled={!selectedDate || !selectedTime} className="mt-8 h-12 w-full rounded-none bg-primary text-base font-semibold text-primary-foreground">Confirmar reserva</Button>
+              <p className="mt-3 text-center text-sm leading-6 text-muted-foreground">Demonstração: a reserva fica salva somente neste navegador.</p>
             </section>
           )}
 
@@ -293,17 +293,17 @@ export default function BookingPage() {
             <section className="py-6 text-center sm:py-8" aria-live="polite">
               <span className="mx-auto flex h-18 w-18 items-center justify-center rounded-full bg-primary/12 text-primary"><CheckCircle2 className="h-9 w-9" /></span>
               <p className="eyebrow mt-6">Reserva demonstrativa concluída</p>
-              <h1 className="display-title mt-3 text-[clamp(2.8rem,11vw,4.5rem)]">Horário reservado</h1>
+              <h1 className="display-title mt-3 text-[clamp(2.5rem,9vw,4rem)]">Horário reservado</h1>
               <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-muted-foreground">{name}, o horário de {format(selectedDate, "dd/MM/yyyy")} às {selectedTime} agora aparece como ocupado na agenda de {selectedBarber.name}.</p>
-              <div className="mx-auto mt-7 max-w-md rounded-xl border border-white/10 bg-background/60 p-5 text-left text-sm">
+              <div className="mx-auto mt-7 max-w-md border border-border bg-background p-5 text-left text-sm">
                 <div className="flex justify-between gap-4"><span className="text-muted-foreground">Serviço</span><span className="text-right">{selectedService.name}</span></div>
                 <div className="mt-3 flex justify-between gap-4"><span className="text-muted-foreground">Profissional</span><span className="text-right">{selectedBarber.name}</span></div>
                 <div className="mt-3 flex justify-between gap-4"><span className="text-muted-foreground">Data e hora</span><span className="text-right">{format(selectedDate, "dd/MM")} às {selectedTime}</span></div>
                 <div className="mt-3 flex justify-between gap-4"><span className="text-muted-foreground">Valor</span><span className="text-right text-primary">{formatPrice(selectedService.price)}</span></div>
               </div>
               <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-                <Button className="gradient-primary h-12 border-0 px-6 font-semibold text-primary-foreground" onClick={resetBooking}>Conferir horário bloqueado</Button>
-                <Link href="/"><Button variant="outline" className="h-12 w-full border-white/15 bg-white/5 px-6">Voltar ao site</Button></Link>
+                <Button className="h-12 rounded-none bg-primary px-6 font-semibold text-primary-foreground" onClick={resetBooking}>Conferir horário bloqueado</Button>
+                <Link href="/"><Button variant="outline" className="h-12 w-full rounded-none border-border bg-background px-6">Voltar ao site</Button></Link>
               </div>
             </section>
           )}

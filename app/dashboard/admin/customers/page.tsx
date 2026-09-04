@@ -60,8 +60,8 @@ export default function AdminCustomersPage() {
 
     apps.forEach((app) => {
       const name = app.customerName
-      const email = app.customerId || "cliente@email.com"
-      const phone = app.customerPhone || "(53) 99999-9999"
+      const email = app.customerId || "Não informado"
+      const phone = app.customerPhone || "Não informado"
 
       if (!customerMap[name]) {
         customerMap[name] = {
