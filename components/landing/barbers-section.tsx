@@ -9,7 +9,7 @@ export function BarbersSection() {
     <section id="barbers" className="bg-background py-20 sm:py-28">
       <div className="container mx-auto px-5 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-          <div>
+          <div data-reveal>
             <p className="eyebrow">Equipe</p>
             <h2 className="display-title mt-4 text-4xl sm:text-5xl">Profissionais com estilos diferentes</h2>
             <p className="mt-5 max-w-md text-base leading-7 text-muted-foreground">
@@ -20,7 +20,7 @@ export function BarbersSection() {
             </div>
           </div>
 
-          <div className="self-end border-t border-border">
+          <div data-reveal className="self-end border-t border-border">
             {barbers.slice(0, 3).map((barber, index) => (
               <article key={barber.id} className="grid gap-4 border-b border-border py-7 sm:grid-cols-[4rem_1fr] sm:items-start sm:gap-6">
                 <span className="font-heading text-3xl text-primary">0{index + 1}</span>
@@ -31,7 +31,7 @@ export function BarbersSection() {
                 </div>
               </article>
             ))}
-            <Link href="/booking" className="mt-8 inline-flex h-13 items-center justify-center bg-foreground px-6 text-sm font-semibold text-background hover:bg-foreground/90">
+            <Link href="/booking" className="mt-8 inline-flex min-h-13 w-full items-center justify-center bg-primary px-6 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 sm:w-auto">
               Escolher profissional <ArrowRight className="ml-3 h-4 w-4" />
             </Link>
           </div>

@@ -8,10 +8,13 @@ import { BarbersSection } from "@/components/landing/barbers-section"
 import { ContactSection } from "@/components/landing/contact-section"
 import { BookingPreviewSection } from "@/components/landing/booking-preview-section"
 import { Footer } from "@/components/footer"
+import { ScrollEffects } from "@/components/scroll-effects"
+import { WhatsappCta } from "@/components/whatsapp-cta"
 
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background text-foreground scroll-smooth">
+      <ScrollEffects />
       <Navbar />
 
       <main>
@@ -23,6 +26,7 @@ export default function LandingPage() {
         <ContactSection />
       </main>
       <Footer />
+      <WhatsappCta />
     </div>
   )
 }

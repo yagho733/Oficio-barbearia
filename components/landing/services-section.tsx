@@ -9,7 +9,7 @@ export function ServicesSection() {
   return (
     <section id="services" className="bg-card py-20 sm:py-28">
       <div className="container mx-auto px-5 lg:px-8">
-        <div className="grid gap-8 border-b border-border pb-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
+        <div data-reveal className="grid gap-8 border-b border-border pb-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
           <div>
             <p className="eyebrow">Serviços</p>
             <h2 className="display-title mt-4 text-4xl sm:text-5xl">Escolha o seu atendimento</h2>
@@ -21,7 +21,7 @@ export function ServicesSection() {
 
         <div className="grid md:grid-cols-2">
           {services.map((service, index) => (
-            <article key={service.id} className={`grid grid-cols-[1fr_auto] gap-5 border-b border-border py-7 md:px-7 ${index % 2 === 0 ? "md:border-r md:pl-0" : "md:pr-0"}`}>
+            <article data-reveal key={service.id} className={`grid grid-cols-[minmax(0,1fr)_auto] gap-4 border-b border-border py-7 sm:gap-5 md:px-7 ${index % 2 === 0 ? "md:border-r md:pl-0" : "md:pr-0"}`}>
               <div>
                 <h3 className="text-lg font-semibold text-foreground">{service.name}</h3>
                 <p className="mt-2 max-w-md text-sm leading-6 text-muted-foreground">{service.description}</p>

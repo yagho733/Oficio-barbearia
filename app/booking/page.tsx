@@ -26,8 +26,6 @@ const formatPrice = (price: number) =>
   new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(price)
 
 const weekdayCodes = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-const closingTimeInMinutes = 20 * 60
-
 const timeToMinutes = (time: string) => {
   const [hours, minutes] = time.split(":").map(Number)
   return hours * 60 + minutes
@@ -59,6 +57,7 @@ export default function BookingPage() {
 
     const now = new Date()
     const startMinutes = timeToMinutes(time)
+    const closingTimeInMinutes = getDay(date) === 6 ? 18 * 60 : 20 * 60
     const endsAfterClosing = startMinutes + durationToMinutes(selectedService.duration) > closingTimeInMinutes
     const isPast = isSameDay(date, now) && startMinutes <= now.getHours() * 60 + now.getMinutes()
 
@@ -245,7 +244,7 @@ export default function BookingPage() {
                           <p className="mt-1 text-sm text-muted-foreground">{barber.specialty}</p>
                           <p className="mt-2 hidden max-w-xl text-sm leading-6 text-muted-foreground sm:block">{barber.bio}</p>
                         </div>
-                        <span className="inline-flex items-center text-xs font-semibold uppercase tracking-[0.1em]">Escolher <ChevronRight className="ml-1 h-4 w-4" /></span>
+                        <span className="inline-flex items-center text-xs font-semibold uppercase tracking-[0.1em]"><span className="hidden sm:inline">Escolher</span><ChevronRight className="h-4 w-4 sm:ml-1" /></span>
                       </button>
                     ))}
                   </div>

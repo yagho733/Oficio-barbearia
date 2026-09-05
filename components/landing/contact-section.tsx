@@ -7,7 +7,7 @@ export function ContactSection() {
     <section id="contact" className="bg-background py-20 sm:py-28">
       <div className="container mx-auto px-5 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-          <div>
+          <div data-reveal>
             <p className="eyebrow">Contato</p>
             <h2 className="display-title mt-4 text-4xl sm:text-5xl">Passe, marque ou chame</h2>
             <p className="mt-5 max-w-md text-base leading-7 text-muted-foreground">
@@ -18,7 +18,7 @@ export function ContactSection() {
             </Link>
           </div>
 
-          <div className="border-t border-border">
+          <div data-reveal className="border-t border-border">
             <div className="grid gap-4 border-b border-border py-6 sm:grid-cols-[2rem_1fr]">
               <MapPin className="h-5 w-5 text-primary" />
               <div><p className="text-sm font-semibold">Endereço</p><p className="mt-1 text-sm text-muted-foreground">{siteConfig.business.address}</p></div>
@@ -34,7 +34,7 @@ export function ContactSection() {
             </div>
             <div className="grid gap-4 border-b border-border py-6 sm:grid-cols-[2rem_1fr]">
               <MessageCircle className="h-5 w-5 text-primary" />
-              <div><p className="text-sm font-semibold">WhatsApp</p><a href={whatsappUrl} target="_blank" rel="noreferrer" className="mt-1 inline-block text-sm text-muted-foreground hover:text-primary">{siteConfig.business.phone}</a></div>
+              <div><p className="text-sm font-semibold">Fale com o proprietário</p><a href={whatsappUrl} target="_blank" rel="noreferrer" className="mt-1 inline-block text-sm text-muted-foreground hover:text-primary">{siteConfig.business.phone}</a></div>
             </div>
             <div className="grid gap-4 border-b border-border py-6 sm:grid-cols-[2rem_1fr]">
               <AtSign className="h-5 w-5 text-primary" />

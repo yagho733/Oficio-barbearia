@@ -3,8 +3,8 @@ export const siteConfig = {
     name: "Ofício",
     descriptor: "Barbearia",
     city: "Pelotas — RS",
-    phone: "Definido na personalização",
-    whatsapp: "",
+    phone: "Atendimento direto pelo WhatsApp",
+    whatsapp: "5553999563554",
     instagram: "Definido na personalização",
     address: "Centro, Pelotas — RS",
   },
@@ -25,7 +25,7 @@ export const siteConfig = {
     {
       id: "1", name: "Rafael", specialty: "Cortes clássicos e tesoura", experience: "9 anos", rating: 4.9, reviews: 126,
       image: "/placeholder-user.jpg", bio: "Especialista em cortes clássicos, acabamento na tesoura e orientação de estilo.",
-      availability: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+      availability: ["Tue", "Wed", "Thu", "Fri", "Sat"],
     },
     {
       id: "2", name: "Lucas", specialty: "Degradê e cortes modernos", experience: "6 anos", rating: 4.8, reviews: 94,
@@ -35,7 +35,7 @@ export const siteConfig = {
     {
       id: "3", name: "Diego", specialty: "Barba e visagismo masculino", experience: "11 anos", rating: 4.9, reviews: 158,
       image: "/placeholder-user.jpg", bio: "Especialista em desenho de barba, toalha quente e cuidados para manutenção em casa.",
-      availability: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+      availability: ["Tue", "Wed", "Thu", "Fri", "Sat"],
     },
   ],
   presentation: {
@@ -45,5 +45,9 @@ export const siteConfig = {
 } as const
 
 export const whatsappUrl = siteConfig.business.whatsapp
-  ? `https://wa.me/${siteConfig.business.whatsapp}?text=Ol%C3%A1%2C%20quero%20agendar%20um%20hor%C3%A1rio.`
+  ? `https://wa.me/${siteConfig.business.whatsapp}?text=Ol%C3%A1%2C%20vi%20a%20demonstra%C3%A7%C3%A3o%20do%20site%20e%20gostaria%20de%20falar%20sobre%20um%20projeto%20para%20minha%20barbearia.`
+  : "/booking"
+
+export const ownerWhatsappUrl = siteConfig.business.whatsapp
+  ? `https://wa.me/${siteConfig.business.whatsapp}?text=Ol%C3%A1%2C%20vi%20a%20demonstra%C3%A7%C3%A3o%20do%20site%20e%20gostaria%20de%20falar%20sobre%20um%20projeto%20para%20minha%20barbearia.`
   : "/booking"

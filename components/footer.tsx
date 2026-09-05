@@ -4,7 +4,7 @@ import { Brand } from "@/components/brand"
 export function Footer() {
   return (
     <footer className="border-t border-border bg-card">
-      <div className="container mx-auto flex flex-col justify-between gap-8 px-5 py-10 sm:flex-row sm:items-end lg:px-8">
+      <div className="container mx-auto flex flex-col justify-between gap-8 px-5 pb-28 pt-10 sm:flex-row sm:items-end sm:py-10 lg:px-8">
         <div>
           <Link href="/" aria-label="Ofício Barbearia — início"><Brand compact /></Link>
           <p className="mt-4 max-w-sm text-sm leading-6 text-muted-foreground">Corte, barba e cuidado masculino com hora marcada.</p>
