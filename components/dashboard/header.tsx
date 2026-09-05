@@ -9,7 +9,7 @@ import { useState } from "react"
 interface DashboardHeaderProps {
   title: string
   subtitle?: string
-  type?: "customer" | "barber" | "admin"
+  type?: "barber" | "admin"
 }
 
 export function DashboardHeader({ title, subtitle, type }: DashboardHeaderProps) {

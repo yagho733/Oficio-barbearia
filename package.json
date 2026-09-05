@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "npx serve out",
-    "check": "tsc --noEmit"
+    "check": "next typegen && tsc --noEmit"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
@@ -16,7 +16,7 @@
     "date-fns": "^4.4.0",
     "framer-motion": "^12.40.0",
     "lucide-react": "^1.16.0",
-    "next": "16.2.6",
+    "next": "^16.3.4",
     "react": "^19",
     "react-day-picker": "^10.0.1",
     "react-dom": "^19",
@@ -29,7 +29,7 @@
     "@types/node": "^24",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "postcss": "^8.5",
+    "postcss": "^8.5.28",
     "serve": "^14.2.6",
     "tailwindcss": "^4.2.0",
     "typescript": "5.7.3"

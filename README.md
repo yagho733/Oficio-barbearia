@@ -1,6 +1,6 @@
 # Demonstração profissional para barbearias
 
-Projeto demonstrativo de uma plataforma para barbearias, com página de apresentação, agendamento interativo e painéis de gestão para cliente, profissional e administrador.
+Projeto demonstrativo de uma plataforma para barbearias, com página de apresentação, agendamento interativo e painéis separados para proprietário e barbeiro.
 
 ## Principais experiências
 
@@ -9,9 +9,16 @@ Projeto demonstrativo de uma plataforma para barbearias, com página de apresent
 - Agendamento demonstrativo sem necessidade de cadastro
 - Bloqueio de horários ocupados por profissional e por duração do serviço
 - Atualização da disponibilidade entre abas do mesmo navegador
-- Painéis separados para cliente, barbeiro e administração
+- Painéis separados para proprietário e barbeiro
 - Dados salvos localmente apenas para a demonstração
 - Identificação clara de informações fictícias
+
+## Acessos demonstrativos
+
+- Proprietário: `dono@barber.com` / `dono123`
+- Barbeiro: `barbeiro@barber.com` / `barbeiro123`
+
+Esses acessos são públicos e servem somente para apresentar os fluxos do protótipo.
 
 ## Tecnologias
 
@@ -39,6 +46,6 @@ npm run build
 
 ## Uso comercial
 
-Esta versão é um protótipo de portfólio. Para uso por uma barbearia real, contatos, identidade visual, equipe, horários e integrações devem ser substituídos pelos dados do estabelecimento. A demonstração salva reservas no navegador; autenticação e banco de dados compartilhado devem ser configurados antes de operar com clientes reais.
+Esta versão é um protótipo de portfólio. Para uso por uma barbearia real, contatos, identidade visual, equipe, horários e integrações devem ser substituídos pelos dados do estabelecimento. A demonstração salva reservas no navegador; autenticação segura, banco de dados compartilhado e política de privacidade devem ser configurados antes de operar com clientes reais.
 
 As fotografias utilizadas na demonstração são disponibilizadas por Pexels e Unsplash.

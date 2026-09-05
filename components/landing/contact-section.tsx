@@ -34,7 +34,7 @@ export function ContactSection() {
             </div>
             <div className="grid gap-4 border-b border-border py-6 sm:grid-cols-[2rem_1fr]">
               <MessageCircle className="h-5 w-5 text-primary" />
-              <div><p className="text-sm font-semibold">Fale com o proprietário</p><a href={whatsappUrl} target="_blank" rel="noreferrer" className="mt-1 inline-block text-sm text-muted-foreground hover:text-primary">{siteConfig.business.phone}</a></div>
+              <div><p className="text-sm font-semibold">Quer uma versão para sua barbearia?</p><a href={whatsappUrl} target="_blank" rel="noreferrer" className="mt-1 inline-block text-sm text-muted-foreground hover:text-primary">Fale sobre o projeto pelo WhatsApp</a></div>
             </div>
             <div className="grid gap-4 border-b border-border py-6 sm:grid-cols-[2rem_1fr]">
               <AtSign className="h-5 w-5 text-primary" />

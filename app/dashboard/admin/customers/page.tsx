@@ -160,7 +160,7 @@ export default function AdminCustomersPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-background relative">
-      <DashboardHeader title="Gerenciamento de Clientes" subtitle="Cadastro e histórico dos clientes do SaaS" type="admin" />
+      <DashboardHeader title="Clientes" subtitle="Cadastro e histórico de atendimento" type="admin" />
 
       <main className="p-6 space-y-6 max-w-6xl w-full mx-auto pb-24 text-left">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">

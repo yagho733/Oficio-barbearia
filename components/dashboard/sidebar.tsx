@@ -21,17 +21,9 @@ import { Separator } from "@/components/ui/separator"
 import { clearDemoSession } from "@/lib/demo-auth"
 
 interface SidebarProps {
-  type: "customer" | "barber" | "admin"
+  type: "barber" | "admin"
   className?: string
 }
-
-const customerLinks = [
-  { href: "/dashboard/customer", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/booking", label: "Novo Agendamento", icon: Calendar },
-  { href: "/dashboard/customer/appointments", label: "Meus Agendamentos", icon: Calendar },
-  { href: "/dashboard/customer/history", label: "Histórico", icon: History },
-  { href: "/dashboard/customer/profile", label: "Perfil", icon: User },
-]
 
 const barberLinks = [
   { href: "/dashboard/barber", label: "Hoje", icon: LayoutDashboard },
@@ -56,15 +48,11 @@ export function DashboardSidebar({ type, className }: SidebarProps) {
   const pathname = usePathname()
   const router = useRouter()
   
-  const links = type === "customer" 
-    ? customerLinks 
-    : type === "barber" 
+  const links = type === "barber"
     ? barberLinks 
     : adminLinks
 
-  const title = type === "customer" 
-    ? "Cliente" 
-    : type === "barber" 
+  const title = type === "barber"
     ? "Barbeiro" 
     : "Proprietário"
 
@@ -121,14 +109,6 @@ export function DashboardSidebar({ type, className }: SidebarProps) {
 
         {/* Footer */}
         <div className="p-4 space-y-2">
-          {type === "customer" && (
-            <Link href="/booking">
-              <Button className="w-full bg-primary hover:bg-primary/95 text-primary-foreground border-0 font-bold text-xs" size="sm">
-                <Calendar className="mr-1.5 h-4 w-4" />
-                Agendar Horário
-              </Button>
-            </Link>
-          )}
           <Button 
             onClick={handleLogout}
             variant="ghost" 
