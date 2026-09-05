@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { Users, Phone, Mail, ChevronLeft, Search, Calendar, Scissors, Award } from "lucide-react"
+import { Users, Phone, Mail, ChevronLeft, Search, Calendar, Award } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { 
-  Calendar, Clock, Scissors, User as UserIcon, 
+  Calendar, Clock, User as UserIcon,
   Trash2, RefreshCcw, ArrowRight, Star, Plus
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -221,7 +221,7 @@ export default function CustomerDashboardPage() {
             <Card className="p-6 bg-card border-border text-center space-y-4 relative overflow-hidden">
               <div className="absolute top-0 left-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl" />
               <div className="relative space-y-3">
-                <Scissors className="h-8 w-8 text-primary mx-auto" />
+                <Calendar className="h-8 w-8 text-primary mx-auto" />
                 <h3 className="font-heading font-bold text-xs tracking-wider uppercase">Novo Agendamento</h3>
                 <p className="text-xs text-muted-foreground">Marque o seu visual com os melhores profissionais da cidade.</p>
                 <Link href="/booking" className="block w-full pt-2">

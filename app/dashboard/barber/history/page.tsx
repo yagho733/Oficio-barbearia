@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { Calendar, Clock, ChevronLeft, Scissors, Search, CheckCircle, XCircle } from "lucide-react"
+import { Calendar, Clock, ChevronLeft, Search, CheckCircle, XCircle } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
@@ -83,7 +83,7 @@ export default function BarberHistoryPage() {
           <div className="divide-y divide-border">
             {filteredAppointments.length === 0 ? (
               <div className="p-12 text-center text-xs text-muted-foreground flex flex-col items-center gap-2">
-                <Scissors className="h-8 w-8 text-muted-foreground/40" />
+                <Calendar className="h-8 w-8 text-muted-foreground/40" />
                 <p>Nenhum corte registrado no histórico.</p>
               </div>
             ) : (

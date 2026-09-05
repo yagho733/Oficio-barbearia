@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import Link from "next/link"
 import {
   ChevronLeft, Plus, Search, Edit3, Trash2, X, Save,
-  Scissors, Clock, Star, DollarSign, Calendar, User
+  Clock, Star, DollarSign, Calendar, User
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"

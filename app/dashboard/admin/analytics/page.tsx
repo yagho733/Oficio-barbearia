@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import {
-  ChevronLeft, Users, Repeat, Scissors, Trophy, BarChart2,
+  ChevronLeft, Users, Repeat, Trophy, BarChart2,
   Download, FileSpreadsheet, FileText, TrendingUp, Star
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -122,7 +122,7 @@ export default function AdminAnalyticsPage() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           <Stat label="Novos Clientes" value={newClients} sub="1ª visita no período" icon={Users} accent="bg-blue-500/15 text-blue-400" />
           <Stat label="Clientes Recorrentes" value={returningClients} sub="2+ visitas" icon={Repeat} accent="bg-violet-500/15 text-violet-400" />
-          <Stat label="Serviço Mais Vendido" value={topService ? topService[1] : 0} sub={topService ? topService[0] : "—"} icon={Scissors} accent="bg-primary/15 text-primary" />
+          <Stat label="Serviço Mais Vendido" value={topService ? topService[1] : 0} sub={topService ? topService[0] : "—"} icon={BarChart2} accent="bg-primary/15 text-primary" />
           <Stat label="Dia Mais Movimentado" value={busiestDay} sub={`${Math.max(...dayCounts)} atendimentos`} icon={TrendingUp} accent="bg-amber-500/15 text-amber-400" />
         </div>
 
@@ -130,7 +130,7 @@ export default function AdminAnalyticsPage() {
           {/* Serviços por demanda */}
           <Card className="bg-card border-border p-5 space-y-4">
             <div className="flex items-center gap-2">
-              <Scissors className="h-4 w-4 text-primary" />
+              <BarChart2 className="h-4 w-4 text-primary" />
               <p className="text-xs font-mono font-bold uppercase text-muted-foreground">Serviços Mais Procurados</p>
             </div>
             <div className="space-y-3">

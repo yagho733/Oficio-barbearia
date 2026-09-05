@@ -20,18 +20,17 @@ interface Service {
   price: number
   duration: number // minutes
   category: string
-  emoji: string
 }
 
 const CATEGORIES = ["Corte", "Barba", "Tratamento", "Combo", "Coloração", "Outros"]
 
 const INITIAL_SERVICES: Service[] = [
-  { id: "1", name: "Corte Clássico", description: "Corte tradicional com acabamento perfeito.", price: 45, duration: 30, category: "Corte", emoji: "✂️" },
-  { id: "2", name: "Corte + Barba", description: "Combo completo de corte e aparação de barba.", price: 70, duration: 50, category: "Combo", emoji: "💈" },
-  { id: "3", name: "Barba Completa", description: "Aparação, design e finalização da barba.", price: 35, duration: 25, category: "Barba", emoji: "🪒" },
-  { id: "4", name: "Degradê Moderno", description: "Corte degradê com acabamento de máquina.", price: 55, duration: 40, category: "Corte", emoji: "⚡" },
-  { id: "5", name: "Hidratação Capilar", description: "Tratamento profundo para os fios.", price: 60, duration: 45, category: "Tratamento", emoji: "💧" },
-  { id: "6", name: "Coloração", description: "Coloração profissional com produtos premium.", price: 90, duration: 60, category: "Coloração", emoji: "🎨" },
+  { id: "1", name: "Corte Clássico", description: "Corte tradicional com acabamento perfeito.", price: 45, duration: 30, category: "Corte" },
+  { id: "2", name: "Corte + Barba", description: "Combo completo de corte e aparação de barba.", price: 70, duration: 50, category: "Combo" },
+  { id: "3", name: "Barba Completa", description: "Aparação, design e finalização da barba.", price: 35, duration: 25, category: "Barba" },
+  { id: "4", name: "Degradê Moderno", description: "Corte degradê com acabamento de máquina.", price: 55, duration: 40, category: "Corte" },
+  { id: "5", name: "Hidratação Capilar", description: "Tratamento profundo para os fios.", price: 60, duration: 45, category: "Tratamento" },
+  { id: "6", name: "Coloração", description: "Coloração profissional com produtos premium.", price: 90, duration: 60, category: "Coloração" },
 ]
 
 const STORAGE_KEY = "barbershop_demo_services"
@@ -52,7 +51,6 @@ const empty = (): Service => ({
   price: 0,
   duration: 30,
   category: "Corte",
-  emoji: "✂️",
 })
 
 export default function AdminServicesPage() {
@@ -146,9 +144,6 @@ export default function AdminServicesPage() {
             <Card key={s.id} className="bg-card border-border p-5 flex flex-col gap-3 hover:border-primary/30 transition-colors">
               <div className="flex justify-between items-start">
                 <div className="flex items-center gap-3">
-                  <div className="h-11 w-11 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-xl">
-                    {s.emoji}
-                  </div>
                   <div>
                     <p className="font-bold text-sm text-foreground">{s.name}</p>
                     <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-muted/50 text-muted-foreground border border-border">
@@ -225,10 +220,6 @@ export default function AdminServicesPage() {
                   <select value={editing.category} onChange={e => setEditing({ ...editing, category: e.target.value })} className="w-full bg-muted border border-border rounded-md px-3 text-xs h-9 text-foreground focus:outline-none focus:ring-1 focus:ring-primary">
                     {CATEGORIES.map(c => <option key={c}>{c}</option>)}
                   </select>
-                </div>
-                <div className="space-y-1">
-                  <Label className="text-xs font-bold uppercase text-muted-foreground">Emoji / Ícone</Label>
-                  <Input value={editing.emoji} onChange={e => setEditing({ ...editing, emoji: e.target.value })} className="bg-muted border-border text-xs h-9" maxLength={4} />
                 </div>
               </div>
 

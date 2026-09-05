@@ -4,10 +4,9 @@ import Link from "next/link"
 import { useEffect, useMemo, useState } from "react"
 import { addDays, format, getDay, isSameDay, startOfDay } from "date-fns"
 import { ptBR } from "date-fns/locale"
-import { ArrowLeft, Check, CheckCircle2, Clock3, Info, Scissors, UserRound } from "lucide-react"
+import { ArrowLeft, Check, CheckCircle2, ChevronRight, Info } from "lucide-react"
 import { Brand } from "@/components/brand"
 import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {
@@ -86,9 +85,9 @@ export default function BookingPage() {
     // availabilityVersion força uma nova consulta após uma reserva ou alteração em outra aba.
   }, [selectedBarber, selectedService, availabilityVersion])
 
-  const slotAvailability = useMemo(() => {
+  const availableTimes = useMemo(() => {
     if (!selectedDate) return []
-    return timeSlots.map((time) => ({ time, available: isAvailable(selectedDate, time) }))
+    return timeSlots.filter((time) => isAvailable(selectedDate, time))
   }, [selectedDate, selectedBarber, selectedService, availabilityVersion])
 
   const selectService = (service: (typeof services)[number]) => {
@@ -104,6 +103,23 @@ export default function BookingPage() {
     setSelectedDate(null)
     setSelectedTime("")
     setStep(3)
+  }
+
+  const changeService = () => {
+    setSelectedService(null)
+    setSelectedBarber(null)
+    setSelectedDate(null)
+    setSelectedTime("")
+    setError("")
+    setStep(1)
+  }
+
+  const changeBarber = () => {
+    setSelectedBarber(null)
+    setSelectedDate(null)
+    setSelectedTime("")
+    setError("")
+    setStep(2)
   }
 
   const finalizeBooking = () => {
@@ -141,9 +157,8 @@ export default function BookingPage() {
   }
 
   const goBack = () => {
-    if (step === 1) return
-    setStep((current) => current - 1)
-    setError("")
+    if (step === 2) changeService()
+    if (step === 3) changeBarber()
   }
 
   const resetBooking = () => {
@@ -152,162 +167,195 @@ export default function BookingPage() {
     setSelectedBarber(null)
     setSelectedDate(null)
     setSelectedTime("")
+    setName("")
+    setPhone("")
     setError("")
   }
 
   return (
-    <main className="min-h-screen bg-background px-4 py-5 text-foreground sm:py-10">
-      <div className="mx-auto max-w-4xl">
-        <header className="flex items-center justify-between gap-3">
+    <main className="min-h-screen bg-background px-4 py-5 text-foreground sm:py-8">
+      <div className="mx-auto max-w-6xl">
+        <header className="flex items-center justify-between gap-3 border-b border-border pb-5">
           <Link href="/" aria-label="Voltar ao início">
             <Brand compact />
           </Link>
-          <Link href="/">
-            <Button variant="outline" className="h-10 border-border bg-background px-3 sm:px-4">
-              <ArrowLeft className="mr-2 h-4 w-4" /> Início
-            </Button>
+          <Link href="/" className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
+            <ArrowLeft className="h-4 w-4" /> Voltar ao site
           </Link>
         </header>
 
         {step < 4 && (
-          <div className="mt-8 grid grid-cols-3 gap-2 sm:mt-10" aria-label={`Etapa ${step} de 3`}>
-            {["Serviço", "Profissional", "Horário"].map((label, index) => {
+          <div className="mt-7 grid grid-cols-3 border-y border-border" aria-label={`Etapa ${step} de 3`}>
+            {["Serviço", "Profissional", "Data e horário"].map((label, index) => {
               const number = index + 1
               const active = number === step
               const complete = number < step
               return (
-                <div key={label}>
-                  <div className={`h-1.5 rounded-full ${number <= step ? "bg-primary" : "bg-muted"}`} />
-                  <p className={`mt-2 flex items-center text-xs leading-5 sm:text-sm ${active ? "text-foreground" : "text-muted-foreground"}`}>
-                    {complete ? <Check className="mr-1 h-4 w-4 shrink-0 text-primary" /> : null}
-                    <span className="truncate">{label}</span>
-                  </p>
+                <div key={label} className={`flex min-h-16 items-center gap-3 border-r border-border px-3 last:border-r-0 sm:px-5 ${active ? "bg-card" : ""}`}>
+                  <span className={`flex h-7 w-7 shrink-0 items-center justify-center border text-xs font-semibold ${number <= step ? "border-primary bg-primary text-primary-foreground" : "border-border text-muted-foreground"}`}>
+                    {complete ? <Check className="h-4 w-4" /> : number}
+                  </span>
+                  <span className={`hidden text-sm sm:block ${active ? "font-semibold text-foreground" : "text-muted-foreground"}`}>{label}</span>
                 </div>
               )
             })}
           </div>
         )}
 
-        <Card className="mt-7 overflow-hidden border-border bg-card p-5 shadow-none sm:mt-8 sm:p-8">
-          {step === 1 && (
-            <section>
-              <p className="eyebrow">Etapa 1 de 3</p>
-              <h1 className="display-title mt-3 text-[clamp(2.35rem,8vw,3.75rem)]">Escolha o serviço</h1>
-              <p className="mt-3 max-w-2xl text-base leading-7 text-muted-foreground">Confira valor e duração antes de continuar.</p>
-              <div className="mt-7 grid gap-3 sm:grid-cols-2">
-                {services.map((service) => (
-                  <button key={service.id} type="button" onClick={() => selectService(service)} className="group border border-border bg-background p-5 text-left transition-colors hover:border-primary focus-visible:border-primary">
-                    <div className="flex items-start justify-between gap-4">
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-primary/25 bg-primary/8 text-primary"><Scissors className="h-5 w-5" /></span>
-                      <span className="font-heading text-2xl leading-none text-primary">{formatPrice(service.price)}</span>
-                    </div>
-                    <h2 className="mt-5 font-heading text-2xl leading-tight tracking-wide">{service.name}</h2>
-                    <p className="mt-2 text-sm leading-6 text-muted-foreground">{service.description}</p>
-                    <p className="mt-4 flex items-center gap-2 text-sm text-muted-foreground"><Clock3 className="h-4 w-4" /> {service.duration}</p>
-                  </button>
-                ))}
-              </div>
-            </section>
-          )}
+        {step < 4 ? (
+          <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_310px] lg:items-start">
+            <section className="border border-border bg-card px-5 py-7 sm:px-8 sm:py-9">
+              {step === 1 && (
+                <div>
+                  <p className="eyebrow">Etapa 1 de 3</p>
+                  <h1 className="mt-3 font-heading text-[clamp(2.25rem,7vw,3.5rem)] font-semibold leading-none tracking-[-0.045em]">Qual serviço você quer?</h1>
+                  <p className="mt-3 text-base leading-7 text-muted-foreground">O valor e o tempo de atendimento aparecem antes da escolha.</p>
 
-          {step === 2 && (
-            <section>
-              <button type="button" onClick={goBack} className="mb-5 flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="h-4 w-4" /> Voltar</button>
-              <p className="eyebrow">Etapa 2 de 3</p>
-              <h1 className="display-title mt-3 text-[clamp(2.35rem,8vw,3.75rem)]">Escolha o profissional</h1>
-              <p className="mt-3 max-w-2xl text-base leading-7 text-muted-foreground">Cada agenda é independente. Um horário ocupado com um profissional pode estar livre com outro.</p>
-              <div className="mt-7 grid gap-3 sm:grid-cols-2">
-                {barbers.slice(0, 3).map((barber) => (
-                  <button key={barber.id} type="button" onClick={() => selectBarber(barber)} className="border border-border bg-background p-5 text-left transition-colors hover:border-primary focus-visible:border-primary">
-                    <div className="flex items-center gap-4">
-                      <span className="flex h-12 w-12 shrink-0 items-center justify-center border border-primary/25 bg-primary/8 text-primary"><UserRound className="h-6 w-6" /></span>
-                      <div className="min-w-0">
-                        <h2 className="font-heading text-2xl leading-tight tracking-wide">{barber.name}</h2>
-                        <p className="mt-1 text-sm leading-5 text-primary">{barber.specialty}</p>
-                      </div>
-                    </div>
-                    <p className="mt-4 text-sm leading-6 text-muted-foreground">{barber.bio}</p>
-                  </button>
-                ))}
-              </div>
-            </section>
-          )}
-
-          {step === 3 && selectedService && selectedBarber && (
-            <section>
-              <button type="button" onClick={goBack} className="mb-5 flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="h-4 w-4" /> Voltar</button>
-              <p className="eyebrow">Etapa 3 de 3</p>
-              <h1 className="display-title mt-3 text-[clamp(2.35rem,8vw,3.75rem)]">Escolha data e horário</h1>
-
-              <div className="mt-6 grid gap-3 border border-border bg-background p-4 text-sm sm:grid-cols-3">
-                <div><span className="block text-muted-foreground">Serviço</span><strong className="mt-1 block font-medium">{selectedService.name}</strong></div>
-                <div><span className="block text-muted-foreground">Profissional</span><strong className="mt-1 block font-medium">{selectedBarber.name}</strong></div>
-                <div><span className="block text-muted-foreground">Valor</span><strong className="mt-1 block font-medium text-primary">{formatPrice(selectedService.price)}</strong></div>
-              </div>
-
-              <div className="mt-7">
-                <Label className="text-sm font-medium">Dias com disponibilidade</Label>
-                <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
-                  {availableDates.map((date) => {
-                    const active = selectedDate && format(selectedDate, "yyyy-MM-dd") === format(date, "yyyy-MM-dd")
-                    return (
-                      <button key={date.toISOString()} type="button" onClick={() => { setSelectedDate(date); setSelectedTime(""); setError("") }} className={`min-h-16 border px-3 py-2 text-sm capitalize transition-colors ${active ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background hover:border-primary"}`}>
-                        <span className="block font-medium">{format(date, "EEEE", { locale: ptBR })}</span>
-                        <span className={`mt-1 block text-xs ${active ? "text-primary-foreground/75" : "text-muted-foreground"}`}>{format(date, "dd 'de' MMM", { locale: ptBR })}</span>
-                      </button>
-                    )
-                  })}
-                </div>
-              </div>
-
-              {selectedDate && (
-                <div className="mt-7">
-                  <Label className="text-sm font-medium">Horários de {selectedBarber.name}</Label>
-                  <div className="mt-3 grid grid-cols-3 gap-2 sm:grid-cols-5">
-                    {slotAvailability.map(({ time, available }) => (
-                      <button key={time} type="button" disabled={!available} onClick={() => { setSelectedTime(time); setError("") }} className={`min-h-14 border px-2 py-2 text-sm transition-colors ${selectedTime === time ? "border-primary bg-primary text-primary-foreground" : available ? "border-border bg-background hover:border-primary" : "cursor-not-allowed border-border bg-muted/45 text-muted-foreground/50"}`}>
-                        <span className="block font-medium">{time}</span>
-                        {!available && <span className="mt-0.5 block text-xs">Ocupado</span>}
+                  <div className="mt-8 border-t border-border">
+                    {services.map((service) => (
+                      <button key={service.id} type="button" onClick={() => selectService(service)} className="group grid w-full grid-cols-[minmax(0,1fr)_auto] items-center gap-5 border-b border-border py-5 text-left focus-visible:bg-muted/50 sm:py-6">
+                        <div>
+                          <h2 className="text-base font-semibold transition-colors group-hover:text-primary sm:text-lg">{service.name}</h2>
+                          <p className="mt-1 max-w-xl text-sm leading-6 text-muted-foreground">{service.description}</p>
+                          <p className="mt-2 text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground">{service.duration}</p>
+                        </div>
+                        <div className="text-right">
+                          <span className="block font-heading text-xl font-semibold text-primary sm:text-2xl">{formatPrice(service.price)}</span>
+                          <span className="mt-2 inline-flex items-center text-xs font-semibold uppercase tracking-[0.1em] text-foreground">Escolher <ChevronRight className="ml-1 h-4 w-4" /></span>
+                        </div>
                       </button>
                     ))}
                   </div>
-                  <p className="mt-3 flex items-start gap-2 text-sm leading-6 text-muted-foreground"><Info className="mt-0.5 h-4 w-4 shrink-0 text-primary" />Horários ocupados e períodos que entram em conflito com a duração do serviço ficam bloqueados.</p>
                 </div>
               )}
 
-              {selectedTime && (
-                <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                  <div><Label htmlFor="booking-name">Seu nome</Label><Input id="booking-name" value={name} onChange={(event) => setName(event.target.value)} placeholder="Nome completo" autoComplete="name" className="mt-2 h-11 bg-background" /></div>
-                  <div><Label htmlFor="booking-phone">WhatsApp</Label><Input id="booking-phone" value={phone} onChange={(event) => setPhone(event.target.value)} placeholder="Digite seu número" inputMode="tel" autoComplete="tel" className="mt-2 h-11 bg-background" /></div>
+              {step === 2 && (
+                <div>
+                  <button type="button" onClick={goBack} className="mb-6 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="h-4 w-4" /> Voltar</button>
+                  <p className="eyebrow">Etapa 2 de 3</p>
+                  <h1 className="mt-3 font-heading text-[clamp(2.25rem,7vw,3.5rem)] font-semibold leading-none tracking-[-0.045em]">Escolha o profissional</h1>
+                  <p className="mt-3 text-base leading-7 text-muted-foreground">Você verá apenas os dias e horários livres na agenda dele.</p>
+
+                  <div className="mt-8 border-t border-border">
+                    {barbers.slice(0, 3).map((barber, index) => (
+                      <button key={barber.id} type="button" onClick={() => selectBarber(barber)} className="group grid w-full grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 border-b border-border py-5 text-left focus-visible:bg-muted/50 sm:gap-6 sm:py-6">
+                        <span className="font-heading text-2xl text-primary">{String(index + 1).padStart(2, "0")}</span>
+                        <div>
+                          <h2 className="text-base font-semibold transition-colors group-hover:text-primary sm:text-lg">{barber.name}</h2>
+                          <p className="mt-1 text-sm text-muted-foreground">{barber.specialty}</p>
+                          <p className="mt-2 hidden max-w-xl text-sm leading-6 text-muted-foreground sm:block">{barber.bio}</p>
+                        </div>
+                        <span className="inline-flex items-center text-xs font-semibold uppercase tracking-[0.1em]">Escolher <ChevronRight className="ml-1 h-4 w-4" /></span>
+                      </button>
+                    ))}
+                  </div>
                 </div>
               )}
 
-              {error && <p aria-live="polite" className="mt-4 rounded-lg border border-destructive/25 bg-destructive/10 p-3 text-sm leading-6 text-destructive">{error}</p>}
+              {step === 3 && selectedService && selectedBarber && (
+                <div>
+                  <button type="button" onClick={goBack} className="mb-6 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="h-4 w-4" /> Voltar</button>
+                  <p className="eyebrow">Etapa 3 de 3</p>
+                  <h1 className="mt-3 font-heading text-[clamp(2.25rem,7vw,3.5rem)] font-semibold leading-none tracking-[-0.045em]">Quando você prefere?</h1>
+                  <p className="mt-3 text-base leading-7 text-muted-foreground">Escolha um dia para ver somente os horários disponíveis.</p>
 
-              <Button type="button" onClick={finalizeBooking} disabled={!selectedDate || !selectedTime} className="mt-8 h-12 w-full rounded-none bg-primary text-base font-semibold text-primary-foreground">Confirmar reserva</Button>
-              <p className="mt-3 text-center text-sm leading-6 text-muted-foreground">Demonstração: a reserva fica salva somente neste navegador.</p>
-            </section>
-          )}
+                  <div className="mt-8">
+                    <Label className="text-sm font-semibold">Próximos dias disponíveis</Label>
+                    {availableDates.length > 0 ? (
+                      <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
+                        {availableDates.map((date) => {
+                          const active = selectedDate && format(selectedDate, "yyyy-MM-dd") === format(date, "yyyy-MM-dd")
+                          return (
+                            <button key={date.toISOString()} type="button" onClick={() => { setSelectedDate(date); setSelectedTime(""); setError("") }} className={`min-h-17 border px-3 py-3 text-left text-sm capitalize transition-colors ${active ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background hover:border-primary"}`}>
+                              <span className="block font-semibold">{format(date, "EEE", { locale: ptBR })}</span>
+                              <span className={`mt-1 block text-xs ${active ? "text-primary-foreground/75" : "text-muted-foreground"}`}>{format(date, "dd 'de' MMM", { locale: ptBR })}</span>
+                            </button>
+                          )
+                        })}
+                      </div>
+                    ) : (
+                      <p className="mt-3 border border-border bg-background p-4 text-sm leading-6 text-muted-foreground">Não há horários livres nas próximas três semanas. Escolha outro profissional.</p>
+                    )}
+                  </div>
 
-          {step === 4 && selectedService && selectedBarber && selectedDate && (
-            <section className="py-6 text-center sm:py-8" aria-live="polite">
-              <span className="mx-auto flex h-18 w-18 items-center justify-center rounded-full bg-primary/12 text-primary"><CheckCircle2 className="h-9 w-9" /></span>
-              <p className="eyebrow mt-6">Reserva demonstrativa concluída</p>
-              <h1 className="display-title mt-3 text-[clamp(2.5rem,9vw,4rem)]">Horário reservado</h1>
-              <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-muted-foreground">{name}, o horário de {format(selectedDate, "dd/MM/yyyy")} às {selectedTime} agora aparece como ocupado na agenda de {selectedBarber.name}.</p>
-              <div className="mx-auto mt-7 max-w-md border border-border bg-background p-5 text-left text-sm">
-                <div className="flex justify-between gap-4"><span className="text-muted-foreground">Serviço</span><span className="text-right">{selectedService.name}</span></div>
-                <div className="mt-3 flex justify-between gap-4"><span className="text-muted-foreground">Profissional</span><span className="text-right">{selectedBarber.name}</span></div>
-                <div className="mt-3 flex justify-between gap-4"><span className="text-muted-foreground">Data e hora</span><span className="text-right">{format(selectedDate, "dd/MM")} às {selectedTime}</span></div>
-                <div className="mt-3 flex justify-between gap-4"><span className="text-muted-foreground">Valor</span><span className="text-right text-primary">{formatPrice(selectedService.price)}</span></div>
-              </div>
-              <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-                <Button className="h-12 rounded-none bg-primary px-6 font-semibold text-primary-foreground" onClick={resetBooking}>Conferir horário bloqueado</Button>
-                <Link href="/"><Button variant="outline" className="h-12 w-full rounded-none border-border bg-background px-6">Voltar ao site</Button></Link>
-              </div>
+                  {selectedDate && (
+                    <div className="mt-8">
+                      <Label className="text-sm font-semibold">Horários livres em {format(selectedDate, "dd/MM")}</Label>
+                      <div className="mt-3 grid grid-cols-3 gap-2 sm:grid-cols-5">
+                        {availableTimes.map((time) => (
+                          <button key={time} type="button" onClick={() => { setSelectedTime(time); setError("") }} className={`min-h-12 border px-2 py-2 text-sm font-semibold transition-colors ${selectedTime === time ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background hover:border-primary"}`}>
+                            {time}
+                          </button>
+                        ))}
+                      </div>
+                      <p className="mt-3 flex items-start gap-2 text-sm leading-6 text-muted-foreground"><Info className="mt-0.5 h-4 w-4 shrink-0" /> Horários já reservados não aparecem nesta lista.</p>
+                    </div>
+                  )}
+
+                  {selectedTime && (
+                    <div className="mt-9 border-t border-border pt-7">
+                      <h2 className="text-lg font-semibold">Seus dados</h2>
+                      <p className="mt-1 text-sm leading-6 text-muted-foreground">Usados para identificar e confirmar a reserva.</p>
+                      <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                        <div><Label htmlFor="booking-name">Nome</Label><Input id="booking-name" value={name} onChange={(event) => setName(event.target.value)} placeholder="Seu nome completo" autoComplete="name" className="mt-2 h-11 rounded-none bg-background" /></div>
+                        <div><Label htmlFor="booking-phone">WhatsApp</Label><Input id="booking-phone" value={phone} onChange={(event) => setPhone(event.target.value)} placeholder="Seu número com DDD" inputMode="tel" autoComplete="tel" className="mt-2 h-11 rounded-none bg-background" /></div>
+                      </div>
+                    </div>
+                  )}
+
+                  {error && <p aria-live="polite" className="mt-4 border border-destructive/25 bg-destructive/10 p-3 text-sm leading-6 text-destructive">{error}</p>}
+
+                  <Button type="button" onClick={finalizeBooking} disabled={!selectedDate || !selectedTime} className="mt-7 h-12 w-full rounded-none bg-primary text-base font-semibold text-primary-foreground">Confirmar agendamento</Button>
+                  <p className="mt-3 text-center text-xs leading-5 text-muted-foreground">Demonstração: a reserva fica salva somente neste navegador.</p>
+                </div>
+              )}
             </section>
-          )}
-        </Card>
+
+            <aside className="border border-border bg-card p-5 lg:sticky lg:top-5" aria-label="Resumo do agendamento">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">Seu agendamento</p>
+              <div className="mt-5 border-t border-border">
+                <div className="border-b border-border py-4">
+                  <div className="flex items-center justify-between gap-4">
+                    <span className="text-xs text-muted-foreground">Serviço</span>
+                    {selectedService && <button type="button" onClick={changeService} className="text-xs font-semibold text-primary hover:underline">Alterar</button>}
+                  </div>
+                  <p className={`mt-1 text-sm font-semibold ${selectedService ? "text-foreground" : "text-muted-foreground"}`}>{selectedService?.name ?? "Ainda não escolhido"}</p>
+                  {selectedService && <p className="mt-1 text-xs text-muted-foreground">{selectedService.duration} · {formatPrice(selectedService.price)}</p>}
+                </div>
+                <div className="border-b border-border py-4">
+                  <div className="flex items-center justify-between gap-4">
+                    <span className="text-xs text-muted-foreground">Profissional</span>
+                    {selectedBarber && <button type="button" onClick={changeBarber} className="text-xs font-semibold text-primary hover:underline">Alterar</button>}
+                  </div>
+                  <p className={`mt-1 text-sm font-semibold ${selectedBarber ? "text-foreground" : "text-muted-foreground"}`}>{selectedBarber?.name ?? "Ainda não escolhido"}</p>
+                </div>
+                <div className="py-4">
+                  <span className="text-xs text-muted-foreground">Data e horário</span>
+                  <p className={`mt-1 text-sm font-semibold ${selectedDate && selectedTime ? "text-foreground" : "text-muted-foreground"}`}>
+                    {selectedDate && selectedTime ? `${format(selectedDate, "dd/MM/yyyy")} às ${selectedTime}` : "Ainda não escolhido"}
+                  </p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        ) : selectedService && selectedBarber && selectedDate ? (
+          <section className="mx-auto mt-10 max-w-2xl border border-border bg-card px-5 py-10 text-center sm:px-10 sm:py-12" aria-live="polite">
+            <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary"><CheckCircle2 className="h-8 w-8" /></span>
+            <p className="eyebrow mt-6">Agendamento concluído</p>
+            <h1 className="mt-3 font-heading text-[clamp(2.5rem,9vw,4rem)] font-semibold leading-none tracking-[-0.045em]">Horário reservado</h1>
+            <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-muted-foreground">{name}, sua reserva foi registrada e esse horário não aparecerá mais como disponível para {selectedBarber.name}.</p>
+            <div className="mx-auto mt-7 max-w-md border-y border-border py-2 text-left text-sm">
+              <div className="flex justify-between gap-4 border-b border-border py-3"><span className="text-muted-foreground">Serviço</span><span className="text-right font-medium">{selectedService.name}</span></div>
+              <div className="flex justify-between gap-4 border-b border-border py-3"><span className="text-muted-foreground">Profissional</span><span className="text-right font-medium">{selectedBarber.name}</span></div>
+              <div className="flex justify-between gap-4 border-b border-border py-3"><span className="text-muted-foreground">Data e hora</span><span className="text-right font-medium">{format(selectedDate, "dd/MM")} às {selectedTime}</span></div>
+              <div className="flex justify-between gap-4 py-3"><span className="text-muted-foreground">Valor</span><span className="text-right font-semibold text-primary">{formatPrice(selectedService.price)}</span></div>
+            </div>
+            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+              <Button className="h-12 rounded-none bg-primary px-6 font-semibold text-primary-foreground" onClick={resetBooking}>Fazer novo agendamento</Button>
+              <Link href="/"><Button variant="outline" className="h-12 w-full rounded-none border-border bg-background px-6">Voltar ao site</Button></Link>
+            </div>
+          </section>
+        ) : null}
       </div>
     </main>
   )

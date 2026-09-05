@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
-import { Calendar, Clock, User, Scissors, XCircle, Plus, ChevronLeft, Info, AlertTriangle } from "lucide-react"
+import { Calendar, Clock, User, XCircle, Plus, ChevronLeft, Info, AlertTriangle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -134,7 +134,7 @@ export default function CustomerAppointmentsPage() {
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex items-start gap-3">
                       <div className="h-10 w-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
-                        <Scissors className="h-5 w-5 text-primary" />
+                        <Calendar className="h-5 w-5 text-primary" />
                       </div>
                       <div className="min-w-0 text-left">
                         <h3 className="font-semibold text-foreground truncate">{app.service}</h3>

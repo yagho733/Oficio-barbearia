@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Calendar, Clock, ChevronLeft, Scissors, Star, Heart } from "lucide-react"
+import { Calendar, Clock, ChevronLeft, Star, Heart } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { DashboardHeader } from "@/components/dashboard/header"
@@ -52,7 +52,7 @@ export default function CustomerHistoryPage() {
               <div key={app.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-5 gap-4 hover:bg-muted/30 transition-all text-left">
                 <div className="flex items-start gap-4">
                   <div className="h-10 w-10 rounded-full bg-muted border border-border flex items-center justify-center shrink-0">
-                    <Scissors className="h-5 w-5 text-muted-foreground" />
+                    <Calendar className="h-5 w-5 text-muted-foreground" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-foreground text-base">{app.service}</h4>
@@ -84,7 +84,7 @@ export default function CustomerHistoryPage() {
 
             {appointments.length === 0 && (
               <div className="p-12 text-center text-xs text-muted-foreground flex flex-col items-center gap-2">
-                <Scissors className="h-8 w-8 text-muted-foreground/40" />
+                <Calendar className="h-8 w-8 text-muted-foreground/40" />
                 <p>Nenhum atendimento no histórico.</p>
               </div>
             )}

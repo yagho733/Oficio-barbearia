@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { 
-  DollarSign, Users, TrendingUp, UserCheck, Calendar, Scissors, Award, 
+  DollarSign, Users, TrendingUp, UserCheck, Calendar, Award,
   ChevronRight, ArrowUpRight, BarChart3, Clock, CheckCircle, XCircle 
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -162,7 +162,7 @@ export default function AdminDashboardPage() {
                 <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider font-mono">Barbeiros</p>
                 <p className="font-heading text-lg font-bold text-foreground mt-1.5">{totalBarbers}</p>
               </div>
-              <Scissors className="h-4.5 w-4.5 text-pink-400 shrink-0" />
+              <Award className="h-4.5 w-4.5 text-pink-400 shrink-0" />
             </div>
           </Card>
         </div>

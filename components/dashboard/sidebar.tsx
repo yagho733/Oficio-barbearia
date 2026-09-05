@@ -3,7 +3,6 @@
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { 
-  Scissors, 
   Calendar, 
   History, 
   User, 
@@ -48,7 +47,7 @@ const adminLinks = [
   { href: "/dashboard/admin/appointments", label: "Agendamentos", icon: Calendar },
   { href: "/dashboard/admin/customers", label: "Clientes", icon: Users },
   { href: "/dashboard/admin/barbers", label: "Barbeiros", icon: User },
-  { href: "/dashboard/admin/services", label: "Serviços", icon: Scissors },
+  { href: "/dashboard/admin/services", label: "Serviços", icon: Package },
   { href: "/dashboard/admin/financial", label: "Financeiro", icon: DollarSign },
   { href: "/dashboard/admin/analytics", label: "Relatórios", icon: BarChart3 },
   { href: "/dashboard/admin/settings", label: "Configurações", icon: Settings },

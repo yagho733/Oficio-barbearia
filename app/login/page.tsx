@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { ArrowLeft, BriefcaseBusiness, Loader2, Scissors, ShieldCheck, UserRound } from "lucide-react"
+import { ArrowLeft, BriefcaseBusiness, Loader2, ShieldCheck, UserRound } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 
@@ -21,7 +21,7 @@ const profiles = [
     name: "Profissional demonstrativo",
     title: "Área do profissional",
     text: "Veja a agenda, clientes, histórico e resumo de atendimentos.",
-    icon: Scissors,
+    icon: BriefcaseBusiness,
     route: "/dashboard/barber",
   },
   {

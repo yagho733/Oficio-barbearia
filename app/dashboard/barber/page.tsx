@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { 
   Calendar, Clock, DollarSign, Users, TrendingUp, Star, CheckCircle, XCircle,
-  Power, Coffee, Plus, Trash2, AlertTriangle, ChevronRight, User as UserIcon, Scissors
+  Power, Coffee, Plus, Trash2, AlertTriangle, ChevronRight, User as UserIcon
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -292,7 +292,7 @@ export default function BarberDashboardPage() {
                   <h3 className="font-heading text-lg font-bold text-foreground">{proximoCliente.customerName}</h3>
                   <div className="flex items-center gap-4 text-xs text-muted-foreground">
                     <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" /> {proximoCliente.time}</span>
-                    <span className="flex items-center gap-1"><Scissors className="h-3.5 w-3.5" /> {proximoCliente.service}</span>
+                    <span>{proximoCliente.service}</span>
                   </div>
                 </div>
                 <div className="relative flex gap-2 shrink-0">
