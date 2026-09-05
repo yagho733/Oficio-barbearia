@@ -10,6 +10,7 @@ const navLinks = [
   { href: "#experience", label: "A barbearia" },
   { href: "#barbers", label: "Equipe" },
   { href: "#contact", label: "Contato" },
+  { href: "/login", label: "Área restrita" },
 ]
 
 export function Navbar() {

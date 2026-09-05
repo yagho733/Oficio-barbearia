@@ -10,7 +10,6 @@ import {
   LogOut,
   LayoutDashboard,
   Users,
-  BarChart3,
   Package,
   DollarSign
 } from "lucide-react"
@@ -19,6 +18,7 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
+import { clearDemoSession } from "@/lib/demo-auth"
 
 interface SidebarProps {
   type: "customer" | "barber" | "admin"
@@ -34,22 +34,21 @@ const customerLinks = [
 ]
 
 const barberLinks = [
-  { href: "/dashboard/barber", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/dashboard/barber/schedule", label: "Agenda", icon: Calendar },
+  { href: "/dashboard/barber", label: "Hoje", icon: LayoutDashboard },
+  { href: "/dashboard/barber/schedule", label: "Minha agenda", icon: Calendar },
   { href: "/dashboard/barber/clients", label: "Clientes", icon: Users },
   { href: "/dashboard/barber/history", label: "Histórico", icon: History },
-  { href: "/dashboard/barber/billing", label: "Faturamento", icon: DollarSign },
+  { href: "/dashboard/barber/billing", label: "Comissões", icon: DollarSign },
   { href: "/dashboard/barber/profile", label: "Perfil", icon: User },
 ]
 
 const adminLinks = [
-  { href: "/dashboard/admin", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/dashboard/admin/appointments", label: "Agendamentos", icon: Calendar },
+  { href: "/dashboard/admin", label: "Visão geral", icon: LayoutDashboard },
+  { href: "/dashboard/admin/appointments", label: "Agenda", icon: Calendar },
   { href: "/dashboard/admin/customers", label: "Clientes", icon: Users },
-  { href: "/dashboard/admin/barbers", label: "Barbeiros", icon: User },
+  { href: "/dashboard/admin/barbers", label: "Equipe", icon: User },
   { href: "/dashboard/admin/services", label: "Serviços", icon: Package },
   { href: "/dashboard/admin/financial", label: "Financeiro", icon: DollarSign },
-  { href: "/dashboard/admin/analytics", label: "Relatórios", icon: BarChart3 },
   { href: "/dashboard/admin/settings", label: "Configurações", icon: Settings },
 ]
 
@@ -67,11 +66,10 @@ export function DashboardSidebar({ type, className }: SidebarProps) {
     ? "Cliente" 
     : type === "barber" 
     ? "Barbeiro" 
-    : "Admin"
+    : "Proprietário"
 
   const handleLogout = () => {
-    localStorage.removeItem("barbershop_demo_session")
-    sessionStorage.removeItem("barbershop_demo_session")
+    clearDemoSession()
     router.push("/login")
   }
 
@@ -138,7 +136,7 @@ export function DashboardSidebar({ type, className }: SidebarProps) {
             size="sm"
           >
             <LogOut className="mr-1.5 h-4 w-4" />
-            Trocar perfil
+            Sair
           </Button>
         </div>
       </div>

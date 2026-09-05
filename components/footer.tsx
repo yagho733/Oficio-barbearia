@@ -12,6 +12,7 @@ export function Footer() {
         <div className="text-sm text-muted-foreground sm:text-right">
           <p>Projeto demonstrativo para portfólio.</p>
           <p className="mt-1">{new Date().getFullYear()} · Informações ilustrativas.</p>
+          <Link href="/login" className="mt-3 inline-block font-medium text-primary hover:underline">Acessar painel</Link>
         </div>
       </div>
     </footer>
